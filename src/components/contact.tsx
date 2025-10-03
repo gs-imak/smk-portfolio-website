@@ -5,9 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Mail, Linkedin, Github, MapPin, Send, } from "lucide-react";
+import { Mail, Linkedin, Github, MapPin, Send, Phone } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { toast } from "sonner";
+import Image from "next/image";
 
 export const Contact = memo(function Contact() {
   const [formData, setFormData] = useState({
@@ -64,7 +65,7 @@ export const Contact = memo(function Contact() {
 
         <div className="max-w-4xl mx-auto">
           {/* Contact Info */}
-          <div className="grid md:grid-cols-2 gap-8 mb-16">
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
             <Card className="p-8 group hover:border-purple-500/50 transition-all duration-300 hover-scale animate-fade-in-up" style={{ animationDelay: '0.7s' }}>
               <div className="flex items-center gap-4 mb-4">
                 <div className="p-3 rounded-lg bg-purple-500/20 group-hover:bg-purple-500/30 transition-colors">
@@ -72,14 +73,32 @@ export const Contact = memo(function Contact() {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold">Email Me</h3>
-                  <p className="text-muted-foreground">Quick response guaranteed</p>
+                  <p className="text-muted-foreground text-sm">Quick response</p>
                 </div>
               </div>
               <a
-                href="mailto:georgiy@example.com"
-                className="text-purple-400 hover:text-purple-300 transition-colors font-medium text-lg"
+                href="mailto:georgesimak@gmail.com"
+                className="text-purple-400 hover:text-purple-300 transition-colors font-medium"
               >
-                georgiy@example.com
+                georgesimak@gmail.com
+              </a>
+            </Card>
+
+            <Card className="p-8 group hover:border-blue-500/50 transition-all duration-300 hover-scale animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
+              <div className="flex items-center gap-4 mb-4">
+                <div className="p-3 rounded-lg bg-blue-500/20 group-hover:bg-blue-500/30 transition-colors">
+                  <Phone className="h-6 w-6 text-blue-400" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold">Call Me</h3>
+                  <p className="text-muted-foreground text-sm">Let's chat</p>
+                </div>
+              </div>
+              <a
+                href="tel:+1234567890"
+                className="text-blue-400 hover:text-blue-300 transition-colors font-medium"
+              >
+                +1 (234) 567-890
               </a>
             </Card>
 
@@ -90,15 +109,31 @@ export const Contact = memo(function Contact() {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold">Location</h3>
-                  <p className="text-muted-foreground">Open to remote work</p>
+                  <p className="text-muted-foreground text-sm">Remote work</p>
                 </div>
               </div>
-              <span className="text-green-400 font-medium text-lg">San Francisco, CA</span>
+              <span className="text-green-400 font-medium">Paris, France</span>
             </Card>
           </div>
 
-          {/* Right - Enhanced Form */}
-          <Card className="p-8 bg-background border border-border hover:border-purple-500/50 transition-all duration-300 animate-fade-in-up" style={{ animationDelay: '1.1s' }}>
+          {/* Form with Phone Image */}
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
+            {/* Phone Image */}
+            <div className="hidden lg:flex items-center justify-center animate-fade-in-up" style={{ animationDelay: '1s' }}>
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-3xl blur-3xl" />
+                <Image
+                  src="/avatar/phone.png"
+                  alt="Get in touch"
+                  width={400}
+                  height={400}
+                  className="relative object-contain hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+            </div>
+
+            {/* Enhanced Form */}
+            <Card className="p-8 bg-background border border-border hover:border-purple-500/50 transition-all duration-300 animate-fade-in-up" style={{ animationDelay: '1.1s' }}>
             <div className="mb-6">
               <h3 className="text-2xl font-bold mb-2 animate-fade-in-up" style={{ animationDelay: '1.3s' }}>Send Me a Message</h3>
               <p className="text-muted-foreground animate-fade-in-up" style={{ animationDelay: '1.5s' }}>I&apos;ll get back to you within 24 hours</p>
@@ -174,6 +209,7 @@ export const Contact = memo(function Contact() {
               </div>
             </form>
           </Card>
+          </div>
         </div>
 
             {/* Social Links */}
@@ -199,7 +235,7 @@ export const Contact = memo(function Contact() {
                 <span className="sr-only">LinkedIn</span>
               </a>
               <a
-                href="mailto:georgiy@example.com"
+                href="mailto:georgesimak@gmail.com"
                 className="p-4 rounded-full bg-foreground/5 hover:bg-foreground/10 transition-colors group"
               >
                 <Mail className="h-6 w-6 group-hover:scale-110 transition-transform" />
@@ -211,7 +247,7 @@ export const Contact = memo(function Contact() {
         {/* Footer */}
         <div className="mt-32 pt-8 border-t border-border">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-            <p>© 2024 Georgiy Simak. All rights reserved.</p>
+            <p>© 2024 George Simak. All rights reserved.</p>
             <p>Designed & Built with passion</p>
           </div>
         </div>

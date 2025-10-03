@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Github, Linkedin, Mail, Sparkles } from "lucide-react";
 import { memo } from "react";
+import Image from "next/image";
 
 export const Hero = memo(function Hero() {
   const scrollToSection = (href: string) => {
@@ -102,18 +103,30 @@ export const Hero = memo(function Hero() {
             </div>
           </div>
 
-          {/* Right side - Simple static visual */}
+          {/* Right side - Profile Image */}
           <div className="relative hidden lg:block">
             <div className="relative w-full aspect-square">
-              {/* Static geometric shapes */}
+              {/* Background gradient */}
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-blue-500/10 rounded-3xl" />
-              <div className="absolute inset-4 border-2 border-foreground/10 rounded-2xl" />
-              <div className="absolute inset-8 bg-gradient-to-tr from-pink-500/5 to-purple-500/5 rounded-xl" />
               
               {/* Subtle pulsing orbs */}
               <div className="absolute top-10 right-10 w-20 h-20 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full blur-xl opacity-50 animate-pulse" />
               <div className="absolute bottom-20 left-10 w-32 h-32 bg-gradient-to-br from-blue-500 to-pink-500 rounded-full blur-2xl opacity-40 animate-pulse" style={{ animationDelay: '1s' }} />
               <div className="absolute top-1/2 right-1/4 w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full blur-lg opacity-60 animate-pulse" style={{ animationDelay: '2s' }} />
+              
+              {/* Profile Image */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="relative w-full h-full flex items-center justify-center">
+                  <Image
+                    src="/avatar/arms crossed.png"
+                    alt="George Simak"
+                    width={500}
+                    height={500}
+                    className="object-contain relative z-10 hover:scale-105 transition-transform duration-500"
+                    priority
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -436,60 +436,105 @@ export default function CVPage() {
                   <div className="p-2 rounded-xl bg-purple-500/10 border border-purple-500/20">
                     <Zap className="h-5 w-5 text-purple-400" />
                   </div>
-                  <h2 className="text-xl font-bold text-white">Technical Skills</h2>
+                  <h2 className="text-xl font-bold text-white">Technical Expertise</h2>
                 </div>
                 
-                <div className="space-y-6">
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium text-white">Frontend Development</span>
-                      <span className="text-sm text-gray-400">95%</span>
+                <div className="space-y-4">
+                  {/* Front-end - Primary Focus */}
+                  <div className="relative p-4 rounded-2xl bg-gradient-to-br from-purple-500/10 to-indigo-500/10 border border-purple-500/30">
+                    <div className="absolute top-2 right-2">
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-bold">Primary Focus</Badge>
                     </div>
-                    <Progress value={95} className="h-2" />
-                    <div className="flex flex-wrap gap-1 mt-2">
-                      <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 text-xs">Vue.js</Badge>
-                      <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 text-xs">React</Badge>
-                      <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 text-xs">TypeScript</Badge>
-                      <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 text-xs">Angular</Badge>
+                    <div className="mb-3">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-base font-bold text-white">Front-end Development</span>
+                        <span className="text-sm font-bold text-purple-400">Expert</span>
+                      </div>
+                      <div className="relative h-3 bg-black/30 rounded-full overflow-hidden">
+                        <div 
+                          className="absolute inset-y-0 left-0 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full transition-all duration-1000"
+                          style={{ width: '95%' }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
+                      </div>
                     </div>
-                  </div>
-
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium text-white">Backend Development</span>
-                      <span className="text-sm text-gray-400">85%</span>
-                    </div>
-                    <Progress value={85} className="h-2" />
-                    <div className="flex flex-wrap gap-1 mt-2">
-                      <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 text-xs">Node.js</Badge>
-                      <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 text-xs">Python</Badge>
-                      <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 text-xs">PHP</Badge>
-                    </div>
-                  </div>
-
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium text-white">Databases</span>
-                      <span className="text-sm text-gray-400">90%</span>
-                    </div>
-                    <Progress value={90} className="h-2" />
-                    <div className="flex flex-wrap gap-1 mt-2">
-                      <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 text-xs">MongoDB</Badge>
-                      <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 text-xs">Neo4j</Badge>
-                      <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 text-xs">GraphDB</Badge>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">Vue.js</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">React</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">Angular</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">TypeScript</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">Next.js</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">Tailwind</Badge>
                     </div>
                   </div>
 
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium text-white">DevOps & Tools</span>
-                      <span className="text-sm text-gray-400">85%</span>
+                  {/* Back-end */}
+                  <div className="relative p-4 rounded-2xl bg-gradient-to-br from-purple-500/10 to-indigo-500/10 border border-purple-500/30">
+                    <div className="mb-3">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-base font-bold text-white">Back-end Development</span>
+                        <span className="text-sm font-bold text-purple-400">Advanced</span>
+                      </div>
+                      <div className="relative h-3 bg-black/30 rounded-full overflow-hidden">
+                        <div 
+                          className="absolute inset-y-0 left-0 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full transition-all duration-1000"
+                          style={{ width: '85%' }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
+                      </div>
                     </div>
-                    <Progress value={85} className="h-2" />
-                    <div className="flex flex-wrap gap-1 mt-2">
-                      <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 text-xs">Git</Badge>
-                      <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 text-xs">Docker</Badge>
-                      <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 text-xs">AWS</Badge>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">Node.js</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">Python</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">PHP</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">Django</Badge>
+                    </div>
+                  </div>
+
+                  {/* Databases */}
+                  <div className="relative p-4 rounded-2xl bg-gradient-to-br from-purple-500/10 to-indigo-500/10 border border-purple-500/30">
+                    <div className="mb-3">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-base font-bold text-white">Databases & APIs</span>
+                        <span className="text-sm font-bold text-purple-400">Advanced</span>
+                      </div>
+                      <div className="relative h-3 bg-black/30 rounded-full overflow-hidden">
+                        <div 
+                          className="absolute inset-y-0 left-0 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full transition-all duration-1000"
+                          style={{ width: '90%' }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
+                      </div>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">MongoDB</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">Neo4j</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">GraphDB</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">REST API</Badge>
+                    </div>
+                  </div>
+
+                  {/* DevOps & Tools */}
+                  <div className="relative p-4 rounded-2xl bg-gradient-to-br from-purple-500/10 to-indigo-500/10 border border-purple-500/30">
+                    <div className="mb-3">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-base font-bold text-white">DevOps & Cloud</span>
+                        <span className="text-sm font-bold text-purple-400">Proficient</span>
+                      </div>
+                      <div className="relative h-3 bg-black/30 rounded-full overflow-hidden">
+                        <div 
+                          className="absolute inset-y-0 left-0 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full transition-all duration-1000"
+                          style={{ width: '85%' }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
+                      </div>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">AWS</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">Docker</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">CI/CD</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">Git</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">Linux</Badge>
                     </div>
                   </div>
                 </div>
@@ -518,23 +563,67 @@ export default function CVPage() {
                   <h2 className="text-xl font-bold text-white">Education</h2>
                 </div>
                 <div className="space-y-4">
-                  <div>
-                    <h3 className="text-base font-bold mb-1 text-white">Master 2 Data Engineer</h3>
-                    <p className="text-sm text-gray-400 mb-1">L&apos;école Multimédia • Paris</p>
-                    <p className="text-xs text-gray-500">Deep Learning, Python, Django</p>
+                  {/* Master 2 */}
+                  <div className="relative p-4 rounded-2xl bg-gradient-to-br from-purple-500/10 to-indigo-500/5 border border-purple-500/30 hover:border-purple-500/50 transition-all">
+                    <div className="flex items-start gap-3 mb-2">
+                      <div className="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center flex-shrink-0">
+                        <span className="text-sm font-bold text-purple-300">M2</span>
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-base font-bold mb-1 text-white leading-tight">Master 2 Data Engineer</h3>
+                        <p className="text-xs text-purple-400 font-medium mb-1">L&apos;école Multimédia</p>
+                        <p className="text-xs text-gray-500">Paris, France</p>
+                      </div>
+                    </div>
+                    <div className="flex flex-wrap gap-1 mt-3">
+                      <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 text-xs">Deep Learning</Badge>
+                      <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 text-xs">Python</Badge>
+                      <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 text-xs">Django</Badge>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-base font-bold mb-1 text-white">Master 1 Développeur Multimédia</h3>
-                    <p className="text-sm text-gray-400 mb-1">L&apos;école Multimédia • Paris</p>
-                    <p className="text-xs text-gray-500">Web Development, Software Architecture</p>
+
+                  {/* Master 1 */}
+                  <div className="relative p-4 rounded-2xl bg-purple-500/5 border border-purple-500/20 hover:border-purple-500/40 transition-all">
+                    <div className="flex items-start gap-3 mb-2">
+                      <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center flex-shrink-0">
+                        <span className="text-sm font-bold text-purple-400">M1</span>
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-base font-bold mb-1 text-white leading-tight">Master 1 Développeur Multimédia</h3>
+                        <p className="text-xs text-purple-400 font-medium mb-1">L&apos;école Multimédia</p>
+                        <p className="text-xs text-gray-500">Paris, France</p>
+                      </div>
+                    </div>
+                    <div className="flex flex-wrap gap-1 mt-3">
+                      <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 text-xs">Web Dev</Badge>
+                      <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 text-xs">Architecture</Badge>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-base font-bold mb-1 text-white">Chef de Projet Digital</h3>
-                    <p className="text-sm text-gray-400">F2i • Paris, France</p>
+
+                  {/* Chef de Projet */}
+                  <div className="relative p-3 rounded-xl bg-purple-500/5 border border-purple-500/20 hover:border-purple-500/40 transition-all">
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/30 flex items-center justify-center flex-shrink-0">
+                        <span className="text-xs font-bold text-purple-400">B+3</span>
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-sm font-bold mb-0.5 text-white leading-tight">Chef de Projet Digital</h3>
+                        <p className="text-xs text-gray-400">F2i • Paris, France</p>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-base font-bold mb-1 text-white">Digital Marketing</h3>
-                    <p className="text-sm text-gray-400">HELP UNIVERSITY • Malaysia</p>
+
+                  {/* Digital Marketing */}
+                  <div className="relative p-3 rounded-xl bg-purple-500/5 border border-purple-500/20 hover:border-purple-500/40 transition-all">
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/30 flex items-center justify-center flex-shrink-0">
+                        <span className="text-xs font-bold text-purple-400">BA</span>
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-sm font-bold mb-0.5 text-white leading-tight">Digital Marketing</h3>
+                        <p className="text-xs text-gray-400">HELP UNIVERSITY • Malaysia</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

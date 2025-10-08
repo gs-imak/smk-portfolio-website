@@ -59,86 +59,129 @@ export default function CVPage() {
         </div>
 
         {/* Contact Info */}
-        <Card className="p-8 mb-12 gradient-border-card">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="flex items-center gap-3 group cursor-pointer">
-              <div className="p-2 rounded-lg bg-purple-500/20 group-hover:bg-purple-500/30 transition-colors">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div className="group relative bg-[#13111C]/60 backdrop-blur-xl border border-white/[0.15] rounded-2xl p-6 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(168,85,247,0.12)] cursor-pointer">
+            <div className="flex items-center gap-3">
+              <div className="p-3 rounded-xl bg-purple-500/10 border border-purple-500/20">
                 <Mail className="h-5 w-5 text-purple-400" />
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">Email</p>
-                <p className="font-medium">georgesimak@gmail.com</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 group cursor-pointer">
-              <div className="p-2 rounded-lg bg-green-500/20 group-hover:bg-green-500/30 transition-colors">
-                <MapPin className="h-5 w-5 text-green-400" />
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground">Location</p>
-                <p className="font-medium">Paris, France</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 group cursor-pointer">
-              <div className="p-2 rounded-lg bg-blue-500/20 group-hover:bg-blue-500/30 transition-colors">
-                <Phone className="h-5 w-5 text-blue-400" />
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground">LinkedIn</p>
-                <p className="font-medium">linkedin.com/in/george-simak</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 group cursor-pointer">
-              <div className="p-2 rounded-lg bg-orange-500/20 group-hover:bg-orange-500/30 transition-colors">
-                <Github className="h-5 w-5 text-orange-400" />
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground">GitHub</p>
-                <p className="font-medium">github.com/georgiysimak</p>
+                <p className="text-sm text-gray-400">Email</p>
+                <p className="font-medium text-white">georgesimak@gmail.com</p>
               </div>
             </div>
           </div>
-        </Card>
+          <div className="group relative bg-[#13111C]/60 backdrop-blur-xl border border-white/[0.15] rounded-2xl p-6 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(139,92,246,0.12)] cursor-pointer">
+            <div className="flex items-center gap-3">
+              <div className="p-3 rounded-xl bg-violet-500/10 border border-violet-500/20">
+                <MapPin className="h-5 w-5 text-violet-400" />
+              </div>
+              <div>
+                <p className="text-sm text-gray-400">Location</p>
+                <p className="font-medium text-white">Paris, France</p>
+              </div>
+            </div>
+          </div>
+          <div className="group relative bg-[#13111C]/60 backdrop-blur-xl border border-white/[0.15] rounded-2xl p-6 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(99,102,241,0.12)] cursor-pointer">
+            <div className="flex items-center gap-3">
+              <div className="p-3 rounded-xl bg-indigo-500/10 border border-indigo-500/20">
+                <Phone className="h-5 w-5 text-indigo-400" />
+              </div>
+              <div>
+                <p className="text-sm text-gray-400">Phone</p>
+                <p className="font-medium text-white">+33 7 69 59 22 21</p>
+              </div>
+            </div>
+          </div>
+          <div className="group relative bg-[#13111C]/60 backdrop-blur-xl border border-white/[0.15] rounded-2xl p-6 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(249,115,22,0.12)] cursor-pointer">
+            <div className="flex items-center gap-3">
+              <div className="p-3 rounded-xl bg-orange-500/10 border border-orange-500/20">
+                <Github className="h-5 w-5 text-orange-400" />
+              </div>
+              <div>
+                <p className="text-sm text-gray-400">GitHub</p>
+                <p className="font-medium text-white">georgiysimak</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-12">
             {/* Professional Summary */}
-            <Card className="p-8 group hover:border-purple-500/50 transition-all duration-300 hover-scale">
+            <div className="group relative bg-[#13111C]/60 backdrop-blur-xl border border-white/[0.15] rounded-3xl p-8 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(168,85,247,0.15)]">
               <div className="flex items-center gap-4 mb-6">
-                <div className="p-3 rounded-lg bg-gradient-to-br from-purple-500/20 to-blue-500/20 group-hover:from-purple-500/30 group-hover:to-blue-500/30 transition-all">
+                <div className="p-3 rounded-xl bg-purple-500/10 border border-purple-500/20">
                   <Target className="h-6 w-6 text-purple-400" />
                 </div>
-                <h2 className="text-3xl font-bold">Professional Summary</h2>
+                <h2 className="text-3xl font-bold text-white">Professional Summary</h2>
               </div>
-              <p className="text-muted-foreground leading-relaxed text-lg">
+              <p className="text-gray-400 leading-relaxed text-lg">
                 Full-Stack Developer with 5+ years of experience. Expertise in HTML, CSS, JavaScript, 
                 and modern frameworks like React, Vue.js, and Angular. Experienced in client consulting 
                 and pair-programming, ready to contribute to your company&apos;s success with robust, 
                 scalable solutions and clean code practices.
               </p>
-            </Card>
+            </div>
 
             {/* Experience Timeline */}
-            <Card className="p-8 group hover:border-blue-500/50 transition-all duration-300 hover-scale">
+            <div className="group relative bg-[#13111C]/60 backdrop-blur-xl border border-white/[0.15] rounded-3xl p-8 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(168,85,247,0.15)]">
               <div className="flex items-center gap-4 mb-8">
-                <div className="p-3 rounded-lg bg-gradient-to-br from-blue-500/20 to-green-500/20 group-hover:from-blue-500/30 group-hover:to-green-500/30 transition-all">
+                <div className="p-3 rounded-xl bg-blue-500/10 border border-blue-500/20">
                   <Calendar className="h-6 w-6 text-blue-400" />
                 </div>
-                <h2 className="text-3xl font-bold">Professional Experience</h2>
+                <h2 className="text-3xl font-bold text-white">Professional Experience</h2>
               </div>
               
               <div className="space-y-8">
-                {/* Timeline Item 1 */}
+                {/* Timeline Item 1 - Widerml */}
+                <div className="relative pl-8 border-l-2 border-purple-500/30 hover:border-purple-500/60 transition-colors">
+                  <div className="absolute -left-2 top-0 w-4 h-4 bg-purple-500 rounded-full border-2 border-background"></div>
+                  <div className="space-y-4">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                      <h3 className="text-xl font-bold text-white">Lead Front-end Developer</h3>
+                      <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30">Fév 2025 - Juil 2025</Badge>
+                    </div>
+                    <p className="text-gray-300 font-medium">Widerml • Paris, France</p>
+                    
+                    <div className="space-y-3">
+                      <div className="grid grid-cols-1 gap-2">
+                        <div className="flex items-start gap-2">
+                          <div className="w-2 h-2 bg-purple-500 rounded-full mt-1.5"></div>
+                          <span className="text-sm text-gray-400">Mise en place et gestion de l&apos;infrastructure AWS (EC2, S3, IAM, CloudFront) et des déploiements sur serveurs Linux</span>
+                        </div>
+                        <div className="flex items-start gap-2">
+                          <div className="w-2 h-2 bg-blue-500 rounded-full mt-1.5"></div>
+                          <span className="text-sm text-gray-400">Intégration de l&apos;API OpenAI pour la génération automatique et la personnalisation de contenu marketing</span>
+                        </div>
+                        <div className="flex items-start gap-2">
+                          <div className="w-2 h-2 bg-green-500 rounded-full mt-1.5"></div>
+                          <span className="text-sm text-gray-400">Refonte du front-end et optimisation du back-end pour une meilleure performance et stabilité</span>
+                        </div>
+                        <div className="flex items-start gap-2">
+                          <div className="w-2 h-2 bg-orange-500 rounded-full mt-1.5"></div>
+                          <span className="text-sm text-gray-400">Supervision du pipeline CI/CD et amélioration des processus DevOps</span>
+                        </div>
+                        <div className="flex items-start gap-2">
+                          <div className="w-2 h-2 bg-pink-500 rounded-full mt-1.5"></div>
+                          <span className="text-sm text-gray-400">Collaboration avec les équipes produit et design sur les choix techniques clés</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Timeline Item 2 - Edumalin */}
                 <div className="relative pl-8 border-l-2 border-blue-500/30 hover:border-blue-500/60 transition-colors">
                   <div className="absolute -left-2 top-0 w-4 h-4 bg-blue-500 rounded-full border-2 border-background"></div>
                   <div className="space-y-4">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                      <h3 className="text-xl font-bold">Full-Stack Developer</h3>
+                      <h3 className="text-xl font-bold text-white">Full-Stack Developer</h3>
                       <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30">Sept 2023 - Dec 2024</Badge>
                     </div>
-                    <p className="text-muted-foreground font-medium">Edumalin • Paris</p>
-                    <p className="text-sm text-muted-foreground italic">Contributor in a team of 3 developers for a new generation educational platform integrating personalized learning modules, advanced pedagogical tools and adaptive quiz systems.</p>
+                    <p className="text-gray-300 font-medium">Edumalin • Paris</p>
+                    <p className="text-sm text-gray-400 italic">Contributor in a team of 3 developers for a new generation educational platform integrating personalized learning modules, advanced pedagogical tools and adaptive quiz systems.</p>
                     
                     <div className="space-y-3">
                       <div>
@@ -146,19 +189,19 @@ export default function CVPage() {
                         <div className="grid grid-cols-1 gap-2">
                           <div className="flex items-start gap-2">
                             <div className="w-2 h-2 bg-purple-500 rounded-full mt-1.5"></div>
-                            <span className="text-sm">Active contribution to technical migrations: Vue.js 2 → Vue 3 → React</span>
+                            <span className="text-sm text-gray-400">Active contribution to technical migrations: Vue.js 2 → Vue 3 → React</span>
                           </div>
                           <div className="flex items-start gap-2">
                             <div className="w-2 h-2 bg-purple-500 rounded-full mt-1.5"></div>
-                            <span className="text-sm">Implementation of robust architecture using NgRx for state management</span>
+                            <span className="text-sm text-gray-400">Implementation of robust architecture using NgRx for state management</span>
                           </div>
                           <div className="flex items-start gap-2">
                             <div className="w-2 h-2 bg-purple-500 rounded-full mt-1.5"></div>
-                            <span className="text-sm">Integration of Neo4j and MongoDB databases for advanced data management</span>
+                            <span className="text-sm text-gray-400">Integration of Neo4j and MongoDB databases for advanced data management</span>
                           </div>
                           <div className="flex items-start gap-2">
                             <div className="w-2 h-2 bg-purple-500 rounded-full mt-1.5"></div>
-                            <span className="text-sm">Daily use of CI/CD pipelines to automate deployments and tests</span>
+                            <span className="text-sm text-gray-400">Daily use of CI/CD pipelines to automate deployments and tests</span>
                           </div>
                         </div>
                       </div>
@@ -168,15 +211,15 @@ export default function CVPage() {
                         <div className="grid grid-cols-1 gap-2">
                           <div className="flex items-start gap-2">
                             <div className="w-2 h-2 bg-blue-500 rounded-full mt-1.5"></div>
-                            <span className="text-sm">Conception of reusable UI components with Figma and Storybook</span>
+                            <span className="text-sm text-gray-400">Conception of reusable UI components with Figma and Storybook</span>
                           </div>
                           <div className="flex items-start gap-2">
                             <div className="w-2 h-2 bg-blue-500 rounded-full mt-1.5"></div>
-                            <span className="text-sm">Implementation of innovative vocal solution for accessibility</span>
+                            <span className="text-sm text-gray-400">Implementation of innovative vocal solution for accessibility</span>
                           </div>
                           <div className="flex items-start gap-2">
                             <div className="w-2 h-2 bg-blue-500 rounded-full mt-1.5"></div>
-                            <span className="text-sm">Complete instant messaging backend development</span>
+                            <span className="text-sm text-gray-400">Complete instant messaging backend development</span>
                           </div>
                         </div>
                       </div>
@@ -186,15 +229,15 @@ export default function CVPage() {
                         <div className="grid grid-cols-1 gap-2">
                           <div className="flex items-start gap-2">
                             <div className="w-2 h-2 bg-green-500 rounded-full mt-1.5"></div>
-                            <span className="text-sm">Seamless integration with existing ENT/LMS systems</span>
+                            <span className="text-sm text-gray-400">Seamless integration with existing ENT/LMS systems</span>
                           </div>
                           <div className="flex items-start gap-2">
                             <div className="w-2 h-2 bg-green-500 rounded-full mt-1.5"></div>
-                            <span className="text-sm">Continuous performance optimization and user experience improvement</span>
+                            <span className="text-sm text-gray-400">Continuous performance optimization and user experience improvement</span>
                           </div>
                           <div className="flex items-start gap-2">
                             <div className="w-2 h-2 bg-green-500 rounded-full mt-1.5"></div>
-                            <span className="text-sm">Proactive bug resolution and functionality improvements</span>
+                            <span className="text-sm text-gray-400">Proactive bug resolution and functionality improvements</span>
                           </div>
                         </div>
                       </div>
@@ -202,16 +245,16 @@ export default function CVPage() {
                   </div>
                 </div>
 
-                {/* Timeline Item 2 */}
-                <div className="relative pl-8 border-l-2 border-purple-500/30 hover:border-purple-500/60 transition-colors">
-                  <div className="absolute -left-2 top-0 w-4 h-4 bg-purple-500 rounded-full border-2 border-background"></div>
+                {/* Timeline Item 3 - Velvet Consulting */}
+                <div className="relative pl-8 border-l-2 border-green-500/30 hover:border-green-500/60 transition-colors">
+                  <div className="absolute -left-2 top-0 w-4 h-4 bg-green-500 rounded-full border-2 border-background"></div>
                   <div className="space-y-4">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                      <h3 className="text-xl font-bold">Full-Stack Developer</h3>
-                      <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30">Sept 2021 - Dec 2023</Badge>
+                      <h3 className="text-xl font-bold text-white">Full-Stack Developer</h3>
+                      <Badge className="bg-green-500/20 text-green-400 border-green-500/30">Sept 2021 - Dec 2023</Badge>
                     </div>
-                    <p className="text-muted-foreground font-medium">Velvet Consulting • Paris, France</p>
-                    <p className="text-sm text-muted-foreground italic">Team member responsible for conception and development of complex web applications and websites for top-tier clients, particularly in the CAC40.</p>
+                    <p className="text-gray-300 font-medium">Velvet Consulting • Paris, France</p>
+                    <p className="text-sm text-gray-400 italic">Team member responsible for conception and development of complex web applications and websites for top-tier clients, particularly in the CAC40.</p>
                     
                     <div className="space-y-3">
                       <div>
@@ -219,15 +262,15 @@ export default function CVPage() {
                         <div className="grid grid-cols-1 gap-2">
                           <div className="flex items-start gap-2">
                             <div className="w-2 h-2 bg-purple-500 rounded-full mt-1.5"></div>
-                            <span className="text-sm">Complete development cycle (front-end and back-end) for UGC, Atlantic, TotalEnergie sites</span>
+                            <span className="text-sm text-gray-400">Complete development cycle (front-end and back-end) for UGC, Atlantic, TotalEnergie sites</span>
                           </div>
                           <div className="flex items-start gap-2">
                             <div className="w-2 h-2 bg-purple-500 rounded-full mt-1.5"></div>
-                            <span className="text-sm">Robust and scalable architectures using Angular, Vue.js, MongoDB, Drupal</span>
+                            <span className="text-sm text-gray-400">Robust and scalable architectures using Angular, Vue.js, MongoDB, Drupal</span>
                           </div>
                           <div className="flex items-start gap-2">
                             <div className="w-2 h-2 bg-purple-500 rounded-full mt-1.5"></div>
-                            <span className="text-sm">Push optimizations achieving 98+/100 web performance scores</span>
+                            <span className="text-sm text-gray-400">Push optimizations achieving 98+/100 web performance scores</span>
                           </div>
                         </div>
                       </div>
@@ -237,11 +280,11 @@ export default function CVPage() {
                         <div className="grid grid-cols-1 gap-2">
                           <div className="flex items-start gap-2">
                             <div className="w-2 h-2 bg-blue-500 rounded-full mt-1.5"></div>
-                            <span className="text-sm">Secured RESTful APIs for transparent integration</span>
+                            <span className="text-sm text-gray-400">Secured RESTful APIs for transparent integration</span>
                           </div>
                           <div className="flex items-start gap-2">
                             <div className="w-2 h-2 bg-blue-500 rounded-full mt-1.5"></div>
-                            <span className="text-sm">Automation of deployments and tests via CI/CD pipelines</span>
+                            <span className="text-sm text-gray-400">Automation of deployments and tests via CI/CD pipelines</span>
                           </div>
                         </div>
                       </div>
@@ -251,11 +294,11 @@ export default function CVPage() {
                         <div className="grid grid-cols-1 gap-2">
                           <div className="flex items-start gap-2">
                             <div className="w-2 h-2 bg-green-500 rounded-full mt-1.5"></div>
-                            <span className="text-sm">20% conversion rate optimization for client newsletters via Drupal</span>
+                            <span className="text-sm text-gray-400">20% conversion rate optimization for client newsletters via Drupal</span>
                           </div>
                           <div className="flex items-start gap-2">
                             <div className="w-2 h-2 bg-green-500 rounded-full mt-1.5"></div>
-                            <span className="text-sm">Clean code practices, unit tests, modular architecture</span>
+                            <span className="text-sm text-gray-400">Clean code practices, unit tests, modular architecture</span>
                           </div>
                         </div>
                       </div>
@@ -263,26 +306,26 @@ export default function CVPage() {
                   </div>
                 </div>
               </div>
-            </Card>
+            </div>
 
           </div>
 
           {/* Sidebar */}
           <div className="space-y-8">
             {/* Skills with Progress */}
-            <Card className="p-6 group hover:border-purple-500/50 transition-all duration-300 hover-scale">
+            <div className="group relative bg-[#13111C]/60 backdrop-blur-xl border border-white/[0.15] rounded-3xl p-6 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(168,85,247,0.15)]">
               <div className="flex items-center gap-3 mb-6">
-                <div className="p-2 rounded-lg bg-gradient-to-br from-purple-500/20 to-blue-500/20 group-hover:from-purple-500/30 group-hover:to-blue-500/30 transition-all">
+                <div className="p-2 rounded-xl bg-purple-500/10 border border-purple-500/20">
                   <Zap className="h-5 w-5 text-purple-400" />
                 </div>
-                <h2 className="text-xl font-bold">Technical Skills</h2>
+                <h2 className="text-xl font-bold text-white">Technical Skills</h2>
               </div>
               
               <div className="space-y-6">
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium">Frontend Development</span>
-                    <span className="text-sm text-muted-foreground">95%</span>
+                    <span className="text-sm font-medium text-white">Frontend Development</span>
+                    <span className="text-sm text-gray-400">95%</span>
                   </div>
                   <Progress value={95} className="h-2" />
                   <div className="flex flex-wrap gap-1 mt-2">
@@ -296,8 +339,8 @@ export default function CVPage() {
 
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium">Backend Development</span>
-                    <span className="text-sm text-muted-foreground">85%</span>
+                    <span className="text-sm font-medium text-white">Backend Development</span>
+                    <span className="text-sm text-gray-400">85%</span>
                   </div>
                   <Progress value={85} className="h-2" />
                   <div className="flex flex-wrap gap-1 mt-2">
@@ -310,8 +353,8 @@ export default function CVPage() {
 
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium">Databases</span>
-                    <span className="text-sm text-muted-foreground">90%</span>
+                    <span className="text-sm font-medium text-white">Databases</span>
+                    <span className="text-sm text-gray-400">90%</span>
                   </div>
                   <Progress value={90} className="h-2" />
                   <div className="flex flex-wrap gap-1 mt-2">
@@ -324,8 +367,8 @@ export default function CVPage() {
 
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium">DevOps & Tools</span>
-                    <span className="text-sm text-muted-foreground">85%</span>
+                    <span className="text-sm font-medium text-white">DevOps & Tools</span>
+                    <span className="text-sm text-gray-400">85%</span>
                   </div>
                   <Progress value={85} className="h-2" />
                   <div className="flex flex-wrap gap-1 mt-2">
@@ -336,65 +379,65 @@ export default function CVPage() {
                   </div>
                 </div>
               </div>
-            </Card>
+            </div>
 
             {/* Education */}
-            <Card className="p-6 group hover:border-blue-500/50 transition-all duration-300 hover-scale">
+            <div className="group relative bg-[#13111C]/60 backdrop-blur-xl border border-white/[0.15] rounded-3xl p-6 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(168,85,247,0.15)]">
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 rounded-lg bg-gradient-to-br from-blue-500/20 to-green-500/20 group-hover:from-blue-500/30 group-hover:to-green-500/30 transition-all">
+                <div className="p-2 rounded-xl bg-blue-500/10 border border-blue-500/20">
                   <Award className="h-5 w-5 text-blue-400" />
                 </div>
-                <h2 className="text-xl font-bold">Education</h2>
+                <h2 className="text-xl font-bold text-white">Education</h2>
               </div>
               <div className="space-y-3">
                 <div className="p-4 rounded-lg bg-blue-500/10 border border-blue-500/20">
-                  <h3 className="text-lg font-semibold mb-1">Master 2 Data Engineer</h3>
-                  <p className="text-sm text-muted-foreground mb-1">L&apos;école Multimédia • Paris</p>
-                  <p className="text-xs text-muted-foreground mt-2">Deep Learning with Keras, Python fundamentals, Django & Panda fundamentals</p>
+                  <h3 className="text-lg font-semibold mb-1 text-white">Master 2 Data Engineer</h3>
+                  <p className="text-sm text-gray-400 mb-1">L&apos;école Multimédia • Paris</p>
+                  <p className="text-xs text-gray-500 mt-2">Deep Learning with Keras, Python fundamentals, Django & Panda fundamentals</p>
                 </div>
                 <div className="p-4 rounded-lg bg-purple-500/10 border border-purple-500/20">
-                  <h3 className="text-lg font-semibold mb-1">Master 1 Développeur Multimédia</h3>
-                  <p className="text-sm text-muted-foreground mb-1">L&apos;école Multimédia • Paris</p>
-                  <p className="text-xs text-muted-foreground mt-2">Web Development, Software Design, Software Architecture</p>
+                  <h3 className="text-lg font-semibold mb-1 text-white">Master 1 Développeur Multimédia</h3>
+                  <p className="text-sm text-gray-400 mb-1">L&apos;école Multimédia • Paris</p>
+                  <p className="text-xs text-gray-500 mt-2">Web Development, Software Design, Software Architecture</p>
                 </div>
                 <div className="p-4 rounded-lg bg-green-500/10 border border-green-500/20">
-                  <h3 className="text-lg font-semibold mb-1">Chef de Projet Digital</h3>
-                  <p className="text-sm text-muted-foreground mb-1">F2i • Paris, France</p>
+                  <h3 className="text-lg font-semibold mb-1 text-white">Chef de Projet Digital</h3>
+                  <p className="text-sm text-gray-400 mb-1">F2i • Paris, France</p>
                 </div>
                 <div className="p-4 rounded-lg bg-orange-500/10 border border-orange-500/20">
-                  <h3 className="text-lg font-semibold mb-1">Digital Marketing & Communication</h3>
-                  <p className="text-sm text-muted-foreground mb-1">HELP UNIVERSITY • Kuala Lumpur, Malaysia</p>
+                  <h3 className="text-lg font-semibold mb-1 text-white">Digital Marketing & Communication</h3>
+                  <p className="text-sm text-gray-400 mb-1">HELP UNIVERSITY • Kuala Lumpur, Malaysia</p>
                 </div>
               </div>
-            </Card>
+            </div>
 
             {/* Languages */}
-            <Card className="p-6 group hover:border-orange-500/50 transition-all duration-300 hover-scale">
+            <div className="group relative bg-[#13111C]/60 backdrop-blur-xl border border-white/[0.15] rounded-3xl p-6 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(168,85,247,0.15)]">
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 rounded-lg bg-gradient-to-br from-orange-500/20 to-pink-500/20 group-hover:from-orange-500/30 group-hover:to-pink-500/30 transition-all">
+                <div className="p-2 rounded-xl bg-orange-500/10 border border-orange-500/20">
                   <Users className="h-5 w-5 text-orange-400" />
                 </div>
-                <h2 className="text-xl font-bold">Languages</h2>
+                <h2 className="text-xl font-bold text-white">Languages</h2>
               </div>
               <div className="space-y-3">
                 <div className="flex items-center justify-between p-3 rounded-lg bg-orange-500/10 border border-orange-500/20">
-                  <span className="text-sm font-medium">French</span>
+                  <span className="text-sm font-medium text-white">French</span>
                   <Badge className="bg-green-500/20 text-green-400 border-green-500/30 text-xs">Conversational</Badge>
                 </div>
                 <div className="flex items-center justify-between p-3 rounded-lg bg-blue-500/10 border border-blue-500/20">
-                  <span className="text-sm font-medium">English</span>
+                  <span className="text-sm font-medium text-white">English</span>
                   <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30 text-xs">Conversational</Badge>
                 </div>
                 <div className="flex items-center justify-between p-3 rounded-lg bg-purple-500/10 border border-purple-500/20">
-                  <span className="text-sm font-medium">Russian</span>
+                  <span className="text-sm font-medium text-white">Russian</span>
                   <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 text-xs">Conversational</Badge>
                 </div>
                 <div className="flex items-center justify-between p-3 rounded-lg bg-purple-500/10 border border-purple-500/20">
-                  <span className="text-sm font-medium">Ukrainian</span>
+                  <span className="text-sm font-medium text-white">Ukrainian</span>
                   <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 text-xs">Conversational</Badge>
                 </div>
               </div>
-            </Card>
+            </div>
           </div>
         </div>
       </main>

@@ -174,12 +174,34 @@ export const Projects = memo(function Projects() {
             >
               {/* Project Visual */}
               <div className={index % 2 === 1 ? 'lg:col-start-2' : ''}>
-                <div className="aspect-[4/3] bg-foreground/5 rounded-lg border border-border hover:border-foreground/20 transition-all duration-500 hover-scale gradient-border-card spotlight group cursor-pointer relative overflow-hidden">
+                <div className="aspect-[4/3] bg-gradient-to-br from-purple-500/20 via-purple-600/10 to-indigo-500/20 rounded-lg border border-border hover:border-foreground/20 transition-all duration-500 hover-scale gradient-border-card spotlight group cursor-pointer relative overflow-hidden">
+                  {/* Grid Pattern */}
+                  <div className="absolute inset-0 opacity-10">
+                    <div className="grid grid-cols-8 grid-rows-6 h-full w-full">
+                      {Array.from({ length: 48 }).map((_, i) => (
+                        <div key={i} className="border border-purple-300/20" />
+                      ))}
+                    </div>
+                  </div>
+                  
+                  {/* Center Icon */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
+                    <div className="text-6xl opacity-20 group-hover:opacity-30 transition-opacity duration-300">
+                      {project.category === "Game" ? "🎮" : 
+                       project.category === "Web App" ? "💻" :
+                       project.category === "Mobile App" ? "📱" : "🚀"}
+                    </div>
+                    <div className="text-lg font-semibold text-muted-foreground/40 group-hover:text-muted-foreground/60 transition-colors duration-300 px-4 text-center">
+                      {project.title}
+                    </div>
+                  </div>
+                  
+                  {/* Floating Accents */}
+                  <div className="absolute top-4 right-4 w-3 h-3 bg-purple-500 rounded-full opacity-40 group-hover:opacity-70 transition-opacity duration-300" />
+                  <div className="absolute bottom-4 left-4 w-2 h-2 bg-indigo-500 rounded-full opacity-40 group-hover:opacity-70 transition-opacity duration-300" />
+                  
                   {/* Animated gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
-                  {/* Corner accent */}
-                  <div className="absolute top-4 right-4 w-2 h-2 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
               </div>
 
@@ -237,7 +259,28 @@ export const Projects = memo(function Projects() {
                 style={{ animationDelay: `${2.6 + index * 0.1}s` }}
                 onClick={() => openModal(project)}
               >
-                <div className="aspect-[4/3] bg-foreground/5 rounded-lg border border-border group-hover:border-foreground/20 transition-all duration-300 hover-scale spotlight relative overflow-hidden">
+                <div className="aspect-[4/3] bg-gradient-to-br from-purple-500/15 via-purple-600/8 to-indigo-500/15 rounded-lg border border-border group-hover:border-foreground/20 transition-all duration-300 hover-scale spotlight relative overflow-hidden">
+                  {/* Grid Pattern */}
+                  <div className="absolute inset-0 opacity-10">
+                    <div className="grid grid-cols-6 grid-rows-4 h-full w-full">
+                      {Array.from({ length: 24 }).map((_, i) => (
+                        <div key={i} className="border border-purple-300/20" />
+                      ))}
+                    </div>
+                  </div>
+                  
+                  {/* Center Icon */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-5xl opacity-15 group-hover:opacity-25 transition-opacity duration-300">
+                      {project.category === "Game" ? "🎮" : 
+                       project.category === "Web App" ? "💻" :
+                       project.category === "Mobile App" ? "📱" : "🚀"}
+                    </div>
+                  </div>
+                  
+                  {/* Corner accent */}
+                  <div className="absolute top-3 right-3 w-2 h-2 bg-purple-500 rounded-full opacity-40 group-hover:opacity-70 transition-opacity duration-300" />
+                  
                   {/* Hover overlay */}
                   <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>

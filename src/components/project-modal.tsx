@@ -34,10 +34,10 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="!max-w-[75vw] !w-[75vw] !max-h-[80vh] !h-[80vh] !top-[10%] !left-[12.5%] !translate-x-0 !translate-y-0 overflow-y-auto modal-scroll bg-gradient-to-br from-background via-background/98 to-background/95 backdrop-blur-xl border border-border/30 shadow-2xl">
+      <DialogContent className="!max-w-[75vw] !w-[75vw] !max-h-[80vh] !h-[80vh] !top-[10%] !left-[12.5%] !translate-x-0 !translate-y-0 overflow-y-auto modal-scroll bg-background/95 backdrop-blur-xl border border-border/30 shadow-2xl [&>button]:!top-8 [&>button]:!right-6">
         <DialogHeader className="relative">
-          {/* Gradient accent line */}
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-blue-500 to-pink-500 rounded-full" />
+          {/* Accent line */}
+          <div className="absolute top-0 left-0 right-0 h-1 bg-purple-500 rounded-full" />
           
           <div className="flex items-center gap-4 mt-6">
             <Badge variant="outline" className="text-sm px-3 py-1 border-purple-500/30 text-purple-400 bg-purple-500/10">
@@ -48,7 +48,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
               <span>{project.year}</span>
             </div>
           </div>
-          <DialogTitle className="text-4xl sm:text-5xl font-bold mt-6 bg-gradient-to-r from-foreground via-foreground to-foreground/80 bg-clip-text text-transparent">
+          <DialogTitle className="text-4xl sm:text-5xl font-bold mt-6 text-foreground">
             {project.title}
           </DialogTitle>
           <DialogDescription className="text-lg text-muted-foreground mt-2">
@@ -58,23 +58,23 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
 
         <div className="space-y-8">
           {/* Project Image */}
-          <div className="aspect-[16/9] bg-gradient-to-br from-purple-500/10 via-blue-500/10 to-pink-500/10 rounded-2xl border border-border/50 relative overflow-hidden group shadow-lg">
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-blue-500/5" />
+          <div className="aspect-[16/9] bg-purple-500/10 rounded-2xl border border-border/50 relative overflow-hidden group shadow-lg">
+            <div className="absolute inset-0 bg-purple-500/5" />
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-7xl opacity-30 group-hover:opacity-50 transition-opacity duration-300">
                 {project.category === "Game" ? "🎮" : "💻"}
               </div>
             </div>
             {/* Animated corner accent */}
-            <div className="absolute top-4 right-4 w-4 h-4 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full opacity-70 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="absolute top-4 right-4 w-4 h-4 bg-purple-500 rounded-full opacity-70 group-hover:opacity-100 transition-opacity duration-300" />
             {/* Subtle glow effect */}
-            <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-purple-500/5" />
+            <div className="absolute inset-0 bg-purple-500/5" />
           </div>
 
           {/* Project Description */}
-          <div className="space-y-4 p-6 bg-gradient-to-r from-foreground/5 to-transparent rounded-xl border border-border/30">
+          <div className="space-y-4 p-6 bg-foreground/5 rounded-xl border border-border/30">
             <h3 className="text-2xl font-bold text-foreground flex items-center gap-2">
-              <div className="w-2 h-2 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full" />
+              <div className="w-2 h-2 bg-purple-500 rounded-full" />
               About This Project
             </h3>
             <p className="text-lg text-muted-foreground leading-relaxed">
@@ -85,7 +85,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
           {/* Project Details Grid */}
           <div className="grid md:grid-cols-2 gap-6">
             {/* Technologies */}
-            <div className="space-y-4 p-5 bg-gradient-to-r from-foreground/5 to-transparent rounded-xl border border-border/30">
+            <div className="space-y-4 p-5 bg-foreground/5 rounded-xl border border-border/30">
               <h4 className="text-xl font-bold flex items-center gap-3 text-foreground">
                 <div className="p-2 rounded-lg bg-foreground/10">
                   <Zap className="h-5 w-5 text-foreground" />
@@ -102,7 +102,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
             </div>
 
             {/* Project Info */}
-            <div className="space-y-4 p-5 bg-gradient-to-r from-foreground/5 to-transparent rounded-xl border border-border/30">
+            <div className="space-y-4 p-5 bg-foreground/5 rounded-xl border border-border/30">
               <h4 className="text-xl font-bold flex items-center gap-3 text-foreground">
                 <div className="p-2 rounded-lg bg-foreground/10">
                   <Calendar className="h-5 w-5 text-foreground" />
@@ -142,7 +142,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
           {(project.challenges || project.results) && (
             <div className="grid md:grid-cols-2 gap-6">
               {project.challenges && (
-                <div className="space-y-4 p-5 bg-gradient-to-r from-foreground/5 to-transparent rounded-xl border border-border/30">
+                <div className="space-y-4 p-5 bg-foreground/5 rounded-xl border border-border/30">
                   <h4 className="text-xl font-bold text-foreground flex items-center gap-3">
                     <div className="p-2 rounded-lg bg-foreground/10">
                       <div className="w-2 h-2 bg-foreground rounded-full" />
@@ -161,7 +161,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
               )}
 
               {project.results && (
-                <div className="space-y-4 p-5 bg-gradient-to-r from-foreground/5 to-transparent rounded-xl border border-border/30">
+                <div className="space-y-4 p-5 bg-foreground/5 rounded-xl border border-border/30">
                   <h4 className="text-xl font-bold text-foreground flex items-center gap-3">
                     <div className="p-2 rounded-lg bg-foreground/10">
                       <div className="w-2 h-2 bg-foreground rounded-full" />
@@ -195,7 +195,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
             )}
             {project.liveUrl && (
               <Button
-                className="group magnetic glow-on-hover rounded-full px-6 py-3 bg-gradient-to-r from-purple-500 via-purple-600 to-blue-600 hover:from-purple-600 hover:via-purple-700 hover:to-blue-700 text-white border-0 shadow-lg hover:shadow-2xl transition-all duration-300"
+                className="group magnetic glow-on-hover rounded-full px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white border-0 shadow-lg hover:shadow-2xl transition-all duration-300"
                 onClick={() => window.open(project.liveUrl, '_blank')}
               >
                 <ExternalLink className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
@@ -203,7 +203,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
               </Button>
             )}
             {!project.githubUrl && !project.liveUrl && (
-              <div className="text-base text-muted-foreground italic p-4 bg-gradient-to-r from-foreground/5 to-transparent rounded-lg border border-border/30">
+              <div className="text-base text-muted-foreground italic p-4 bg-foreground/5 rounded-lg border border-border/30">
                 Project details and links coming soon...
               </div>
             )}

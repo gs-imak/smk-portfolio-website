@@ -1,6 +1,5 @@
 "use client";
 
-import { Building2 } from "lucide-react";
 import Image from "next/image";
 
 export function Clients() {
@@ -25,73 +24,85 @@ export function Clients() {
       logo: "/logos/totalEnergies.png",
       fallback: "⚡"
     },
-    { name: "Edumalin", 
+    { 
+      name: "Edumalin", 
       logo: "/logos/edumalin.png",
       fallback: "🎓"
+    },
+    { 
+      name: "Sauter", 
+      logo: "/logos/sauter.png",
+      fallback: "🔧"
     },
   ];
 
   return (
-    <section className="py-16 relative overflow-hidden bg-muted/5">
-      {/* Header */}
-      <div className="text-center mb-12 px-4">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30 mb-6">
-          <Building2 className="h-4 w-4 text-blue-400" />
-          <span className="text-sm font-medium">Trusted By</span>
-        </div>
-        
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-          <span className="accent-gradient">Companies</span> I&apos;ve Worked With
-        </h2>
-        
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          From innovative startups to established enterprises
-        </p>
+    <section className="py-24 relative overflow-hidden">
+      {/* Animated gradient blobs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="blob absolute top-20 left-20 w-72 h-72 bg-purple-500/20" />
+        <div className="blob absolute bottom-20 right-20 w-96 h-96 bg-blue-500/20" style={{ animationDelay: '2s' }} />
+        <div className="blob absolute top-1/2 right-1/4 w-80 h-80 bg-pink-500/10" style={{ animationDelay: '4s' }} />
       </div>
+      
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <p className="text-sm uppercase tracking-wider text-muted-foreground mb-4">
+            Trusted By
+          </p>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            Leading Companies
+            <br />
+            <span className="text-muted-foreground">
+              & CAC40 Clients
+            </span>
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Delivering excellence for innovative startups and established enterprises
+          </p>
+        </div>
 
-      {/* Auto-scrolling logos - Full width */}
-      <div className="relative w-full overflow-hidden py-8">
-        <div className="flex animate-scroll">
-          {[...Array(10)].map((_, setIndex) => (
-            clients.map((client, index) => (
-              <div
-                key={`set-${setIndex}-${index}`}
-                className="flex-shrink-0 mx-10 flex items-center justify-center"
-              >
-                <div className="flex flex-col items-center gap-3 group">
-                <div className="w-26 h-26 flex items-center justify-center group-hover:scale-105 transition-all duration-300 rounded-lg bg-white/95 p-2">
-                  {client.logo.startsWith('/') ? (
-                    <>
-                      <Image
-                        src={client.logo}
-                        alt={`${client.name} logo`}
-                        width={96}
-                        height={96}
-                        className="object-contain transition-all duration-300"
-                        onError={(e) => {
-                          e.currentTarget.style.display = 'none';
-                          if (e.currentTarget.nextElementSibling) {
-                            (e.currentTarget.nextElementSibling as HTMLElement).style.display = 'block';
-                          }
-                        }}
-                      />
-                      <div className="text-4xl hidden">
-                        {client.fallback || ''}
-                      </div>
-                    </>
-                  ) : (
-                    <div className="text-6xl">
-                      {client.logo}
-                    </div>
-                  )}
+        {/* Logo Grid */}
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4 mb-12">
+          {clients.map((client, index) => (
+            <div
+              key={index}
+              className="group relative aspect-square bg-white/90 backdrop-blur-sm border border-white/20 rounded-2xl p-6 hover:bg-white hover:border-white/30 hover:shadow-lg transition-all duration-300 flex items-center justify-center"
+            >
+              {client.logo.startsWith('/') ? (
+                <>
+                  <Image
+                    src={client.logo}
+                    alt={`${client.name} logo`}
+                    width={80}
+                    height={80}
+                    className="object-contain transition-all duration-300 group-hover:scale-110"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                      if (e.currentTarget.nextElementSibling) {
+                        (e.currentTarget.nextElementSibling as HTMLElement).style.display = 'flex';
+                      }
+                    }}
+                  />
+                  <div className="hidden text-3xl items-center justify-center w-full h-full">
+                    {client.fallback || ''}
+                  </div>
+                </>
+              ) : (
+                <div className="text-4xl">
+                  {client.logo}
                 </div>
-                  <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors">
-                    {client.name}
-                  </span>
-                </div>
-              </div>
-            ))
+              )}
+            </div>
           ))}
+        </div>
+
+        {/* CTA Button */}
+        <div className="text-center">
+          <button className="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold text-sm transition-all duration-300 shadow-lg hover:shadow-xl">
+            View All Projects
+          </button>
         </div>
       </div>
     </section>

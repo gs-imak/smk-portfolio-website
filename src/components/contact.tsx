@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Mail, Linkedin, Github, MapPin, Send, Phone } from "lucide-react";
-import { Card } from "@/components/ui/card";
 import { toast } from "sonner";
 import Image from "next/image";
 
@@ -17,6 +16,17 @@ export const Contact = memo(function Contact() {
     message: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Mouse spotlight effect handler
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+  }, []);
 
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,192 +73,313 @@ export const Contact = memo(function Contact() {
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
-          {/* Contact Info */}
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            <Card className="p-8 group hover:border-purple-500/50 transition-all duration-300 hover-scale animate-fade-in-up" style={{ animationDelay: '0.7s' }}>
-              <div className="flex items-center gap-4 mb-4">
-                <div className="p-3 rounded-lg bg-purple-500/20 group-hover:bg-purple-500/30 transition-colors">
-                  <Mail className="h-6 w-6 text-purple-400" />
+        <div className="max-w-6xl mx-auto">
+          {/* Contact Info Cards */}
+          <div className="grid md:grid-cols-3 gap-6 mb-16">
+            {/* Email Card */}
+            <div 
+              className="group relative bg-[#13111C]/60 backdrop-blur-xl border border-white/[0.15] rounded-3xl p-8 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(168,85,247,0.12)] cursor-pointer animate-fade-in-up overflow-hidden"
+              style={{ animationDelay: '0.7s' }}
+              onMouseMove={handleMouseMove}
+            >
+              {/* Spotlight effect */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                <div 
+                  className="absolute inset-0" 
+                  style={{
+                    background: `radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(168, 85, 247, 0.15), transparent 40%)`
+                  }}
+                />
+              </div>
+              
+              <div className="relative z-10 flex flex-col h-full">
+                <div className="mb-6">
+                  <div className="inline-flex p-3 rounded-xl bg-purple-500/10 border border-purple-500/20">
+                    <Mail className="h-6 w-6 text-purple-400" />
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold">Email Me</h3>
-                  <p className="text-muted-foreground text-sm">Quick response</p>
+                
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold mb-3 text-white">Email Me</h3>
+                  <p className="text-base text-gray-400 mb-6 leading-relaxed">
+                    Quick response within 24h. Let&apos;s discuss your project and how we can work together.
+                  </p>
+                </div>
+                
+                <div className="pt-4 border-t border-white/[0.12]">
+                  <a
+                    href="mailto:georgesimak@gmail.com"
+                    className="text-sm font-medium text-purple-400 hover:text-purple-300 transition-colors inline-flex items-center gap-2 group/link"
+                  >
+                    georgesimak@gmail.com
+                    <span className="group-hover/link:translate-x-1 transition-transform">→</span>
+                  </a>
                 </div>
               </div>
-              <a
-                href="mailto:georgesimak@gmail.com"
-                className="text-purple-400 hover:text-purple-300 transition-colors font-medium"
-              >
-                georgesimak@gmail.com
-              </a>
-            </Card>
+            </div>
 
-            <Card className="p-8 group hover:border-blue-500/50 transition-all duration-300 hover-scale animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
-              <div className="flex items-center gap-4 mb-4">
-                <div className="p-3 rounded-lg bg-blue-500/20 group-hover:bg-blue-500/30 transition-colors">
-                  <Phone className="h-6 w-6 text-blue-400" />
+            {/* Phone Card */}
+            <div 
+              className="group relative bg-[#13111C]/60 backdrop-blur-xl border border-white/[0.15] rounded-3xl p-8 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(99,102,241,0.12)] cursor-pointer animate-fade-in-up overflow-hidden"
+              style={{ animationDelay: '0.8s' }}
+              onMouseMove={handleMouseMove}
+            >
+              {/* Spotlight effect */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                <div 
+                  className="absolute inset-0" 
+                  style={{
+                    background: `radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(99, 102, 241, 0.15), transparent 40%)`
+                  }}
+                />
+              </div>
+              
+              <div className="relative z-10 flex flex-col h-full">
+                <div className="mb-6">
+                  <div className="inline-flex p-3 rounded-xl bg-indigo-500/10 border border-indigo-500/20">
+                    <Phone className="h-6 w-6 text-indigo-400" />
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold">Call Me</h3>
-                  <p className="text-muted-foreground text-sm">Let's chat</p>
+                
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold mb-3 text-white">Call Me</h3>
+                  <p className="text-base text-gray-400 mb-6 leading-relaxed">
+                    Let&apos;s have a conversation about your ideas and explore collaboration opportunities.
+                  </p>
+                </div>
+                
+                <div className="pt-4 border-t border-white/[0.12]">
+                  <a
+                    href="tel:+1234567890"
+                    className="text-sm font-medium text-indigo-400 hover:text-indigo-300 transition-colors inline-flex items-center gap-2 group/link"
+                  >
+                    +1 (234) 567-890
+                    <span className="group-hover/link:translate-x-1 transition-transform">→</span>
+                  </a>
                 </div>
               </div>
-              <a
-                href="tel:+1234567890"
-                className="text-blue-400 hover:text-blue-300 transition-colors font-medium"
-              >
-                +1 (234) 567-890
-              </a>
-            </Card>
+            </div>
 
-            <Card className="p-8 group hover:border-green-500/50 transition-all duration-300 hover-scale animate-fade-in-up" style={{ animationDelay: '0.9s' }}>
-              <div className="flex items-center gap-4 mb-4">
-                <div className="p-3 rounded-lg bg-green-500/20 group-hover:bg-green-500/30 transition-colors">
-                  <MapPin className="h-6 w-6 text-green-400" />
+            {/* Location Card */}
+            <div 
+              className="group relative bg-[#13111C]/60 backdrop-blur-xl border border-white/[0.15] rounded-3xl p-8 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(139,92,246,0.12)] cursor-pointer animate-fade-in-up overflow-hidden"
+              style={{ animationDelay: '0.9s' }}
+              onMouseMove={handleMouseMove}
+            >
+              {/* Spotlight effect */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                <div 
+                  className="absolute inset-0" 
+                  style={{
+                    background: `radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(139, 92, 246, 0.15), transparent 40%)`
+                  }}
+                />
+              </div>
+              
+              <div className="relative z-10 flex flex-col h-full">
+                <div className="mb-6">
+                  <div className="inline-flex p-3 rounded-xl bg-violet-500/10 border border-violet-500/20">
+                    <MapPin className="h-6 w-6 text-violet-400" />
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold">Location</h3>
-                  <p className="text-muted-foreground text-sm">Remote work</p>
+                
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold mb-3 text-white">Location</h3>
+                  <p className="text-base text-gray-400 mb-6 leading-relaxed">
+                    Based in Paris, France. Available for remote work worldwide and local meetings.
+                  </p>
+                </div>
+                
+                <div className="pt-4 border-t border-white/[0.12]">
+                  <span className="text-sm font-medium text-violet-400">Paris, France 🇫🇷</span>
                 </div>
               </div>
-              <span className="text-green-400 font-medium">Paris, France</span>
-            </Card>
+            </div>
           </div>
 
           {/* Form with Phone Image */}
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Phone Image */}
             <div className="hidden lg:flex items-center justify-center animate-fade-in-up" style={{ animationDelay: '1s' }}>
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-3xl blur-3xl" />
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/30 to-indigo-500/30 rounded-full blur-[100px]" />
                 <Image
                   src="/avatar/phone.png"
                   alt="Get in touch"
-                  width={400}
-                  height={400}
-                  className="relative object-contain hover:scale-105 transition-transform duration-500"
+                  width={450}
+                  height={450}
+                  className="relative object-contain"
                 />
               </div>
             </div>
 
             {/* Enhanced Form */}
-            <Card className="p-8 bg-background border border-border hover:border-purple-500/50 transition-all duration-300 animate-fade-in-up" style={{ animationDelay: '1.1s' }}>
-            <div className="mb-6">
-              <h3 className="text-2xl font-bold mb-2 animate-fade-in-up" style={{ animationDelay: '1.3s' }}>Send Me a Message</h3>
-              <p className="text-muted-foreground animate-fade-in-up" style={{ animationDelay: '1.5s' }}>I&apos;ll get back to you within 24 hours</p>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="name" className="text-sm font-medium">Name *</Label>
-                  <Input
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Your full name"
-                    required
-                    className="w-full"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="email" className="text-sm font-medium">Email *</Label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="your@email.com"
-                    required
-                    className="w-full"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="message" className="text-sm font-medium">Project Details *</Label>
-                <Textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder="Tell me about your project, timeline, and any specific requirements..."
-                  className="min-h-[150px] w-full resize-none"
-                  required
+            <div 
+              className="group relative bg-[#13111C]/60 backdrop-blur-xl border border-white/[0.15] rounded-3xl p-10 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(168,85,247,0.15)] animate-fade-in-up overflow-hidden" 
+              style={{ animationDelay: '1.1s' }}
+              onMouseMove={handleMouseMove}
+            >
+              {/* Spotlight effect */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                <div 
+                  className="absolute inset-0" 
+                  style={{
+                    background: `radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(168, 85, 247, 0.12), transparent 40%)`
+                  }}
                 />
               </div>
+              
+              <div className="relative z-10">
+                <div className="mb-8">
+                  <h3 className="text-3xl font-bold mb-3 text-white animate-fade-in-up" style={{ animationDelay: '1.3s' }}>Send Me a Message</h3>
+                  <p className="text-gray-400 text-lg animate-fade-in-up" style={{ animationDelay: '1.5s' }}>I&apos;ll get back to you within 24 hours</p>
+                </div>
 
-              <div className="flex items-center gap-4 pt-4">
-                <Button
-                  type="submit"
-                  className="flex-1 group magnetic glow-on-hover rounded-full px-8 py-3 bg-gradient-to-b from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? (
-                    <span className="flex items-center gap-2">
-                      <span className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      Sending...
-                    </span>
-                  ) : (
-                    <>
-                      <Send className="mr-2 h-4 w-2" />
-                      Send Message
-                    </>
-                  )}
-                </Button>
-              </div>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div className="space-y-3">
+                    <Label htmlFor="name" className="text-sm font-semibold text-white">Name *</Label>
+                    <Input
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="John Doe"
+                      required
+                      className="h-12 rounded-xl border-white/[0.12] bg-black/[0.25] text-white placeholder:text-gray-500 focus:border-purple-500/50 focus:ring-purple-500/20 transition-all"
+                    />
+                  </div>
 
-              <div className="text-center pt-4">
-                <p className="text-xs text-muted-foreground">
-                  By sending this message, you agree to our privacy policy
-                </p>
+                  <div className="space-y-3">
+                    <Label htmlFor="email" className="text-sm font-semibold text-white">Email *</Label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="john@example.com"
+                      required
+                      className="h-12 rounded-xl border-white/[0.12] bg-black/[0.25] text-white placeholder:text-gray-500 focus:border-purple-500/50 focus:ring-purple-500/20 transition-all"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <Label htmlFor="message" className="text-sm font-semibold text-white">Project Details *</Label>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    placeholder="Tell me about your project, timeline, and any specific requirements..."
+                    className="min-h-[160px] resize-none rounded-xl border-white/[0.12] bg-black/[0.25] text-white placeholder:text-gray-500 focus:border-purple-500/50 focus:ring-purple-500/20 transition-all"
+                    required
+                  />
+                </div>
+
+                <div className="pt-2">
+                  <Button
+                    type="submit"
+                    className="w-full h-14 group rounded-xl text-base font-semibold bg-gradient-to-r from-purple-600 via-purple-500 to-indigo-600 hover:from-purple-700 hover:via-purple-600 hover:to-indigo-700 text-white border-0 shadow-lg hover:shadow-[0_0_30px_rgba(168,85,247,0.4)] transition-all duration-300"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <span className="flex items-center justify-center gap-3">
+                        <span className="h-5 w-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        Sending message...
+                      </span>
+                    ) : (
+                      <span className="flex items-center justify-center gap-2">
+                        Send Message
+                        <Send className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                      </span>
+                    )}
+                  </Button>
+                </div>
+
+                <div className="text-center pt-2">
+                  <p className="text-xs text-muted-foreground/70">
+                    By sending this message, you agree to our privacy policy
+                  </p>
+                </div>
+              </form>
               </div>
-            </form>
-          </Card>
+            </div>
           </div>
         </div>
 
-            {/* Social Links */}
-            <div className="text-center pt-16">
-            <h3 className="text-2xl font-bold mb-6">Connect With Me</h3>
-            <div className="flex justify-center items-center gap-6">
-              <a
-                href="https://github.com/georgiysimak"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-4 rounded-full bg-foreground/5 hover:bg-foreground/10 transition-colors group"
-              >
-                <Github className="h-6 w-6 group-hover:scale-110 transition-transform" />
-                <span className="sr-only">GitHub</span>
-              </a>
-              <a
-                href="https://linkedin.com/in/georgiysimak"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-4 rounded-full bg-foreground/5 hover:bg-foreground/10 transition-colors group"
-              >
-                <Linkedin className="h-6 w-6 group-hover:scale-110 transition-transform" />
-                <span className="sr-only">LinkedIn</span>
-              </a>
-              <a
-                href="mailto:georgesimak@gmail.com"
-                className="p-4 rounded-full bg-foreground/5 hover:bg-foreground/10 transition-colors group"
-              >
-                <Mail className="h-6 w-6 group-hover:scale-110 transition-transform" />
-                <span className="sr-only">Email</span>
-              </a>
-            </div>
+        {/* Social Links */}
+        <div className="text-center pt-24">
+          <h3 className="text-3xl font-bold mb-3">Connect With Me</h3>
+          <p className="text-muted-foreground mb-8 text-lg">Let&apos;s build something amazing together</p>
+          <div className="flex justify-center items-center gap-4">
+            <a
+              href="https://github.com/georgiysimak"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative p-6 rounded-2xl bg-[#13111C]/60 backdrop-blur-xl border border-white/[0.15] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(255,255,255,0.08)] overflow-hidden"
+              onMouseMove={handleMouseMove}
+            >
+              {/* Spotlight effect */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                <div 
+                  className="absolute inset-0" 
+                  style={{
+                    background: `radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.08), transparent 40%)`
+                  }}
+                />
+              </div>
+              <Github className="h-7 w-7 text-gray-300 group-hover:scale-110 transition-transform duration-300 relative z-10" />
+              <span className="sr-only">GitHub</span>
+            </a>
+            <a
+              href="https://linkedin.com/in/georgiysimak"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative p-6 rounded-2xl bg-[#13111C]/60 backdrop-blur-xl border border-white/[0.15] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(59,130,246,0.15)] overflow-hidden"
+              onMouseMove={handleMouseMove}
+            >
+              {/* Spotlight effect */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                <div 
+                  className="absolute inset-0" 
+                  style={{
+                    background: `radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(59, 130, 246, 0.15), transparent 40%)`
+                  }}
+                />
+              </div>
+              <Linkedin className="h-7 w-7 text-blue-400 group-hover:scale-110 transition-transform duration-300 relative z-10" />
+              <span className="sr-only">LinkedIn</span>
+            </a>
+            <a
+              href="mailto:georgesimak@gmail.com"
+              className="group relative p-6 rounded-2xl bg-[#13111C]/60 backdrop-blur-xl border border-white/[0.15] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(168,85,247,0.15)] overflow-hidden"
+              onMouseMove={handleMouseMove}
+            >
+              {/* Spotlight effect */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                <div 
+                  className="absolute inset-0" 
+                  style={{
+                    background: `radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(168, 85, 247, 0.15), transparent 40%)`
+                  }}
+                />
+              </div>
+              <Mail className="h-7 w-7 text-purple-400 group-hover:scale-110 transition-transform duration-300 relative z-10" />
+              <span className="sr-only">Email</span>
+            </a>
           </div>
+        </div>
 
         {/* Footer */}
-        <div className="mt-32 pt-8 border-t border-border">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-            <p>© 2024 George Simak. All rights reserved.</p>
-            <p>Designed & Built with passion</p>
+        <div className="mt-32 pt-10 border-t border-border/50">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-muted-foreground/80">
+            <p className="font-medium">© 2024 George Simak. All rights reserved.</p>
+            <p className="flex items-center gap-2">
+              <span>Designed & Built with</span>
+              <span className="text-red-500 animate-pulse">❤️</span>
+            </p>
           </div>
         </div>
       </div>

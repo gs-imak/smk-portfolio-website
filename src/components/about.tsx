@@ -1,13 +1,24 @@
 "use client";
 
-import { memo } from "react";
+import { memo, useCallback } from "react";
 
 export const About = memo(function About() {
+  // Mouse spotlight effect handler
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+  }, []);
+
   const expertise = [
     {
       title: "Frontend Development",
-      description: "I build modern, responsive web applications using React, Next.js, and TypeScript. Focused on creating seamless user experiences with clean, maintainable code.",
-      metrics: ["5+ Years Experience", "50+ Projects", "React & Next.js Expert"]
+      description: "I build modern, responsive web applications using Vue.js, React, Angular, and TypeScript. Specialized in technical migrations, state management with NgRx, and creating seamless user experiences with clean, maintainable code for CAC40 clients.",
+      metrics: ["5+ Years Experience", "Vue.js & React Expert", "CAC40 Clients"]
     },
     {
       title: "Game Development",
@@ -35,66 +46,80 @@ export const About = memo(function About() {
               </p>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
                 <span className="inline-block animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-                  Building Digital
+                  Full-Stack Developer
                 </span>
                 <br />
                 <span className="text-muted-foreground inline-block animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-                  Experiences
+                  Building Excellence
                 </span>
               </h2>
             </div>
 
             <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
               <p className="animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
-                I&apos;m a developer with a passion for creating exceptional digital experiences. 
-                With expertise in both web development and game design, I bring a unique perspective 
-                to every project.
+                I&apos;m a Full-Stack Developer with over 5 years of experience building modern web 
+                applications. My expertise spans HTML, CSS, JavaScript, and modern frameworks like React, 
+                Vue.js, and Angular. I&apos;m passionate about writing clean, maintainable code and 
+                creating exceptional user experiences.
               </p>
               <p className="animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
-                Based in San Francisco, I work with clients worldwide to build products that users 
-                love. From startups to established companies, I help bring ideas to life with 
-                modern technology and thoughtful design.
+                Based in Paris, I&apos;ve had the privilege of working with top-tier clients including 
+                CAC40 companies like TotalEnergie, UGC, and Atlantic. I specialize in client consulting, 
+                pair-programming, and delivering robust, scalable solutions that drive business success.
               </p>
             </div>
 
             <div className="grid grid-cols-3 gap-4 pt-8">
               <div className="animate-fade-in-up" style={{ animationDelay: '1s' }}>
-                <div className="text-3xl font-bold mb-1">50+</div>
-                <div className="text-sm text-muted-foreground">Projects</div>
+                <div className="text-3xl font-bold mb-1">5+</div>
+                <div className="text-sm text-muted-foreground">Companies</div>
               </div>
               <div className="animate-fade-in-up" style={{ animationDelay: '1.1s' }}>
                 <div className="text-3xl font-bold mb-1">5+</div>
-                <div className="text-sm text-muted-foreground">Years</div>
+                <div className="text-sm text-muted-foreground">Years Exp</div>
               </div>
               <div className="animate-fade-in-up" style={{ animationDelay: '1.2s' }}>
-                <div className="text-3xl font-bold mb-1">100%</div>
-                <div className="text-sm text-muted-foreground">Satisfied</div>
+                <div className="text-3xl font-bold mb-1">CAC40</div>
+                <div className="text-sm text-muted-foreground">Clients</div>
               </div>
             </div>
           </div>
 
           {/* Right - Expertise Cards */}
-          <div className="space-y-8">
+          <div className="space-y-6">
             {expertise.map((item, index) => (
               <div
                 key={index}
-                className="border border-border p-8 rounded-lg hover:border-foreground/20 transition-all duration-300 group gradient-border-card hover-scale animate-fade-in-up"
+                className="group relative bg-[#13111C]/60 backdrop-blur-xl border border-white/[0.15] rounded-3xl p-8 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(168,85,247,0.12)] cursor-pointer animate-fade-in-up overflow-hidden"
                 style={{ animationDelay: `${1.4 + index * 0.2}s` }}
+                onMouseMove={handleMouseMove}
               >
-                <h3 className="text-2xl font-bold mb-4 group-hover:accent-gradient transition-all duration-300">{item.title}</h3>
-                <p className="text-muted-foreground leading-relaxed mb-6">
-                  {item.description}
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  {item.metrics.map((metric, idx) => (
-                    <div
-                      key={idx}
-                      className="text-sm px-3 py-1 bg-secondary rounded-full hover:bg-foreground/10 transition-colors duration-300 animate-fade-in-up"
-                      style={{ animationDelay: `${1.6 + index * 0.2 + idx * 0.1}s` }}
-                    >
-                      {metric}
-                    </div>
-                  ))}
+                {/* Spotlight effect */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                  <div 
+                    className="absolute inset-0" 
+                    style={{
+                      background: `radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(168, 85, 247, 0.15), transparent 40%)`
+                    }}
+                  />
+                </div>
+
+                <div className="relative z-10">
+                  <h3 className="text-2xl font-bold mb-4 text-white transition-all duration-300">{item.title}</h3>
+                  <p className="text-gray-400 leading-relaxed mb-6 text-base">
+                    {item.description}
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    {item.metrics.map((metric, idx) => (
+                      <div
+                        key={idx}
+                        className="text-sm px-4 py-2 bg-purple-500/10 border border-purple-500/20 rounded-full text-purple-400 font-medium transition-colors duration-300 animate-fade-in-up"
+                        style={{ animationDelay: `${1.6 + index * 0.2 + idx * 0.1}s` }}
+                      >
+                        {metric}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}

@@ -30,7 +30,7 @@ export const Hero = memo(function Hero() {
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-foreground/5 border border-foreground/10 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
                 <Sparkles className="h-3 w-3" />
                 <p className="text-xs uppercase tracking-wider">
-                  Frontend & Game Developer
+                  Full-Stack Developer
                 </p>
               </div>
               
@@ -49,26 +49,26 @@ export const Hero = memo(function Hero() {
               </h1>
 
               <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-xl animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
-                I design and develop modern web applications and interactive experiences
-                that users love. Based in San Francisco, working with clients worldwide.
+                I build modern web applications with Vue.js, React, and Angular. 
+                Based in Paris, delivering robust solutions for clients worldwide including CAC40 companies.
               </p>
             </div>
 
             <div className="flex flex-wrap gap-4 animate-fade-in-up" style={{ animationDelay: '1s' }}>
               <Button
-                size="lg"
                 onClick={() => scrollToSection("#projects")}
-                className="group magnetic glow-on-hover rounded-full px-12 py-6 text-lg bg-gradient-to-b from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300"
+                className="group h-14 rounded-xl text-base font-semibold bg-gradient-to-r from-purple-600 via-purple-500 to-indigo-600 hover:from-purple-700 hover:via-purple-600 hover:to-indigo-700 text-white border-0 shadow-lg hover:shadow-[0_0_30px_rgba(168,85,247,0.4)] transition-all duration-300 px-8"
               >
-                View Projects
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                <span className="flex items-center justify-center gap-2">
+                  View Projects
+                  <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </span>
               </Button>
 
               <Button
                 variant="outline"
-                size="lg"
                 onClick={() => scrollToSection("#contact")}
-                className="magnetic spotlight rounded-full px-12 py-6 text-lg border-2 border-foreground/20 hover:border-foreground/40 hover:bg-foreground/5 text-foreground hover:text-foreground transition-all duration-300"
+                className="h-14 rounded-xl text-base font-semibold border-2 border-white/[0.15] hover:border-purple-500/50 bg-transparent hover:bg-purple-500/10 text-foreground transition-all duration-300 px-8"
               >
                 Get In Touch
               </Button>
@@ -117,6 +117,7 @@ export const Hero = memo(function Hero() {
               {/* Profile Image */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="relative w-full h-full flex items-center justify-center">
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/30 to-indigo-500/30 rounded-full blur-[100px]" />
                   <Image
                     src="/avatar/arms crossed.png"
                     alt="George Simak"

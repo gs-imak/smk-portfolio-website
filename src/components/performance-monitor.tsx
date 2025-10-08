@@ -17,7 +17,7 @@ export function PerformanceMonitor() {
       
       try {
         observer.observe({ entryTypes: ['largest-contentful-paint'] });
-      } catch (e) {
+      } catch {
         // PerformanceObserver not supported
       }
 
@@ -32,7 +32,7 @@ export function PerformanceMonitor() {
 
       try {
         fidObserver.observe({ entryTypes: ['first-input'] });
-      } catch (e) {
+      } catch {
         // PerformanceObserver not supported
       }
     }

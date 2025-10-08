@@ -18,7 +18,7 @@ export const Contact = memo(function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Mouse spotlight effect handler
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;

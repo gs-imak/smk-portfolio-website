@@ -7,8 +7,26 @@ import { ArrowUpRight } from "lucide-react";
 // Lazy load the modal for better performance
 const ProjectModal = lazy(() => import("@/components/project-modal").then(module => ({ default: module.ProjectModal })));
 
+interface Project {
+  id: number;
+  title: string;
+  description: string;
+  year: string;
+  category: string;
+  technologies: string[];
+  featured: boolean;
+  longDescription?: string;
+  challenges?: string[];
+  results?: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  imageUrl?: string;
+  teamSize?: string;
+  duration?: string;
+}
+
 export const Projects = memo(function Projects() {
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const projects = [
@@ -128,7 +146,7 @@ export const Projects = memo(function Projects() {
 
   const featured = projects.filter(p => p.featured);
 
-  const openModal = (project) => {
+  const openModal = (project: Project) => {
     setSelectedProject(project);
     setIsModalOpen(true);
   };

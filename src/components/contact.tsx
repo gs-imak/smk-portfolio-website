@@ -109,7 +109,7 @@ export const Contact = memo(function Contact() {
                 <div className="pt-4 border-t border-white/[0.12]">
                   <a
                     href="mailto:georgesimak@gmail.com"
-                    className="text-sm font-medium text-purple-400 hover:text-purple-300 transition-colors inline-flex items-center gap-2 group/link"
+                    className="text-lg font-medium text-purple-400 hover:text-purple-300 transition-colors inline-flex items-center gap-2 group/link"
                   >
                     georgesimak@gmail.com
                     <span className="group-hover/link:translate-x-1 transition-transform">→</span>
@@ -150,10 +150,10 @@ export const Contact = memo(function Contact() {
                 
                 <div className="pt-4 border-t border-white/[0.12]">
                   <a
-                    href="tel:+1234567890"
-                    className="text-sm font-medium text-indigo-400 hover:text-indigo-300 transition-colors inline-flex items-center gap-2 group/link"
+                    href="tel:+33769592221"
+                    className="text-lg font-medium text-indigo-400 hover:text-indigo-300 transition-colors inline-flex items-center gap-2 group/link"
                   >
-                    +1 (234) 567-890
+                    +33 7 69 59 22 21
                     <span className="group-hover/link:translate-x-1 transition-transform">→</span>
                   </a>
                 </div>
@@ -191,7 +191,7 @@ export const Contact = memo(function Contact() {
                 </div>
                 
                 <div className="pt-4 border-t border-white/[0.12]">
-                  <span className="text-sm font-medium text-violet-400">Paris, France 🇫🇷</span>
+                  <span className="text-lg font-medium text-violet-400">Paris, France 🇫🇷</span>
                 </div>
               </div>
             </div>

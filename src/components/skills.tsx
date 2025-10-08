@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { FileText, Code, Database, Gamepad2, Wrench, Zap, Code2, Palette, Figma, GitBranch, Container, Globe, Server, HardDrive, Network, Box, Terminal, Shapes } from "lucide-react";
+import { FileText, Code, Database, Wrench, Zap, Code2, Figma, GitBranch, Container, Globe, Server, HardDrive, Network, Box, Terminal, Shapes } from "lucide-react";
 import Link from "next/link";
 import { memo } from "react";
 

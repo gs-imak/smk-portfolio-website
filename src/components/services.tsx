@@ -1,9 +1,8 @@
 "use client";
 
 import { useCallback } from "react";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Check, X, Zap, Code, Gamepad2, Star, Clock, Users, Shield, TrendingUp } from "lucide-react";
+import { Check, X, Zap, Code, Gamepad2, Star, Clock, Shield, TrendingUp } from "lucide-react";
 
 export function Services() {
   // Mouse spotlight effect handler

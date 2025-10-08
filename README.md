@@ -68,13 +68,4 @@ This portfolio is designed to be easily customizable:
 ## License
 
 This project is open source and available under the [MIT License](LICENSE).
-
-## Contact
-
-Ready to work together? Let's discuss your next project!
-
-- **Email**: [Your email here]
-- **LinkedIn**: [Your LinkedIn profile]
-- **Portfolio**: [Your portfolio URL]
-
 ---

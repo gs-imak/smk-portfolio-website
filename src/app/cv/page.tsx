@@ -440,15 +440,12 @@ export default function CVPage() {
                 </div>
                 
                 <div className="space-y-4">
-                  {/* Front-end - Primary Focus */}
+                  {/* Front-end */}
                   <div className="relative p-4 rounded-2xl bg-gradient-to-br from-purple-500/10 to-indigo-500/10 border border-purple-500/30">
-                    <div className="absolute top-2 right-2">
-                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-bold">Primary Focus</Badge>
-                    </div>
                     <div className="mb-3">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-base font-bold text-white">Front-end Development</span>
-                        <span className="text-sm font-bold text-purple-400">Expert</span>
+                        <span className="text-lg font-bold text-white">Front-end Development</span>
+                        <span className="text-base font-bold text-purple-400">Expert</span>
                       </div>
                       <div className="relative h-3 bg-black/30 rounded-full overflow-hidden">
                         <div 
@@ -459,12 +456,12 @@ export default function CVPage() {
                       </div>
                     </div>
                     <div className="flex flex-wrap gap-2">
-                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">Vue.js</Badge>
-                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">React</Badge>
-                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">Angular</Badge>
-                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">TypeScript</Badge>
-                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">Next.js</Badge>
-                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">Tailwind</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-sm font-semibold">Vue.js</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-sm font-semibold">React</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-sm font-semibold">Angular</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-sm font-semibold">TypeScript</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-sm font-semibold">Next.js</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-sm font-semibold">Tailwind</Badge>
                     </div>
                   </div>
 
@@ -472,8 +469,8 @@ export default function CVPage() {
                   <div className="relative p-4 rounded-2xl bg-gradient-to-br from-purple-500/10 to-indigo-500/10 border border-purple-500/30">
                     <div className="mb-3">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-base font-bold text-white">Back-end Development</span>
-                        <span className="text-sm font-bold text-purple-400">Advanced</span>
+                        <span className="text-lg font-bold text-white">Back-end Development</span>
+                        <span className="text-base font-bold text-purple-400">Advanced</span>
                       </div>
                       <div className="relative h-3 bg-black/30 rounded-full overflow-hidden">
                         <div 
@@ -484,10 +481,10 @@ export default function CVPage() {
                       </div>
                     </div>
                     <div className="flex flex-wrap gap-2">
-                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">Node.js</Badge>
-                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">Python</Badge>
-                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">PHP</Badge>
-                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">Django</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-sm font-semibold">Node.js</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-sm font-semibold">Python</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-sm font-semibold">PHP</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-sm font-semibold">Django</Badge>
                     </div>
                   </div>
 
@@ -495,8 +492,8 @@ export default function CVPage() {
                   <div className="relative p-4 rounded-2xl bg-gradient-to-br from-purple-500/10 to-indigo-500/10 border border-purple-500/30">
                     <div className="mb-3">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-base font-bold text-white">Databases & APIs</span>
-                        <span className="text-sm font-bold text-purple-400">Advanced</span>
+                        <span className="text-lg font-bold text-white">Databases & APIs</span>
+                        <span className="text-base font-bold text-purple-400">Advanced</span>
                       </div>
                       <div className="relative h-3 bg-black/30 rounded-full overflow-hidden">
                         <div 
@@ -507,10 +504,10 @@ export default function CVPage() {
                       </div>
                     </div>
                     <div className="flex flex-wrap gap-2">
-                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">MongoDB</Badge>
-                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">Neo4j</Badge>
-                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">GraphDB</Badge>
-                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">REST API</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-sm font-semibold">MongoDB</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-sm font-semibold">Neo4j</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-sm font-semibold">GraphDB</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-sm font-semibold">REST API</Badge>
                     </div>
                   </div>
 
@@ -518,8 +515,8 @@ export default function CVPage() {
                   <div className="relative p-4 rounded-2xl bg-gradient-to-br from-purple-500/10 to-indigo-500/10 border border-purple-500/30">
                     <div className="mb-3">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-base font-bold text-white">DevOps & Cloud</span>
-                        <span className="text-sm font-bold text-purple-400">Proficient</span>
+                        <span className="text-lg font-bold text-white">DevOps & Cloud</span>
+                        <span className="text-base font-bold text-purple-400">Proficient</span>
                       </div>
                       <div className="relative h-3 bg-black/30 rounded-full overflow-hidden">
                         <div 
@@ -530,11 +527,11 @@ export default function CVPage() {
                       </div>
                     </div>
                     <div className="flex flex-wrap gap-2">
-                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">AWS</Badge>
-                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">Docker</Badge>
-                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">CI/CD</Badge>
-                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">Git</Badge>
-                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-xs font-semibold">Linux</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-sm font-semibold">AWS</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-sm font-semibold">Docker</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-sm font-semibold">CI/CD</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-sm font-semibold">Git</Badge>
+                      <Badge className="bg-purple-500/30 text-purple-300 border-purple-400/50 text-sm font-semibold">Linux</Badge>
                     </div>
                   </div>
                 </div>

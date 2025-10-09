@@ -152,7 +152,7 @@ export const ServicesPricing = memo(function ServicesPricing() {
               <div className="relative z-10">
                 <div className="text-sm font-semibold text-purple-400 mb-2">Hourly</div>
                 <div className="mb-6">
-                  <span className="text-5xl font-bold text-white">€80</span>
+                  <span className="text-5xl font-bold text-white">€100</span>
                   <span className="text-xl text-gray-400">/hour</span>
                 </div>
                 <p className="text-gray-400 mb-6 leading-relaxed">

@@ -159,7 +159,7 @@ export default function TechnicalExcellencePage() {
               <div className="relative z-10">
                 <div className="flex items-center justify-center gap-2 mb-4">
                   <CheckCircle className="h-6 w-6 text-green-400" />
-                  <span className="text-lg font-bold text-white">Skip the 6-Round Interview Process</span>
+                  <span className="text-lg font-bold text-white">Skip Interview Process</span>
                 </div>
                 <p className="text-gray-300 mb-6">
                   I&apos;ve already solved these challenges in production. Let&apos;s have a focused 30-minute technical discussion instead.

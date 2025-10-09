@@ -11,6 +11,7 @@ const navigation = [
   { name: "About", href: "#about" },
   { name: "Skills", href: "#skills" },
   { name: "Projects", href: "#projects" },
+  { name: "Tech Excellence", href: "/technical-excellence", isExternal: true },
   { name: "CV", href: "/cv", isExternal: true },
   { name: "Contact", href: "#contact" },
 ];

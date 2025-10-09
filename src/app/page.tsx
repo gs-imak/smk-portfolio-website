@@ -3,20 +3,18 @@ import { Hero } from "@/components/hero";
 import { About } from "@/components/about";
 import { Clients } from "@/components/clients";
 import { Skills } from "@/components/skills";
-import { Services } from "@/components/services";
 import { Projects } from "@/components/projects";
 import { Contact } from "@/components/contact";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen text-foreground">
       <Navigation />
-      <main className="relative">
+      <main className="relative z-10">
         <Hero />
         <About />
         <Clients />
         <Skills />
-        <Services />
         <Projects />
         <Contact />
       </main>

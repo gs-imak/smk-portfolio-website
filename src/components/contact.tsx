@@ -376,10 +376,6 @@ export const Contact = memo(function Contact() {
         <div className="mt-32 pt-10 border-t border-border/50">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-muted-foreground/80">
             <p className="font-medium">© 2024 George Simak. All rights reserved.</p>
-            <p className="flex items-center gap-2">
-              <span>Designed & Built with</span>
-              <span className="text-red-500 animate-pulse">❤️</span>
-            </p>
           </div>
         </div>
       </div>

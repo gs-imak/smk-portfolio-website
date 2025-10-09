@@ -73,6 +73,48 @@ export const Contact = memo(function Contact() {
           </p>
         </div>
 
+        {/* Free Consultation Banner */}
+        <div className="mb-16 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+          <div 
+            className="group relative bg-gradient-to-br from-purple-500/20 via-purple-600/10 to-indigo-500/20 backdrop-blur-xl border border-purple-500/30 rounded-3xl p-10 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(168,85,247,0.25)] overflow-hidden"
+            onMouseMove={handleMouseMove}
+          >
+            {/* Spotlight effect */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+              <div 
+                className="absolute inset-0" 
+                style={{
+                  background: `radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(168, 85, 247, 0.2), transparent 40%)`
+                }}
+              />
+            </div>
+
+            <div className="relative z-10 text-center max-w-3xl mx-auto">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/20 border border-purple-400/30 mb-6">
+                <div className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
+                <span className="text-sm font-semibold text-purple-300">Limited Spots Available</span>
+              </div>
+              
+              <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+                Free 30-Minute Discovery Call
+              </h3>
+              <p className="text-lg text-gray-300 mb-8">
+                Let&apos;s discuss your project goals, timeline, and how I can help bring your vision to life. 
+                No obligations, just valuable insights for your project.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="mailto:georgesimak@gmail.com?subject=Free Discovery Call Request">
+                  <Button className="h-14 px-8 rounded-xl text-base font-semibold bg-white text-purple-900 hover:bg-gray-100 border-0 shadow-xl transition-all duration-300">
+                    Book Your Free Call
+                  </Button>
+                </a>
+                <span className="text-sm text-gray-400">or scroll down to send a message</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className="max-w-6xl mx-auto">
           {/* Contact Info Cards */}
           <div className="grid md:grid-cols-3 gap-6 mb-16">

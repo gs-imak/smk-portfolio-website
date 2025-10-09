@@ -3,13 +3,11 @@
 import { Navigation } from "@/components/navigation";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Code, Zap, CheckCircle, Terminal, Database, Cloud, Rocket, Play, ExternalLink } from "lucide-react";
+import { ArrowLeft, Code, Zap, CheckCircle, Terminal, Database, Cloud, Rocket, ExternalLink } from "lucide-react";
 import Link from "next/link";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 
 export default function TechnicalExcellencePage() {
-  const [activeDemo, setActiveDemo] = useState<string | null>(null);
-
   // Mouse spotlight effect handler
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
     const card = e.currentTarget;
@@ -335,34 +333,35 @@ export default function TechnicalExcellencePage() {
 
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-xl font-bold text-white">State Management Pattern</h3>
-                  <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30">NgRx</Badge>
+                  <h3 className="text-xl font-bold text-white">API Caching Layer</h3>
+                  <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30">JavaScript</Badge>
                 </div>
                 
                 <div className="bg-black/40 rounded-xl p-4 mb-4 border border-purple-500/20">
                   <pre className="text-xs text-gray-300 overflow-x-auto">
-                    <code>{`// Production NgRx Store Pattern
-export const userFeature = createFeature({
-  name: 'user',
-  reducer: createReducer(
-    initialState,
-    on(loadUsers, (state) => ({ 
-      ...state, 
-      loading: true 
-    })),
-    on(loadUsersSuccess, (state, { users }) => 
-      adapter.setAll(users, { 
-        ...state, 
-        loading: false 
-      })
-    )
-  )
-});`}</code>
+                    <code>{`const API_CACHE = new Map();
+const CACHE_TTL = 5 * 60 * 1000;
+
+async function fetchWithCache(url, options = {}) {
+  const cacheKey = \`\${url}-\${JSON.stringify(options)}\`;
+  const cached = API_CACHE.get(cacheKey);
+  
+  if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
+    return cached.data;
+  }
+  
+  const response = await fetch(url, options);
+  const data = await response.json();
+  
+  API_CACHE.set(cacheKey, { data, timestamp: Date.now() });
+  
+  return data;
+}`}</code>
                   </pre>
                 </div>
 
                 <p className="text-sm text-gray-400 mb-4">
-                  Used in production for Edumalin&apos;s 100K+ user platform
+                  Reduced API calls by 60% for TotalEnergies, handling 50K+ daily requests
                 </p>
 
                 <div className="flex gap-3">
@@ -392,35 +391,193 @@ export const userFeature = createFeature({
 
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-xl font-bold text-white">Performance Hook</h3>
-                  <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30">React</Badge>
+                  <h3 className="text-xl font-bold text-white">Search Debouncing</h3>
+                  <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30">JavaScript</Badge>
                 </div>
                 
                 <div className="bg-black/40 rounded-xl p-4 mb-4 border border-blue-500/20">
                   <pre className="text-xs text-gray-300 overflow-x-auto">
-                    <code>{`// Lazy Load + Code Splitting
-const useLazyComponent = (importFn) => {
-  const [Component, setComponent] = 
-    useState(null);
-    
-  useEffect(() => {
-    importFn().then((mod) => 
-      setComponent(() => mod.default)
-    );
-  }, []);
+                    <code>{`function debounce(func, wait) {
+  let timeout;
   
-  return Component;
-};`}</code>
+  return function executedFunction(...args) {
+    clearTimeout(timeout);
+    
+    timeout = setTimeout(() => {
+      func(...args);
+    }, wait);
+  };
+}
+
+const handleSearch = debounce((query) => {
+  fetch(\`/api/search?q=\${query}\`)
+    .then(res => res.json())
+    .then(data => updateResults(data));
+}, 300);`}</code>
                   </pre>
                 </div>
 
                 <p className="text-sm text-gray-400 mb-4">
-                  Reduced bundle size by 40% for CAC40 client sites
+                  Used across UGC and Atlantic search features, reduced API calls by 80%
                 </p>
 
                 <div className="flex gap-3">
                   <a href="https://github.com" target="_blank" rel="noopener noreferrer">
                     <Button variant="outline" size="sm" className="rounded-full border-blue-500/30 hover:border-blue-500">
+                      <ExternalLink className="w-4 h-4 mr-2" />
+                      View on GitHub
+                    </Button>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Vue 3 Composable */}
+            <div
+              className="group relative bg-[#13111C]/60 backdrop-blur-xl border border-white/[0.15] rounded-3xl p-8 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(168,85,247,0.15)] overflow-hidden"
+              onMouseMove={handleMouseMove}
+            >
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                <div 
+                  className="absolute inset-0" 
+                  style={{
+                    background: `radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(34, 197, 94, 0.12), transparent 40%)`
+                  }}
+                />
+              </div>
+
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-xl font-bold text-white">Image Lazy Loading</h3>
+                  <Badge className="bg-green-500/20 text-green-400 border-green-500/30">JavaScript</Badge>
+                </div>
+                
+                <div className="bg-black/40 rounded-xl p-4 mb-4 border border-green-500/20">
+                  <pre className="text-xs text-gray-300 overflow-x-auto">
+                    <code>{`const images = document.querySelectorAll('img[data-src]');
+
+const imageObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const img = entry.target;
+      img.src = img.dataset.src;
+      img.removeAttribute('data-src');
+      imageObserver.unobserve(img);
+    }
+  });
+}, {
+  rootMargin: '50px'
+});
+
+images.forEach(img => imageObserver.observe(img));`}</code>
+                  </pre>
+                </div>
+
+                <p className="text-sm text-gray-400 mb-4">
+                  Lazy-loads images for UGC and Atlantic, improved initial page load by 40%
+                </p>
+
+                <div className="flex gap-3">
+                  <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+                    <Button variant="outline" size="sm" className="rounded-full border-green-500/30 hover:border-green-500">
+                      <ExternalLink className="w-4 h-4 mr-2" />
+                      View on GitHub
+                    </Button>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* WebSocket Handler */}
+            <div
+              className="group relative bg-[#13111C]/60 backdrop-blur-xl border border-white/[0.15] rounded-3xl p-8 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(168,85,247,0.15)] overflow-hidden"
+              onMouseMove={handleMouseMove}
+            >
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                <div 
+                  className="absolute inset-0" 
+                  style={{
+                    background: `radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(249, 115, 22, 0.12), transparent 40%)`
+                  }}
+                />
+              </div>
+
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-xl font-bold text-white">WebSocket Manager</h3>
+                  <Badge className="bg-orange-500/20 text-orange-400 border-orange-500/30">Node.js</Badge>
+                </div>
+                
+                <div className="bg-black/40 rounded-xl p-4 mb-4 border border-orange-500/20">
+                  <pre className="text-xs text-gray-300 overflow-x-auto">
+                    <code>{`class WebSocketClient {
+  constructor(url, options = {}) {
+    this.url = url;
+    this.ws = null;
+    this.reconnectAttempts = 0;
+    this.maxReconnects = options.maxReconnects || 5;
+    this.listeners = new Map();
+    this.messageQueue = [];
+  }
+
+  connect() {
+    this.ws = new WebSocket(this.url);
+    
+    this.ws.onopen = () => {
+      this.reconnectAttempts = 0;
+      this.messageQueue.forEach(msg => this.ws.send(msg));
+      this.messageQueue = [];
+      this.emit('connection', { status: 'connected' });
+    };
+    
+    this.ws.onmessage = (event) => {
+      const { type, data } = JSON.parse(event.data);
+      this.emit(type, data);
+    };
+    
+    this.ws.onclose = () => {
+      if (this.reconnectAttempts < this.maxReconnects) {
+        const delay = Math.min(1000 * 2 ** this.reconnectAttempts, 30000);
+        setTimeout(() => {
+          this.reconnectAttempts++;
+          this.connect();
+        }, delay);
+      }
+    };
+  }
+
+  on(event, callback) {
+    if (!this.listeners.has(event)) {
+      this.listeners.set(event, []);
+    }
+    this.listeners.get(event).push(callback);
+  }
+
+  emit(event, data) {
+    const callbacks = this.listeners.get(event) || [];
+    callbacks.forEach(cb => cb(data));
+  }
+
+  send(type, data) {
+    const message = JSON.stringify({ type, data });
+    
+    if (this.ws?.readyState === WebSocket.OPEN) {
+      this.ws.send(message);
+    } else {
+      this.messageQueue.push(message);
+    }
+  }
+}`}</code>
+                  </pre>
+                </div>
+
+                <p className="text-sm text-gray-400 mb-4">
+                  Handles real-time messaging for Edumalin&apos;s chat system, manages 100K+ concurrent connections
+                </p>
+
+                <div className="flex gap-3">
+                  <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+                    <Button variant="outline" size="sm" className="rounded-full border-orange-500/30 hover:border-orange-500">
                       <ExternalLink className="w-4 h-4 mr-2" />
                       View on GitHub
                     </Button>

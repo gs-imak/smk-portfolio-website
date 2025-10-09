@@ -135,7 +135,7 @@ export const ServicesPricing = memo(function ServicesPricing() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {/* Hourly Rate */}
+            {/* Starter Project */}
             <div 
               className="group relative bg-[#13111C]/60 backdrop-blur-xl border border-white/[0.15] rounded-3xl p-8 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(168,85,247,0.15)] overflow-hidden"
               onMouseMove={handleMouseMove}
@@ -150,32 +150,36 @@ export const ServicesPricing = memo(function ServicesPricing() {
               </div>
 
               <div className="relative z-10">
-                <div className="text-sm font-semibold text-purple-400 mb-2">Hourly</div>
+                <div className="text-sm font-semibold text-purple-400 mb-2">Starter Project</div>
                 <div className="mb-6">
-                  <span className="text-5xl font-bold text-white">€100</span>
-                  <span className="text-xl text-gray-400">/hour</span>
+                  <span className="text-5xl font-bold text-white">€900</span>
+                  <span className="text-xl text-gray-400">/project</span>
                 </div>
                 <p className="text-gray-400 mb-6 leading-relaxed">
-                  Perfect for short-term tasks, consultations, or ongoing support.
+                  Perfect for simple websites, landing pages, or small features.
                 </p>
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3 text-sm text-gray-300">
                     <Check className="w-5 h-5 text-purple-400 flex-shrink-0 mt-0.5" />
-                    <span>Flexible scheduling</span>
+                    <span>Up to 3 pages</span>
                   </li>
                   <li className="flex items-start gap-3 text-sm text-gray-300">
                     <Check className="w-5 h-5 text-purple-400 flex-shrink-0 mt-0.5" />
-                    <span>Pay as you go</span>
+                    <span>3 rounds of revisions</span>
                   </li>
                   <li className="flex items-start gap-3 text-sm text-gray-300">
                     <Check className="w-5 h-5 text-purple-400 flex-shrink-0 mt-0.5" />
-                    <span>No minimum commitment</span>
+                    <span>1 week delivery</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-gray-300">
+                    <Check className="w-5 h-5 text-purple-400 flex-shrink-0 mt-0.5" />
+                    <span>Responsive design</span>
                   </li>
                 </ul>
               </div>
             </div>
 
-            {/* Project-Based */}
+            {/* Custom Project */}
             <div 
               className="group relative bg-gradient-to-br from-purple-500/10 to-indigo-500/10 backdrop-blur-xl border-2 border-purple-500/30 rounded-3xl p-8 transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(168,85,247,0.25)] overflow-hidden scale-105"
               onMouseMove={handleMouseMove}
@@ -196,18 +200,17 @@ export const ServicesPricing = memo(function ServicesPricing() {
               </div>
 
               <div className="relative z-10">
-                <div className="text-sm font-semibold text-purple-400 mb-2">Project-Based</div>
+                <div className="text-sm font-semibold text-purple-400 mb-2">Custom Project</div>
                 <div className="mb-6">
-                  <span className="text-5xl font-bold text-white">€5K+</span>
-                  <span className="text-xl text-gray-400">/project</span>
+                  <span className="text-4xl font-bold text-white">Based on Scope</span>
                 </div>
                 <p className="text-gray-300 mb-6 leading-relaxed">
-                  Fixed-price projects with clear scope, timeline, and deliverables.
+                  Tailored pricing for your specific needs - from €2K to €20K+
                 </p>
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3 text-sm text-gray-200">
                     <Check className="w-5 h-5 text-purple-300 flex-shrink-0 mt-0.5" />
-                    <span>Fixed pricing</span>
+                    <span>Unlimited pages/features</span>
                   </li>
                   <li className="flex items-start gap-3 text-sm text-gray-200">
                     <Check className="w-5 h-5 text-purple-300 flex-shrink-0 mt-0.5" />
@@ -215,7 +218,7 @@ export const ServicesPricing = memo(function ServicesPricing() {
                   </li>
                   <li className="flex items-start gap-3 text-sm text-gray-200">
                     <Check className="w-5 h-5 text-purple-300 flex-shrink-0 mt-0.5" />
-                    <span>Milestone-based payments</span>
+                    <span>Milestone payments</span>
                   </li>
                   <li className="flex items-start gap-3 text-sm text-gray-200">
                     <Check className="w-5 h-5 text-purple-300 flex-shrink-0 mt-0.5" />
@@ -225,7 +228,7 @@ export const ServicesPricing = memo(function ServicesPricing() {
               </div>
             </div>
 
-            {/* Monthly Retainer */}
+            {/* Hourly Rate */}
             <div 
               className="group relative bg-[#13111C]/60 backdrop-blur-xl border border-white/[0.15] rounded-3xl p-8 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(99,102,241,0.15)] overflow-hidden"
               onMouseMove={handleMouseMove}
@@ -240,30 +243,30 @@ export const ServicesPricing = memo(function ServicesPricing() {
               </div>
 
               <div className="relative z-10">
-                <div className="text-sm font-semibold text-indigo-400 mb-2">Monthly Retainer</div>
+                <div className="text-sm font-semibold text-indigo-400 mb-2">Hourly Rate</div>
                 <div className="mb-6">
-                  <span className="text-5xl font-bold text-white">€8K+</span>
-                  <span className="text-xl text-gray-400">/month</span>
+                  <span className="text-5xl font-bold text-white">€100</span>
+                  <span className="text-xl text-gray-400">/hour</span>
                 </div>
                 <p className="text-gray-400 mb-6 leading-relaxed">
-                  Dedicated monthly hours for ongoing development and maintenance.
+                  Flexible hourly rate for consultations and ongoing work.
                 </p>
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3 text-sm text-gray-300">
                     <Check className="w-5 h-5 text-indigo-400 flex-shrink-0 mt-0.5" />
-                    <span>Priority support</span>
+                    <span>Flexible scheduling</span>
                   </li>
                   <li className="flex items-start gap-3 text-sm text-gray-300">
                     <Check className="w-5 h-5 text-indigo-400 flex-shrink-0 mt-0.5" />
-                    <span>Guaranteed availability</span>
+                    <span>Pay as you go</span>
                   </li>
                   <li className="flex items-start gap-3 text-sm text-gray-300">
                     <Check className="w-5 h-5 text-indigo-400 flex-shrink-0 mt-0.5" />
-                    <span>Reduced hourly rate</span>
+                    <span>Expert consultation</span>
                   </li>
                   <li className="flex items-start gap-3 text-sm text-gray-300">
                     <Check className="w-5 h-5 text-indigo-400 flex-shrink-0 mt-0.5" />
-                    <span>Long-term partnership</span>
+                    <span>No minimum commitment</span>
                   </li>
                 </ul>
               </div>

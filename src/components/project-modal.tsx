@@ -34,50 +34,48 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="!max-w-[75vw] !w-[75vw] !max-h-[80vh] !h-[80vh] !top-[10%] !left-[12.5%] !translate-x-0 !translate-y-0 overflow-y-auto modal-scroll bg-background/95 backdrop-blur-xl border border-border/30 shadow-2xl [&>button]:!top-8 [&>button]:!right-6">
+      <DialogContent className="!max-w-[75vw] !w-[75vw] !max-h-[85vh] overflow-y-auto modal-scroll bg-[#13111C]/95 backdrop-blur-xl border border-white/[0.15] shadow-2xl [&>button]:!top-6 [&>button]:!right-6">
         <DialogHeader className="relative">
-          {/* Accent line */}
-          <div className="absolute top-0 left-0 right-0 h-1 bg-purple-500 rounded-full" />
+          {/* Accent gradient line */}
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-blue-500 to-purple-500 rounded-full" />
           
           <div className="flex items-center gap-4 mt-6">
             <Badge variant="outline" className="text-sm px-3 py-1 border-purple-500/30 text-purple-400 bg-purple-500/10">
               {project.category}
             </Badge>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <div className="w-1 h-1 bg-muted-foreground rounded-full" />
+            <div className="flex items-center gap-2 text-sm text-gray-400">
+              <div className="w-1 h-1 bg-purple-500 rounded-full" />
               <span>{project.year}</span>
             </div>
           </div>
-          <DialogTitle className="text-4xl sm:text-5xl font-bold mt-6 text-foreground">
+          <DialogTitle className="text-3xl sm:text-4xl font-bold mt-4 text-white">
             {project.title}
           </DialogTitle>
-          <DialogDescription className="text-lg text-muted-foreground mt-2">
+          <DialogDescription className="text-base text-gray-300 mt-2">
             {project.description}
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-8">
-          {/* Project Image */}
-          <div className="aspect-[16/9] bg-purple-500/10 rounded-2xl border border-border/50 relative overflow-hidden group shadow-lg">
-            <div className="absolute inset-0 bg-purple-500/5" />
+        <div className="space-y-6 mt-6">
+          {/* Project Image - Smaller */}
+          <div className="aspect-[21/9] bg-gradient-to-br from-purple-500/10 to-blue-500/10 rounded-2xl border border-white/[0.08] relative overflow-hidden group">
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-blue-500/5" />
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-7xl opacity-30 group-hover:opacity-50 transition-opacity duration-300">
+              <div className="text-5xl opacity-20 group-hover:opacity-40 transition-opacity duration-300">
                 {project.category === "Game" ? "🎮" : "💻"}
               </div>
             </div>
-            {/* Animated corner accent */}
-            <div className="absolute top-4 right-4 w-4 h-4 bg-purple-500 rounded-full opacity-70 group-hover:opacity-100 transition-opacity duration-300" />
-            {/* Subtle glow effect */}
-            <div className="absolute inset-0 bg-purple-500/5" />
+            {/* Corner accent */}
+            <div className="absolute top-4 right-4 w-3 h-3 bg-purple-500 rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
           </div>
 
           {/* Project Description */}
-          <div className="space-y-4 p-6 bg-foreground/5 rounded-xl border border-border/30">
-            <h3 className="text-2xl font-bold text-foreground flex items-center gap-2">
+          <div className="space-y-4 p-6 bg-white/[0.03] backdrop-blur-sm rounded-2xl border border-white/[0.08]">
+            <h3 className="text-xl font-bold text-white flex items-center gap-2">
               <div className="w-2 h-2 bg-purple-500 rounded-full" />
               About This Project
             </h3>
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            <p className="text-base text-gray-300 leading-relaxed">
               {project.longDescription || project.description}
             </p>
           </div>
@@ -85,16 +83,16 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
           {/* Project Details Grid */}
           <div className="grid md:grid-cols-2 gap-6">
             {/* Technologies */}
-            <div className="space-y-4 p-5 bg-foreground/5 rounded-xl border border-border/30">
-              <h4 className="text-xl font-bold flex items-center gap-3 text-foreground">
-                <div className="p-2 rounded-lg bg-foreground/10">
-                  <Zap className="h-5 w-5 text-foreground" />
+            <div className="space-y-4 p-6 bg-white/[0.03] backdrop-blur-sm rounded-2xl border border-white/[0.08]">
+              <h4 className="text-lg font-bold flex items-center gap-3 text-white">
+                <div className="p-2 rounded-lg bg-purple-500/10 border border-purple-500/20">
+                  <Zap className="h-4 w-4 text-purple-400" />
                 </div>
                 Technologies Used
               </h4>
               <div className="flex flex-wrap gap-2">
                 {project.technologies.map((tech, idx) => (
-                  <Badge key={idx} variant="secondary" className="text-sm px-3 py-1 bg-foreground/10 border-border/30 text-foreground hover:bg-foreground/20 transition-colors">
+                  <Badge key={idx} variant="secondary" className="text-xs px-3 py-1 bg-white/[0.05] border-white/[0.1] text-gray-300 hover:bg-white/[0.08] transition-colors">
                     {tech}
                   </Badge>
                 ))}
@@ -102,36 +100,36 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
             </div>
 
             {/* Project Info */}
-            <div className="space-y-4 p-5 bg-foreground/5 rounded-xl border border-border/30">
-              <h4 className="text-xl font-bold flex items-center gap-3 text-foreground">
-                <div className="p-2 rounded-lg bg-foreground/10">
-                  <Calendar className="h-5 w-5 text-foreground" />
+            <div className="space-y-4 p-6 bg-white/[0.03] backdrop-blur-sm rounded-2xl border border-white/[0.08]">
+              <h4 className="text-lg font-bold flex items-center gap-3 text-white">
+                <div className="p-2 rounded-lg bg-blue-500/10 border border-blue-500/20">
+                  <Calendar className="h-4 w-4 text-blue-400" />
                 </div>
                 Project Details
               </h4>
-              <div className="space-y-3 text-base">
-                <div className="flex items-center gap-3 p-2 rounded-lg bg-foreground/5">
-                  <Tag className="h-4 w-4 text-muted-foreground" />
-                  <span className="text-muted-foreground">Category:</span>
-                  <span className="font-medium text-foreground">{project.category}</span>
+              <div className="space-y-2 text-sm">
+                <div className="flex items-center gap-3 p-2 rounded-lg bg-white/[0.03]">
+                  <Tag className="h-4 w-4 text-gray-400" />
+                  <span className="text-gray-400">Category:</span>
+                  <span className="font-medium text-white">{project.category}</span>
                 </div>
-                <div className="flex items-center gap-3 p-2 rounded-lg bg-foreground/5">
-                  <Calendar className="h-4 w-4 text-muted-foreground" />
-                  <span className="text-muted-foreground">Year:</span>
-                  <span className="font-medium text-foreground">{project.year}</span>
+                <div className="flex items-center gap-3 p-2 rounded-lg bg-white/[0.03]">
+                  <Calendar className="h-4 w-4 text-gray-400" />
+                  <span className="text-gray-400">Year:</span>
+                  <span className="font-medium text-white">{project.year}</span>
                 </div>
                 {project.teamSize && (
-                  <div className="flex items-center gap-3 p-2 rounded-lg bg-foreground/5">
-                    <Users className="h-4 w-4 text-muted-foreground" />
-                    <span className="text-muted-foreground">Team:</span>
-                    <span className="font-medium text-foreground">{project.teamSize}</span>
+                  <div className="flex items-center gap-3 p-2 rounded-lg bg-white/[0.03]">
+                    <Users className="h-4 w-4 text-gray-400" />
+                    <span className="text-gray-400">Team:</span>
+                    <span className="font-medium text-white">{project.teamSize}</span>
                   </div>
                 )}
                 {project.duration && (
-                  <div className="flex items-center gap-3 p-2 rounded-lg bg-foreground/5">
-                    <Calendar className="h-4 w-4 text-muted-foreground" />
-                    <span className="text-muted-foreground">Duration:</span>
-                    <span className="font-medium text-foreground">{project.duration}</span>
+                  <div className="flex items-center gap-3 p-2 rounded-lg bg-white/[0.03]">
+                    <Calendar className="h-4 w-4 text-gray-400" />
+                    <span className="text-gray-400">Duration:</span>
+                    <span className="font-medium text-white">{project.duration}</span>
                   </div>
                 )}
               </div>
@@ -142,17 +140,17 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
           {(project.challenges || project.results) && (
             <div className="grid md:grid-cols-2 gap-6">
               {project.challenges && (
-                <div className="space-y-4 p-5 bg-foreground/5 rounded-xl border border-border/30">
-                  <h4 className="text-xl font-bold text-foreground flex items-center gap-3">
-                    <div className="p-2 rounded-lg bg-foreground/10">
-                      <div className="w-2 h-2 bg-foreground rounded-full" />
+                <div className="space-y-4 p-6 bg-white/[0.03] backdrop-blur-sm rounded-2xl border border-white/[0.08]">
+                  <h4 className="text-lg font-bold text-white flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-orange-500/10 border border-orange-500/20">
+                      <div className="w-2 h-2 bg-orange-400 rounded-full" />
                     </div>
                     Key Challenges
                   </h4>
-                  <ul className="space-y-3">
+                  <ul className="space-y-2">
                     {project.challenges.map((challenge, idx) => (
-                      <li key={idx} className="text-base text-muted-foreground flex items-start gap-3 p-3 rounded-lg bg-foreground/5 border border-border/20">
-                        <span className="text-foreground mt-1 text-sm font-bold">•</span>
+                      <li key={idx} className="text-sm text-gray-300 flex items-start gap-2 p-3 rounded-lg bg-white/[0.03] border border-white/[0.05]">
+                        <span className="text-orange-400 mt-0.5">•</span>
                         <span className="leading-relaxed">{challenge}</span>
                       </li>
                     ))}
@@ -161,17 +159,17 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
               )}
 
               {project.results && (
-                <div className="space-y-4 p-5 bg-foreground/5 rounded-xl border border-border/30">
-                  <h4 className="text-xl font-bold text-foreground flex items-center gap-3">
-                    <div className="p-2 rounded-lg bg-foreground/10">
-                      <div className="w-2 h-2 bg-foreground rounded-full" />
+                <div className="space-y-4 p-6 bg-white/[0.03] backdrop-blur-sm rounded-2xl border border-white/[0.08]">
+                  <h4 className="text-lg font-bold text-white flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-green-500/10 border border-green-500/20">
+                      <div className="w-2 h-2 bg-green-400 rounded-full" />
                     </div>
                     Results & Impact
                   </h4>
-                  <ul className="space-y-3">
+                  <ul className="space-y-2">
                     {project.results.map((result, idx) => (
-                      <li key={idx} className="text-base text-muted-foreground flex items-start gap-3 p-3 rounded-lg bg-foreground/5 border border-border/20">
-                        <span className="text-foreground mt-1 text-sm font-bold">•</span>
+                      <li key={idx} className="text-sm text-gray-300 flex items-start gap-2 p-3 rounded-lg bg-white/[0.03] border border-white/[0.05]">
+                        <span className="text-green-400 mt-0.5">•</span>
                         <span className="leading-relaxed">{result}</span>
                       </li>
                     ))}
@@ -182,11 +180,11 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
           )}
 
           {/* Action Buttons */}
-          <div className="flex flex-wrap gap-4 pt-8 border-t border-border/30">
+          <div className="flex flex-wrap gap-4 pt-6 border-t border-white/[0.08]">
             {project.githubUrl && (
               <Button
                 variant="outline"
-                className="group rounded-full px-6 py-3 border-2 border-foreground/20 hover:border-purple-500/50 hover:bg-purple-500/10 text-foreground hover:text-purple-300 transition-all duration-300 shadow-lg hover:shadow-xl"
+                className="group rounded-full px-6 py-3 border-2 border-white/[0.15] hover:border-purple-500/50 hover:bg-purple-500/10 text-white hover:text-purple-300 transition-all duration-300"
                 onClick={() => window.open(project.githubUrl, '_blank')}
               >
                 <Github className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
@@ -195,7 +193,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
             )}
             {project.liveUrl && (
               <Button
-                className="group magnetic glow-on-hover rounded-full px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white border-0 shadow-lg hover:shadow-2xl transition-all duration-300"
+                className="group rounded-full px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300"
                 onClick={() => window.open(project.liveUrl, '_blank')}
               >
                 <ExternalLink className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
@@ -203,7 +201,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
               </Button>
             )}
             {!project.githubUrl && !project.liveUrl && (
-              <div className="text-base text-muted-foreground italic p-4 bg-foreground/5 rounded-lg border border-border/30">
+              <div className="text-sm text-gray-400 italic p-4 bg-white/[0.03] rounded-lg border border-white/[0.08]">
                 Project details and links coming soon...
               </div>
             )}

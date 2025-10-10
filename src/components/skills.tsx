@@ -3,9 +3,18 @@
 import { Button } from "@/components/ui/button";
 import { FileText, Code, Database, Wrench, Zap, Code2, Figma, GitBranch, Container, Globe, Server, HardDrive, Network, Box, Terminal, Shapes } from "lucide-react";
 import Link from "next/link";
-import { memo } from "react";
+import { memo, useCallback } from "react";
 
 export const Skills = memo(function Skills() {
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+  }, []);
   const skills = [
     { 
       category: "Frontend", 
@@ -54,7 +63,7 @@ export const Skills = memo(function Skills() {
   ];
 
   return (
-    <section id="skills" className="py-32 bg-secondary/30 relative overflow-hidden">
+    <section id="skills" className="py-32 relative overflow-hidden">
       {/* Animated gradient blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="blob absolute top-20 left-20 w-72 h-72 bg-purple-500/20" />
@@ -107,46 +116,77 @@ export const Skills = memo(function Skills() {
           <div className="grid grid-cols-2 gap-6">
             {skills.map((skillGroup, index) => {
               const IconComponent = skillGroup.icon;
-              const colors = [
-                "from-purple-500/20 to-pink-500/20",
-                "from-blue-500/20 to-cyan-500/20", 
-                "from-green-500/20 to-emerald-500/20",
-                "from-orange-500/20 to-red-500/20"
-              ];
-              const iconColors = [
-                "text-purple-400",
-                "text-blue-400",
-                "text-green-400", 
-                "text-orange-400"
-              ];
+              const colorMap = {
+                0: {
+                  bg: "bg-purple-500/10",
+                  border: "border-purple-500/20",
+                  icon: "text-purple-400",
+                  glow: "rgba(168, 85, 247, 0.12)"
+                },
+                1: {
+                  bg: "bg-blue-500/10",
+                  border: "border-blue-500/20",
+                  icon: "text-blue-400",
+                  glow: "rgba(59, 130, 246, 0.12)"
+                },
+                2: {
+                  bg: "bg-green-500/10",
+                  border: "border-green-500/20",
+                  icon: "text-green-400",
+                  glow: "rgba(34, 197, 94, 0.12)"
+                },
+                3: {
+                  bg: "bg-orange-500/10",
+                  border: "border-orange-500/20",
+                  icon: "text-orange-400",
+                  glow: "rgba(249, 115, 22, 0.12)"
+                }
+              };
+              const colors = colorMap[index as keyof typeof colorMap];
               
               return (
-                <div key={index} className="group animate-fade-in-up" style={{ animationDelay: `${1.2 + index * 0.2}s` }}>
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className={`p-2 rounded-lg bg-gradient-to-br ${colors[index]} transition-all duration-300 group-hover:scale-105`}>
-                      <IconComponent className={`h-4 w-4 ${iconColors[index]}`} />
-                    </div>
-                    <h3 className="text-sm font-bold">{skillGroup.category}</h3>
+                <div 
+                  key={index} 
+                  className="group relative bg-[#13111C]/60 backdrop-blur-xl border border-white/[0.15] rounded-3xl p-6 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(168,85,247,0.15)] overflow-hidden animate-fade-in-up h-full flex flex-col"
+                  style={{ animationDelay: `${1.2 + index * 0.2}s` }}
+                  onMouseMove={handleMouseMove}
+                >
+                  {/* Spotlight effect */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                    <div 
+                      className="absolute inset-0" 
+                      style={{
+                        background: `radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), ${colors.glow}, transparent 40%)`
+                      }}
+                    />
                   </div>
-                  
-                  <div className="space-y-2">
-                    {skillGroup.items.map((item, idx) => {
-                      const ItemIcon = item.icon;
-                      return (
-                        <div
-                          key={idx}
-                          className="group/item flex items-center gap-2 p-2 rounded-md bg-foreground/5 hover:bg-foreground/10 border border-foreground/10 hover:border-foreground/20 transition-all duration-300 hover:scale-105 cursor-pointer animate-fade-in-up"
-                          style={{ animationDelay: `${1.4 + index * 0.2 + idx * 0.1}s` }}
-                        >
-                          <div className="w-4 h-4 rounded-md bg-gradient-to-br from-foreground/10 to-foreground/5 flex items-center justify-center group-hover/item:scale-110 transition-transform">
-                            <ItemIcon className="h-3 w-3 text-foreground/70 group-hover/item:text-foreground transition-colors" />
+
+                  <div className="relative z-10 flex flex-col h-full">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className={`p-2.5 rounded-xl ${colors.bg} border ${colors.border}`}>
+                        <IconComponent className={`h-4 w-4 ${colors.icon}`} />
+                      </div>
+                      <h3 className="text-base font-bold text-white">{skillGroup.category}</h3>
+                    </div>
+                    
+                    <div className="space-y-2 flex-1">
+                      {skillGroup.items.map((item, idx) => {
+                        const ItemIcon = item.icon;
+                        return (
+                          <div
+                            key={idx}
+                            className="group/item flex items-center gap-2 p-2.5 rounded-lg bg-white/[0.03] border border-white/[0.08] hover:bg-white/[0.06] hover:border-white/[0.15] transition-all duration-300 cursor-pointer"
+                          >
+                            <div className={`w-6 h-6 rounded-lg ${colors.bg} border ${colors.border} flex items-center justify-center group-hover/item:scale-110 transition-transform flex-shrink-0`}>
+                              <ItemIcon className={`h-3.5 w-3.5 ${colors.icon}`} />
+                            </div>
+                            <span className="font-medium text-xs text-gray-300 group-hover/item:text-white transition-colors">
+                              {item.name}
+                            </span>
                           </div>
-                          <span className="font-medium text-xs group-hover/item:text-foreground transition-colors">
-                            {item.name}
-                          </span>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
               );

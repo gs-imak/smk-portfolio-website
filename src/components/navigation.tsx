@@ -53,7 +53,7 @@ export function Navigation() {
             onClick={() => scrollToSection("#hero")}
             className="text-xl font-bold tracking-tight hover:text-muted-foreground transition-colors"
           >
-            AC
+            SMAK STUDIOS
           </button>
 
           {/* Desktop Navigation */}

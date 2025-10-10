@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
-import { CustomCursor } from "@/components/custom-cursor";
 import { PerformanceMonitor } from "@/components/performance-monitor";
 import "./globals.css";
 
@@ -80,7 +79,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <CustomCursor />
         <PerformanceMonitor />
         {children}
         <Toaster richColors position="top-right" />

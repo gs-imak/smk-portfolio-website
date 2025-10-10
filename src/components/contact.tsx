@@ -90,13 +90,8 @@ export const Contact = memo(function Contact() {
             </div>
 
             <div className="relative z-10 text-center max-w-3xl mx-auto">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/20 border border-purple-400/30 mb-6">
-                <div className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
-                <span className="text-sm font-semibold text-purple-300">Limited Spots Available</span>
-              </div>
-              
               <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-                Free 30-Minute Discovery Call
+                30-Minute Discovery Call
               </h3>
               <p className="text-lg text-gray-300 mb-8">
                 Let&apos;s discuss your project goals, timeline, and how I can help bring your vision to life. 
@@ -350,70 +345,6 @@ export const Contact = memo(function Contact() {
             </div>
           </div>
         </div>
-
-        {/* Social Links */}
-        <div className="text-center pt-24">
-          <h3 className="text-3xl font-bold mb-3">Connect With Me</h3>
-          <p className="text-muted-foreground mb-8 text-lg">Let&apos;s build something amazing together</p>
-          <div className="flex justify-center items-center gap-4">
-            <a
-              href="https://github.com/georgiysimak"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative p-6 rounded-2xl bg-[#13111C]/60 backdrop-blur-xl border border-white/[0.15] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(255,255,255,0.08)] overflow-hidden"
-              onMouseMove={handleMouseMove}
-            >
-              {/* Spotlight effect */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                <div 
-                  className="absolute inset-0" 
-                  style={{
-                    background: `radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.08), transparent 40%)`
-                  }}
-                />
-              </div>
-              <Github className="h-7 w-7 text-gray-300 group-hover:scale-110 transition-transform duration-300 relative z-10" />
-              <span className="sr-only">GitHub</span>
-            </a>
-            <a
-              href="https://linkedin.com/in/georgiysimak"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative p-6 rounded-2xl bg-[#13111C]/60 backdrop-blur-xl border border-white/[0.15] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(59,130,246,0.15)] overflow-hidden"
-              onMouseMove={handleMouseMove}
-            >
-              {/* Spotlight effect */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                <div 
-                  className="absolute inset-0" 
-                  style={{
-                    background: `radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(59, 130, 246, 0.15), transparent 40%)`
-                  }}
-                />
-              </div>
-              <Linkedin className="h-7 w-7 text-blue-400 group-hover:scale-110 transition-transform duration-300 relative z-10" />
-              <span className="sr-only">LinkedIn</span>
-            </a>
-            <a
-              href="mailto:georgesimak@gmail.com"
-              className="group relative p-6 rounded-2xl bg-[#13111C]/60 backdrop-blur-xl border border-white/[0.15] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(168,85,247,0.15)] overflow-hidden"
-              onMouseMove={handleMouseMove}
-            >
-              {/* Spotlight effect */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                <div 
-                  className="absolute inset-0" 
-                  style={{
-                    background: `radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(168, 85, 247, 0.15), transparent 40%)`
-                  }}
-                />
-              </div>
-              <Mail className="h-7 w-7 text-purple-400 group-hover:scale-110 transition-transform duration-300 relative z-10" />
-              <span className="sr-only">Email</span>
-            </a>
-          </div>
-        </div>
-
         {/* Footer */}
         <div className="mt-32 pt-10 border-t border-border/50">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-muted-foreground/80">

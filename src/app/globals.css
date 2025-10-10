@@ -507,31 +507,4 @@
     background-clip: content-box;
   }
 
-  /* Custom cursor */
-  * {
-    cursor: none !important;
-  }
-
-  .custom-cursor {
-    position: fixed;
-    width: 8px;
-    height: 8px;
-    background: var(--foreground);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.1s ease;
-  }
-
-  .custom-cursor.clicked {
-    transform: scale(1.8);
-  }
-
-  .custom-cursor.hover {
-    transform: scale(1.5);
-  }
-
-  .custom-cursor.dragging {
-    transform: scale(0.8);
-  }
 }

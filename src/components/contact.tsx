@@ -346,11 +346,113 @@ export const Contact = memo(function Contact() {
           </div>
         </div>
         {/* Footer */}
-        <div className="mt-32 pt-10 border-t border-border/50">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-muted-foreground/80">
-            <p className="font-medium">© 2024 George Simak. All rights reserved.</p>
+        <footer className="mt-32 pt-16 border-t border-white/[0.08]">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+            {/* About Column */}
+            <div className="space-y-4">
+              <h4 className="text-lg font-bold text-white">SMK Studios</h4>
+              <p className="text-sm text-gray-400 leading-relaxed">
+                Creating immersive digital experiences through innovative frontend development and game design.
+              </p>
+              <div className="flex items-center gap-2 text-sm">
+                <span className="relative flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                </span>
+                <span className="text-gray-400">Available for new projects</span>
+              </div>
+            </div>
+
+            {/* Quick Links Column */}
+            <div className="space-y-4">
+              <h4 className="text-lg font-bold text-white">Quick Links</h4>
+              <nav className="flex flex-col space-y-3">
+                <a href="#about" className="text-sm text-gray-400 hover:text-purple-400 transition-colors duration-200">
+                  About Me
+                </a>
+                <a href="#skills" className="text-sm text-gray-400 hover:text-purple-400 transition-colors duration-200">
+                  Skills
+                </a>
+                <a href="#services" className="text-sm text-gray-400 hover:text-purple-400 transition-colors duration-200">
+                  Services
+                </a>
+                <a href="#projects" className="text-sm text-gray-400 hover:text-purple-400 transition-colors duration-200">
+                  Projects
+                </a>
+                <a href="/cv" className="text-sm text-gray-400 hover:text-purple-400 transition-colors duration-200">
+                  Download CV
+                </a>
+              </nav>
+            </div>
+
+            {/* Services Column */}
+            <div className="space-y-4">
+              <h4 className="text-lg font-bold text-white">Services</h4>
+              <nav className="flex flex-col space-y-3">
+                <span className="text-sm text-gray-400">Frontend Development</span>
+                <span className="text-sm text-gray-400">Game Development</span>
+                <span className="text-sm text-gray-400">UI/UX Design</span>
+                <span className="text-sm text-gray-400">Performance Optimization</span>
+                <span className="text-sm text-gray-400">Technical Consulting</span>
+              </nav>
+            </div>
+
+            {/* Connect Column */}
+            <div className="space-y-4">
+              <h4 className="text-lg font-bold text-white">Connect</h4>
+              <div className="flex flex-col space-y-4">
+                <a 
+                  href="https://github.com/your-github" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-3 text-sm text-gray-400 hover:text-purple-400 transition-colors duration-200"
+                >
+                  <div className="p-2 rounded-lg bg-white/5 group-hover:bg-purple-500/10 transition-colors">
+                    <Github className="h-4 w-4" />
+                  </div>
+                  <span>GitHub</span>
+                </a>
+                <a 
+                  href="https://linkedin.com/in/your-linkedin" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-3 text-sm text-gray-400 hover:text-purple-400 transition-colors duration-200"
+                >
+                  <div className="p-2 rounded-lg bg-white/5 group-hover:bg-purple-500/10 transition-colors">
+                    <Linkedin className="h-4 w-4" />
+                  </div>
+                  <span>LinkedIn</span>
+                </a>
+                <a 
+                  href="mailto:georgesimak@gmail.com"
+                  className="group flex items-center gap-3 text-sm text-gray-400 hover:text-purple-400 transition-colors duration-200"
+                >
+                  <div className="p-2 rounded-lg bg-white/5 group-hover:bg-purple-500/10 transition-colors">
+                    <Mail className="h-4 w-4" />
+                  </div>
+                  <span>Email</span>
+                </a>
+              </div>
+            </div>
           </div>
-        </div>
+
+          {/* Bottom Bar */}
+          <div className="pt-8 border-t border-white/[0.08]">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+              <p className="text-sm text-gray-400">
+                © 2024 SMK Studios. All rights reserved.
+              </p>
+              <div className="flex items-center gap-6 text-sm text-gray-400">
+                <a href="/privacy" className="hover:text-purple-400 transition-colors duration-200">
+                  Privacy Policy
+                </a>
+                <a href="/terms" className="hover:text-purple-400 transition-colors duration-200">
+                  Terms of Service
+                </a>
+              </div>
+            </div>
+          </div>
+        </footer>
       </div>
     </section>
   );

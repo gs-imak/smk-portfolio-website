@@ -6,6 +6,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navigation = [
   { name: "About", href: "#about" },
@@ -19,6 +20,8 @@ const navigation = [
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const pathname = usePathname();
+  const isHomePage = pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,6 +33,12 @@ export function Navigation() {
   }, []);
 
   const scrollToSection = (href: string) => {
+    if (!isHomePage) {
+      // If not on homepage, navigate to homepage with hash
+      window.location.href = `/${href}`;
+      return;
+    }
+    
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
@@ -49,12 +58,21 @@ export function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <button
-            onClick={() => scrollToSection("#hero")}
-            className="text-xl font-bold tracking-tight hover:text-muted-foreground transition-colors"
-          >
-            SMAK STUDIOS
-          </button>
+          {isHomePage ? (
+            <button
+              onClick={() => scrollToSection("#hero")}
+              className="text-xl font-bold tracking-tight hover:text-muted-foreground transition-colors"
+            >
+              SMK STUDIOS
+            </button>
+          ) : (
+            <Link
+              href="/"
+              className="text-xl font-bold tracking-tight hover:text-muted-foreground transition-colors"
+            >
+              SMK STUDIOS
+            </Link>
+          )}
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">

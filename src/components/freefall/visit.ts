@@ -76,30 +76,22 @@ const URA = `${T}2k_uranus.jpg`;
 const MER = `${T}2k_mercury.jpg`;
 const VEN = `${T}2k_venus_atmosphere.jpg`;
 const MOON = `${T}2k_moon.jpg`;
-const CER = `${T}2k_ceres_fictional.jpg`;
-const ERI = `${T}2k_eris_fictional.jpg`;
-const HAU = `${T}2k_haumea_fictional.jpg`;
-const MAK = `${T}2k_makemake_fictional.jpg`;
 
-// A POPULATED space field — 12 DIFFERENT worlds (no repeats), WELL SPREAD down
-// the deep fall (y −24 → −210 over a 320-unit drop), OFF TO THE SIDE (z = screen
-// left/right, alternating x) so they never block the centre and you pass them one
-// at a time. No fade / no fake scale: fixed-size worlds, so PERSPECTIVE makes them
-// small in the distance and grow as you fall past. (Earth lives far below at
-// −320 and only resolves late — see Earth.tsx reveal.)
+// The REAL solar system, in order, OUTER → INNER as you fall toward Earth:
+// Neptune, Uranus, Saturn, Jupiter, Mars, Venus, Mercury, then the Moon just
+// before Earth (the landing). Spread EVENLY across the WHOLE drop (y −30 → −256
+// over 320) — you pass roughly one per screen, never a clump and never an empty
+// stretch. Off to alternating sides (z depth varies) so they don't block centre.
+// Fixed-size + no fade: PERSPECTIVE makes them grow as you fall past.
 export const PLANETS: PlanetDef[] = [
-  { texture: SAT, position: [11, -24, 18], radius: 6, ring: true, tilt: 0.34 },
-  { texture: JUP, position: [-10, -44, -14], radius: 6.5, tilt: 0.5 },
-  { texture: NEP, position: [13, -62, 20], radius: 4, tilt: 0.8 },
-  { texture: MAR, position: [-13, -82, -19], radius: 4.5, tilt: 0.3 },
-  { texture: URA, position: [12, -100, 15], radius: 4, tilt: 0.9 },
-  { texture: MOON, position: [-9, -118, -13], radius: 3, tilt: 0.6 },
-  { texture: MER, position: [14, -136, 21], radius: 3.5, tilt: 0.4 },
-  { texture: VEN, position: [-12, -152, -16], radius: 4, tilt: 0.5 },
-  { texture: CER, position: [10, -168, 17], radius: 3, tilt: 0.7 },
-  { texture: MAK, position: [-11, -182, -14], radius: 3.5, tilt: 0.4 },
-  { texture: ERI, position: [13, -196, 19], radius: 3, tilt: 0.6 },
-  { texture: HAU, position: [-10, -210, -12], radius: 3.5, tilt: 0.5 },
+  { texture: NEP, position: [13, -30, 20], radius: 4, tilt: 0.5 },
+  { texture: URA, position: [-12, -58, -16], radius: 4.5, tilt: 0.8 },
+  { texture: SAT, position: [12, -90, 19], radius: 6, ring: true, tilt: 0.34 },
+  { texture: JUP, position: [-14, -124, -15], radius: 7, tilt: 0.4 },
+  { texture: MAR, position: [12, -158, 18], radius: 3.5, tilt: 0.6 },
+  { texture: VEN, position: [-10, -192, -14], radius: 4, tilt: 0.5 },
+  { texture: MER, position: [13, -224, 20], radius: 3, tilt: 0.4 },
+  { texture: MOON, position: [-9, -256, -12], radius: 2.8, tilt: 0.3 },
 ];
 
 /** Over-the-shoulder framing (dormant; kept for the guarded CameraRig block). */

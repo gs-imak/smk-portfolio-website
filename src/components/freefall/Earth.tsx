@@ -25,10 +25,10 @@ import { SUN } from "./Planets";
 // and grows believably into the planet he lands on (R88 filled the frame from
 // a third of the way down; 340 was a flat wall). Surface top still at GROUND_Y.
 const R = 40;
-// Resolve LATE — only past the midpoint, after you've fallen through the whole
-// spread-out planet field. Fades in small/distant (perspective then grows it as
-// you close on it) so Earth doesn't rush into view early. No pop.
-const reveal = (p: number) => smoothstep(0.58, 0.82, p);
+// Appears around the midpoint as a SMALL, FAINT distant globe (so the middle of
+// the fall isn't empty), then perspective grows it as you close in — arriving in
+// the distance, not rushing the frame. Resolved by ~0.8, then the cloud plunge.
+const reveal = (p: number) => smoothstep(0.5, 0.8, p);
 
 const BODY_VERT = /* glsl */ `
   varying vec2 vUv; varying vec3 vN;

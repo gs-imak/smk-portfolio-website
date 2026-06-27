@@ -52,7 +52,7 @@ function Planet({ texture, position, radius, ring, tilt = 0.4 }: PlanetDef) {
     if (!ring) return null;
     const inner = radius * 1.28;
     const outer = radius * 2.3;
-    const g = new THREE.RingGeometry(inner, outer, 180, 1);
+    const g = new THREE.RingGeometry(inner, outer, 90, 1);
     const pos = g.attributes.position;
     const uv = g.attributes.uv;
     const v = new THREE.Vector3();
@@ -74,7 +74,7 @@ function Planet({ texture, position, radius, ring, tilt = 0.4 }: PlanetDef) {
   return (
     <group ref={grp} position={position} rotation={[0.22, tilt, 0.08]}>
       <mesh>
-        <sphereGeometry args={[radius, 96, 96]} />
+        <sphereGeometry args={[radius, 48, 48]} />
         <shaderMaterial vertexShader={BODY_VERT} fragmentShader={BODY_FRAG} uniforms={bodyU} fog={false} />
       </mesh>
       {ring && ringGeo && (
@@ -90,10 +90,13 @@ export function Planets() {
   const grp = useRef<Group>(null);
 
   // Hidden as a UNIT until just after the leap (binary visibility — no opacity
-  // fade, so nothing renders transparent and there's no scroll flicker). They're
-  // small/distant at p≈0.22 so appearing is subtle, not a "pop".
+  // fade, so nothing renders transparent and there's no scroll flicker). HYSTERESIS
+  // (on >0.24, off <0.16) so the eased scroll can't dither across one threshold and
+  // strobe the whole field on/off; still hidden back at the platform.
   useFrame(() => {
-    if (grp.current) grp.current.visible = scroll.smooth > 0.22;
+    const g = grp.current;
+    if (!g) return;
+    if (g.visible ? scroll.smooth < 0.16 : scroll.smooth > 0.24) g.visible = !g.visible;
   });
 
   return (

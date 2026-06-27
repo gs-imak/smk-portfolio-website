@@ -1,9 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useLenis } from "lenis/react";
 import { Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 import type { Project } from "./visit";
+
+/** A link is live only if it has a real href (placeholder "#" jumps to top). */
+const isLive = (href?: string) => !!href && href !== "#";
 
 const display = Bricolage_Grotesque({ subsets: ["latin"], weight: ["600", "700", "800"] });
 const mono = JetBrains_Mono({ subsets: ["latin"], weight: ["400", "500", "700"] });
@@ -37,7 +41,7 @@ export function ProjectSection({ project, side = "left" }: { project: Project; s
         initial={{ opacity: 0, y: 26 }}
         whileInView={{ opacity: 1, y: 0 }}
         whileHover={{ y: -4 }}
-        viewport={{ once: false, amount: 0.5 }}
+        viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         style={{
           pointerEvents: "auto",
@@ -87,12 +91,50 @@ export function ProjectSection({ project, side = "left" }: { project: Project; s
 function ProjectModal({ project, onClose }: { project: Project; onClose: () => void }) {
   const [shot, setShot] = useState(0);
   const accent = project.accent;
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const titleId = `proj-${project.name.replace(/\s+/g, "-").toLowerCase()}`;
+  const lenis = useLenis();
 
+  // Freeze the world behind the modal (Lenis + body) so wheel/touch can't scrub
+  // the falling scene, and trap keyboard focus inside the dialog (Esc closes,
+  // Tab wraps, focus returns to the trigger on close).
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [onClose]);
+    const prevFocused = document.activeElement as HTMLElement | null;
+    const prevOverflow = document.body.style.overflow;
+    lenis?.stop();
+    document.body.style.overflow = "hidden";
+
+    const focusables = () =>
+      Array.from(
+        dialogRef.current?.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ) ?? [],
+      );
+    focusables()[0]?.focus();
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") return onClose();
+      if (e.key !== "Tab") return;
+      const f = focusables();
+      if (!f.length) return;
+      const first = f[0];
+      const last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      lenis?.start();
+      document.body.style.overflow = prevOverflow;
+      prevFocused?.focus();
+    };
+  }, [lenis, onClose]);
 
   return (
     <motion.div
@@ -114,6 +156,10 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
       }}
     >
       <motion.div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
         initial={{ opacity: 0, scale: 0.96, y: 16 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.97, y: 10 }}
@@ -145,7 +191,7 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
         <div className={mono.className} style={{ fontSize: 11, letterSpacing: ".24em", color: accent }}>
           ◢ {project.eyebrow}
         </div>
-        <h2 className={display.className} style={{ fontSize: "clamp(34px, 4.6vw, 56px)", fontWeight: 800, lineHeight: 0.95, letterSpacing: "-.03em", margin: "10px 0 4px" }}>
+        <h2 id={titleId} className={display.className} style={{ fontSize: "clamp(34px, 4.6vw, 56px)", fontWeight: 800, lineHeight: 0.95, letterSpacing: "-.03em", margin: "10px 0 4px" }}>
           {project.name}
         </h2>
         <div className={mono.className} style={{ fontSize: 13, color: "#cfc8ff", marginBottom: 18 }}>
@@ -178,11 +224,17 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: 18, marginTop: 22 }}>
-          <a href={project.links[0]?.href ?? "#"} className={mono.className} style={{ fontSize: 13, fontWeight: 700, letterSpacing: ".08em", color: "#0b0820", background: accent, padding: "11px 20px", borderRadius: 999, textDecoration: "none" }}>
-            LAUNCH PROJECT ↗
-          </a>
-          {project.links.slice(1).map((l) => (
-            <a key={l.label} href={l.href} className={mono.className} style={{ fontSize: 12, letterSpacing: ".08em", color: accent, textDecoration: "none" }}>
+          {isLive(project.links[0]?.href) ? (
+            <a href={project.links[0].href} target="_blank" rel="noopener noreferrer" className={mono.className} style={{ fontSize: 13, fontWeight: 700, letterSpacing: ".08em", color: "#0b0820", background: accent, padding: "11px 20px", borderRadius: 999, textDecoration: "none" }}>
+              LAUNCH PROJECT ↗
+            </a>
+          ) : (
+            <span aria-disabled className={mono.className} style={{ fontSize: 13, fontWeight: 700, letterSpacing: ".08em", color: "#0b0820", background: accent, padding: "11px 20px", borderRadius: 999, opacity: 0.55, cursor: "not-allowed" }}>
+              COMING SOON
+            </span>
+          )}
+          {project.links.slice(1).filter((l) => isLive(l.href)).map((l) => (
+            <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" className={mono.className} style={{ fontSize: 12, letterSpacing: ".08em", color: accent, textDecoration: "none" }}>
               {l.label} ↗
             </a>
           ))}

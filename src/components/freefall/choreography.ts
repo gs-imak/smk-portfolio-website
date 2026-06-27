@@ -106,6 +106,7 @@ const clamp01 = (x: number) => (x < 0 ? 0 : x > 1 ? 1 : x);
 
 /** GLSL-style smoothstep (kept for general use). */
 export function smoothstep(edge0: number, edge1: number, x: number): number {
+  if (edge0 === edge1) return x >= edge1 ? 1 : 0; // guard: no divide-by-zero → no NaN
   const t = clamp01((x - edge0) / (edge1 - edge0));
   return t * t * (3 - 2 * t);
 }
@@ -219,5 +220,6 @@ export function computeFreefallFrame(p: number): FreefallFrame {
   };
 }
 
-/** The single calm frame shown under prefers-reduced-motion (mid-fall). */
-export const REDUCED_MOTION_P = 0.45;
+/** The single calm frame shown under prefers-reduced-motion — Earth revealed and
+ *  filling below (not mid-void), so the "touchdown / contact" copy has a subject. */
+export const REDUCED_MOTION_P = 0.82;

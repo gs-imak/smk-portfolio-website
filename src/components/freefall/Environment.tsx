@@ -181,10 +181,11 @@ function Motes({ count = 280 }: { count?: number }) {
     material.dispose();
   }, [geometry, material]);
 
-  // Keep the mote field centred on the camera's vertical lane and drift gently.
+  // Keep the mote field centred on the camera (full position, not just Y, so it
+  // doesn't drift off-axis as the camera moves laterally) and drift gently.
   useFrame((_, dt) => {
     if (!ref.current) return;
-    ref.current.position.y = camera.position.y;
+    ref.current.position.copy(camera.position);
     ref.current.rotation.y += dt * 0.02;
   });
 
@@ -210,7 +211,10 @@ function FogDriver() {
       f.color.copy(tmp.current);
       f.density = a.fogDensity;
     }
-    if (typeof window !== "undefined") {
+    // DEV-ONLY debug mirror (headless verification reads window.__atmo). The
+    // bundler dead-code-eliminates this whole block in production builds, so it
+    // costs nothing live (was allocating arrays + an object every frame).
+    if (process.env.NODE_ENV === "development" && typeof window !== "undefined") {
       const fmt = (c: RGB) => [+c[0].toFixed(3), +c[1].toFixed(3), +c[2].toFixed(3)];
       (window as unknown as { __atmo?: unknown }).__atmo = {
         p: +scroll.smooth.toFixed(3),

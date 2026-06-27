@@ -5,6 +5,7 @@ import { Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 import { FreefallMount } from "@/components/freefall/FreefallMount";
 import { LenisProvider } from "@/components/freefall/LenisProvider";
 import { ProjectSection } from "@/components/freefall/ProjectSection";
+import { ScrollProgress } from "@/components/freefall/ScrollProgress";
 import { PROJECTS } from "@/components/freefall/visit";
 
 const display = Bricolage_Grotesque({ subsets: ["latin"], weight: ["600", "700", "800"] });
@@ -21,6 +22,7 @@ export default function Home() {
   return (
     <LenisProvider>
       <FreefallMount />
+      <ScrollProgress />
 
       {/* top bar */}
       <header
@@ -90,7 +92,7 @@ export default function Home() {
             <br />
             worth the fall.
           </h2>
-          <div className={mono.className} style={{ display: "flex", flexWrap: "wrap", gap: "14px 40px", marginTop: 36, fontSize: 14, pointerEvents: "auto" }}>
+          <div className={mono.className} style={{ display: "flex", flexWrap: "wrap", gap: "14px 40px", marginTop: 36, fontSize: 14, pointerEvents: "auto", userSelect: "text", WebkitUserSelect: "text" }}>
             <a href="mailto:georgesimak@gmail.com" style={{ color: "#cfc8ff", textDecoration: "none" }}>✉ georgesimak@gmail.com</a>
             <a href="tel:+33769592221" style={{ color: "#cfc8ff", textDecoration: "none" }}>☎ +33 7 69 59 22 21</a>
             <span style={{ color: "#8d86b8" }}>◎ Paris, France</span>

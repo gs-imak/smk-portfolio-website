@@ -15,12 +15,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Georgiy Simak - Frontend & Game Developer",
-  description: "Expert frontend developer and game designer creating immersive digital experiences. Specializing in React, Next.js, Unity, and modern web technologies.",
-  keywords: ["frontend developer", "game developer", "React", "Next.js", "Unity", "web development", "game design"],
-  authors: [{ name: "Georgiy Simak" }],
-  creator: "Georgiy Simak",
-  publisher: "Georgiy Simak",
+  title: "Georges Simak — SMK Studios",
+  description: "Georges Simak / SMK Studios. Immersive web experiences & game design — a scroll-driven freefall through the work, from deep space down to Earth.",
+  keywords: ["Georges Simak", "SMK Studios", "creative developer", "React Three Fiber", "WebGL", "frontend developer", "game design", "immersive web"],
+  authors: [{ name: "Georges Simak" }],
+  creator: "Georges Simak",
+  publisher: "SMK Studios",
   formatDetection: {
     email: false,
     address: false,

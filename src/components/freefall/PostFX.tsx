@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import { Bloom, EffectComposer, GodRays, Vignette } from "@react-three/postprocessing";
+import { Bloom, EffectComposer, GodRays, ToneMapping, Vignette } from "@react-three/postprocessing";
 import * as THREE from "three";
 import { scroll } from "./useScrollStore";
 import { GROUND_Y } from "./choreography";
@@ -88,6 +88,11 @@ export function PostFX() {
         {/* cinematic grade — re-adds the "punch" AgX intentionally holds back */}
         <Bloom mipmapBlur intensity={0.9} luminanceThreshold={0.6} luminanceSmoothing={0.25} />
         <Vignette eskil={false} offset={0.28} darkness={0.72} />
+        {/* AgX tonemap — MUST be the last effect. Without it the composer forces
+            NoToneMapping and the whole scene clips raw. mode 7 = AGX (importing
+            ToneMappingMode from nested `postprocessing` is unresolvable here).
+            Reads the Canvas toneMappingExposure (1.35), then rolls off highlights. */}
+        <ToneMapping mode={7} />
       </EffectComposer>
     </>
   );

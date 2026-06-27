@@ -24,10 +24,11 @@ import { SUN } from "./Planets";
 // Sized so that over the 150-unit fall it reads as a SMALL distant globe early
 // and grows believably into the planet he lands on (R88 filled the frame from
 // a third of the way down; 340 was a flat wall). Surface top still at GROUND_Y.
-const R = 50;
-// Fade in quickly just after the leap so it ARRIVES small in the distance (then
-// perspective grows it) — no pop, and not hanging over the platform either.
-const reveal = (p: number) => smoothstep(0.1, 0.24, p);
+const R = 40;
+// Resolve LATE — only past the midpoint, after you've fallen through the whole
+// spread-out planet field. Fades in small/distant (perspective then grows it as
+// you close on it) so Earth doesn't rush into view early. No pop.
+const reveal = (p: number) => smoothstep(0.58, 0.82, p);
 
 const BODY_VERT = /* glsl */ `
   varying vec2 vUv; varying vec3 vN;

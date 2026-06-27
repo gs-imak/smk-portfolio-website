@@ -1,5 +1,6 @@
 "use client";
 
+import { Fragment } from "react";
 import { Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 import { FreefallMount } from "@/components/freefall/FreefallMount";
 import { LenisProvider } from "@/components/freefall/LenisProvider";
@@ -65,13 +66,19 @@ export default function Home() {
           </div>
         </section>
 
-        {/* the fall — project sections ease in as you scroll past them; the
-            planets just drift in the background (no pop, no planet trigger). */}
+        {/* the fall — one hover-by card per project, alternating sides, evenly
+            spaced down the long descent. Scales automatically: add projects to
+            PROJECTS and they slot in. The planets just drift behind (no trigger);
+            Earth resolves late in the closing descent spacer below. */}
+        <div style={{ height: "220vh" }} />
+        {PROJECTS.map((project, i) => (
+          <Fragment key={project.name}>
+            <ProjectSection project={project} side={i % 2 === 0 ? "left" : "right"} />
+            <div style={{ height: "170vh" }} />
+          </Fragment>
+        ))}
+        {/* closing descent — Earth grows in, atmosphere, cloud plunge, touchdown */}
         <div style={{ height: "300vh" }} />
-        {PROJECTS[0] && <ProjectSection project={PROJECTS[0]} side="left" />}
-        <div style={{ height: "300vh" }} />
-        {PROJECTS[1] && <ProjectSection project={PROJECTS[1]} side="right" />}
-        <div style={{ height: "340vh" }} />
 
         {/* CONTACT — last screen, over the Earth touchdown */}
         <section style={{ height: "120vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "0 clamp(20px, 6vw, 96px)" }}>

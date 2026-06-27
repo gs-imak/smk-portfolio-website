@@ -13,7 +13,7 @@
  */
 
 // --- tunable constants ---------------------------------------------------
-export const FALL_DEPTH = 150; // world units the character falls over [0.2, 1.0]
+export const FALL_DEPTH = 320; // world units the character falls over [0.2, 1.0]
 /** Touchdown altitude — his feet meet the ground here at p=1 (Contact section). */
 export const GROUND_Y = -FALL_DEPTH;
 

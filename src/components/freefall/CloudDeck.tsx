@@ -3,6 +3,7 @@ import { useFrame } from "@react-three/fiber";
 import { Cloud, Clouds } from "@react-three/drei";
 import * as THREE from "three";
 import { scroll } from "./useScrollStore";
+import { GROUND_Y } from "./choreography";
 
 /**
  * The CLOUD DECK — the money shot. A wide, thin slab of drei volumetric cloud
@@ -22,8 +23,9 @@ const TEX = "/textures/cloud.png";
 // Centre of the slab in world space. x≈7 matches the character's fall lane;
 // y=-40 is where he is at the whiteout peak. Live-tunable.
 // Earth's ATMOSPHERE — a cloud layer hugging the globe's top (surface at
-// GROUND_Y -150) that he plunges through right before touchdown. NOT in space.
-export const cloudDeckTuning = { x: 7, y: -142, z: 0 };
+// GROUND_Y) that he plunges through right before touchdown. NOT in space.
+// Anchored to GROUND_Y so it stays glued to the surface if the fall depth changes.
+export const cloudDeckTuning = { x: 7, y: GROUND_Y + 8, z: 0 };
 
 export function CloudDeck() {
   const ref = useRef<THREE.Group>(null);

@@ -1,69 +1,57 @@
-import { useRef, useState } from "react";
-import { useFrame, useThree } from "@react-three/fiber";
+import { type ComponentRef, useRef } from "react";
+import { useFrame } from "@react-three/fiber";
 import { Bloom, EffectComposer, GodRays, ToneMapping, Vignette } from "@react-three/postprocessing";
 import * as THREE from "three";
 import { scroll } from "./useScrollStore";
 import { GROUND_Y } from "./choreography";
 
 /**
- * The SUN + volumetric GOD-RAYS — the cloud-deck money shot ONLY.
+ * The SUN + volumetric GOD-RAYS — the cloud-deck money shot.
  *
- * The cinematic read is a sun glowing BELOW the cloud deck with shafts streaming
- * UP through the gaps toward the descending diver. The sun therefore sits beneath
- * the deck (just under GROUND_Y) and the rays fade in with `atmosphere.sunIntensity`
- * (0 in space, peaks at the whiteout).
+ * The sun sits BELOW the entire fall (just under GROUND_Y) so the belly-down
+ * diver never falls past it — its screen projection therefore stays in front of
+ * the camera the whole way down and can NEVER sign-flip. (That flip, back when
+ * the sun was mid-fall, was the scroll strobe.) The rays glow up through the
+ * cloud gaps toward him near touchdown.
  *
- * CRITICAL (fixes the scroll strobe): GodRays must be UNMOUNTED for the whole
- * space/planet descent. Its per-frame pass projects the sun to screen space; while
- * the belly-down camera falls PAST the sun the projection sits in the w≤0 / behind-
- * near-plane regime and snaps between the clamp extremes (−1 ↔ 2) every frame, so
- * the radial blur reverses direction frame-to-frame and SCREEN-blends a full-screen
- * flash = strobe. Hiding the sun mesh did NOT stop the pass from running. So we
- * conditionally MOUNT GodRays only when the sun is bright AND safely in FRONT of the
- * camera (view-space z < −near). It toggles once entering / leaving the deck, never
- * during the planet descent. Bloom + Vignette stay mounted always.
+ * GodRays is ALWAYS mounted; we gate only its blend OPACITY (a uniform, via ref)
+ * with `atmosphere.sunIntensity` — 0 through the clean space/planet descent so it
+ * contributes nothing, ramping up only at the deck. NO conditional mount / no
+ * setState in the loop: toggling EffectComposer children rebuilds (recompiles)
+ * the whole effect chain every frame and HARD-FREEZES the page.
  *
  * NOTE: we do NOT import from `postprocessing` directly (nested under
  * @react-three/postprocessing, unresolvable from app code).
  */
 
-// Sun disc world position + base radius. Below the cloud deck (which hugs
-// GROUND_Y), in the fall lane. Anchored to GROUND_Y so it tracks the surface.
+// Sun disc world position + base radius — below the cloud deck / surface, in the
+// fall lane. Anchored to GROUND_Y so it tracks the surface if the fall deepens.
 export const sunTuning = { x: 8, y: GROUND_Y - 40, z: -10, radius: 2.7 };
 
 export function PostFX() {
-  const { camera } = useThree();
   const sun = useRef<THREE.Mesh>(null);
   const mat = useRef<THREE.MeshBasicMaterial>(null);
-  const probe = useRef(new THREE.Vector3());
-  const raysOnRef = useRef(false);
-  const [raysOn, setRaysOn] = useState(false);
+  const rays = useRef<ComponentRef<typeof GodRays>>(null);
 
   useFrame(() => {
     const a = scroll.atmosphere;
+    // Confine the sun + rays to the cloud-deck money shot only (sunIntensity>0.25,
+    // i.e. p≈0.85+). Before that — through the whole planet + Earth approach — the
+    // disc and rays are fully off, so no stray sun square hangs over the descent.
+    const gate = Math.min(1, Math.max(0, (a.sunIntensity - 0.25) / 0.5));
     const s = sun.current;
     if (s) {
       s.position.set(sunTuning.x, sunTuning.y, sunTuning.z);
       s.scale.setScalar(sunTuning.radius * (0.55 + 0.6 * a.sunIntensity));
+      s.visible = gate > 0.001;
     }
     if (mat.current) {
       mat.current.color.setRGB(a.sunColor[0], a.sunColor[1], a.sunColor[2], THREE.SRGBColorSpace);
-      mat.current.opacity = Math.min(1, a.sunIntensity);
+      mat.current.opacity = gate;
     }
-    // GodRays is SAFE only when the sun is bright AND in front of the camera.
-    // view-space z must be comfortably past the near plane (negative = in front),
-    // with a margin so it can't dither across the boundary frame-to-frame.
-    let valid = false;
-    if (s && a.sunIntensity > 0.06) {
-      s.updateWorldMatrix(true, false);
-      const vz = probe.current.setFromMatrixPosition(s.matrixWorld).applyMatrix4(camera.matrixWorldInverse).z;
-      valid = vz < -(camera.near + 3);
-    }
-    if (s) s.visible = valid;
-    if (valid !== raysOnRef.current) {
-      raysOnRef.current = valid;
-      setRaysOn(valid);
-    }
+    // Gate the god-ray contribution by opacity (0 until the deck → no rays, no
+    // strobe). Smooth uniform write — no remount, no recompile, no freeze.
+    if (rays.current) rays.current.blendMode.opacity.value = gate;
   });
 
   return (
@@ -73,25 +61,21 @@ export function PostFX() {
         <meshBasicMaterial ref={mat} color="#fff7db" transparent toneMapped={false} fog={false} />
       </mesh>
       <EffectComposer>
-        {raysOn && (
-          <GodRays
-            sun={sun as React.RefObject<THREE.Mesh>}
-            samples={80}
-            density={0.95}
-            decay={0.94}
-            weight={0.8}
-            exposure={0.45}
-            clampMax={1}
-            blur
-          />
-        )}
+        <GodRays
+          ref={rays}
+          sun={sun as React.RefObject<THREE.Mesh>}
+          samples={80}
+          density={0.95}
+          decay={0.94}
+          weight={0.8}
+          exposure={0.45}
+          clampMax={1}
+          blur
+        />
         {/* cinematic grade — re-adds the "punch" AgX intentionally holds back */}
         <Bloom mipmapBlur intensity={0.9} luminanceThreshold={0.6} luminanceSmoothing={0.25} />
         <Vignette eskil={false} offset={0.28} darkness={0.72} />
-        {/* AgX tonemap — MUST be the last effect. Without it the composer forces
-            NoToneMapping and the whole scene clips raw. mode 7 = AGX (importing
-            ToneMappingMode from nested `postprocessing` is unresolvable here).
-            Reads the Canvas toneMappingExposure (1.35), then rolls off highlights. */}
+        {/* AgX tonemap — MUST be last (composer forces NoToneMapping otherwise). */}
         <ToneMapping mode={7} />
       </EffectComposer>
     </>

@@ -1,8 +1,6 @@
 import { useEffect, useMemo, useRef } from "react";
-import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import type { InstancedMesh } from "three";
-import { scroll } from "./useScrollStore";
 
 /**
  * A scattered ASTEROID / debris field drifting through the fall — organic, not
@@ -41,7 +39,6 @@ function makeRock(detail: number, seed: number) {
 }
 
 export function Asteroids() {
-  const group = useRef<THREE.Group>(null);
   const meshes = useRef<(InstancedMesh | null)[]>([]);
 
   const geos = useMemo(() => Array.from({ length: VARIANTS }, (_, i) => makeRock(1 + (i % 2), 1.3 + i * 2.6)), []);
@@ -69,7 +66,7 @@ export function Asteroids() {
         const scale = 0.18 + Math.pow(u, 2.5) * 3.4; // many small, few big boulders
         tint.setHSL(0.06 + (Math.random() - 0.5) * 0.06, 0.18 + Math.random() * 0.12, 0.34 + Math.random() * 0.22);
         return {
-          pos: new THREE.Vector3(LANE.x + Math.cos(ang) * rad, -8 - Math.random() * 282, Math.sin(ang) * rad),
+          pos: new THREE.Vector3(LANE.x + Math.cos(ang) * rad, -10 - Math.random() * 258, Math.sin(ang) * rad),
           rot: new THREE.Euler(Math.random() * 6.283, Math.random() * 6.283, Math.random() * 6.283),
           scale,
           color: tint.clone(),
@@ -100,13 +97,11 @@ export function Asteroids() {
   useEffect(() => () => geos.forEach((g) => g.dispose()), [geos]);
   useEffect(() => () => mat.dispose(), [mat]);
 
-  // Space only — hidden at the platform, gone before the atmosphere.
-  useFrame(() => {
-    if (group.current) group.current.visible = scroll.smooth > 0.12 && scroll.smooth < 0.87;
-  });
-
+  // ALWAYS rendered (no gate, no pop) — debris simply drifts there; perspective
+  // grows it as you fall past. Capped above the atmosphere so it thins out
+  // naturally before touchdown.
   return (
-    <group ref={group} visible={false}>
+    <group>
       {geos.map((g, i) => (
         <instancedMesh
           key={i}

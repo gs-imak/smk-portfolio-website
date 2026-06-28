@@ -3,7 +3,6 @@ import { useFrame } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import type { Group } from "three";
-import { scroll } from "./useScrollStore";
 import { PLANETS, type PlanetDef } from "./visit";
 
 /**
@@ -87,20 +86,11 @@ function Planet({ texture, position, radius, ring, tilt = 0.4 }: PlanetDef) {
 }
 
 export function Planets() {
-  const grp = useRef<Group>(null);
-
-  // Hidden as a UNIT until just after the leap (binary visibility — no opacity
-  // fade, so nothing renders transparent and there's no scroll flicker). HYSTERESIS
-  // (on >0.24, off <0.16) so the eased scroll can't dither across one threshold and
-  // strobe the whole field on/off; still hidden back at the platform.
-  useFrame(() => {
-    const g = grp.current;
-    if (!g) return;
-    if (g.visible ? scroll.smooth < 0.16 : scroll.smooth > 0.24) g.visible = !g.visible;
-  });
-
+  // ALWAYS rendered — the worlds are simply THERE. They start as tiny distant
+  // specks (perspective) and GROW as you fall toward them, so they never POP in at
+  // a threshold. Opaque bodies → no transparency → no scroll flicker either.
   return (
-    <group ref={grp} visible={false}>
+    <group>
       {PLANETS.map((p, i) => (
         <Planet key={i} {...p} />
       ))}

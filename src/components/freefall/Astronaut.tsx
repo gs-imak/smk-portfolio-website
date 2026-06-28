@@ -14,7 +14,6 @@ const TARGET_HEIGHT = 2.3; // world units — match the prototype placeholder (�
 // walk and floating for the fall — but SCRUBBED by scroll (see below), never
 // auto-playing on real time.
 const WALK_CYCLES = 3; // step cycles over the walk phase
-const FLOAT_CYCLES = 2; // float-drift cycles over the fall
 // Walk/float weight crossfade — runs THROUGH the leap (p0.12→0.2), aligned with
 // the dive pitch (diveBlend 0.12→0.42), so as he steps off the edge he tucks
 // straight into the zero-g skydive pose. Previously held until p0.2 → he froze
@@ -68,8 +67,37 @@ export function Astronaut() {
     });
   }, [model]);
 
-  const lookEul = useRef(new THREE.Euler());
-  const lookOff = useRef(new THREE.Quaternion());
+  // Head-look (cursor-follow): a smoothed target + the head/neck bones it drives.
+  const look = useRef({ tx: 0, ty: 0, x: 0, y: 0 });
+  const bones = useMemo(() => {
+    const find = (pfx: string) => {
+      let r: THREE.Object3D | null = null;
+      model.traverse((o) => {
+        if (!r && o.name.startsWith(pfx)) r = o;
+      });
+      return r as THREE.Object3D | null;
+    };
+    return { head: find("head"), neck: find("neck") };
+  }, [model]);
+  const lookScratch = useMemo(
+    () => ({
+      q: new THREE.Quaternion(),
+      ax: new THREE.Vector3(),
+      dq: new THREE.Quaternion(),
+      wy: new THREE.Vector3(0, 1, 0),
+      wz: new THREE.Vector3(0, 0, 1),
+    }),
+    [],
+  );
+
+  useEffect(() => {
+    const onMove = (e: PointerEvent) => {
+      look.current.tx = (e.clientX / window.innerWidth) * 2 - 1;
+      look.current.ty = -((e.clientY / window.innerHeight) * 2 - 1);
+    };
+    window.addEventListener("pointermove", onMove);
+    return () => window.removeEventListener("pointermove", onMove);
+  }, []);
 
   // Normalize unknown native scale/origin: scale to TARGET_HEIGHT, drop feet to
   // y=0, centre on x/z. Done once against the cloned model.
@@ -86,15 +114,21 @@ export function Astronaut() {
     };
   }, [model]);
 
-  // Start BOTH clips but PAUSED — the mixer must not advance them on real time.
-  // We set each action's `.time` from scroll every frame, so motion only ever
-  // happens while scrolling (and reverses when scrolling back).
+  // moon_walk is SCRUBBED by scroll (its steps must sync to the platform walk),
+  // so it stays paused and we set its .time each frame. floating + idle PLAY in
+  // real time → continuous AMBIENT body drift (and a live idle when you're not
+  // scrolling) layered on top of the scroll-driven position/pitch.
   useEffect(() => {
-    for (const name of ["moon_walk", "floating", "idle"] as const) {
+    const walk = actions["moon_walk"];
+    if (walk) {
+      walk.play();
+      walk.paused = true;
+    }
+    for (const name of ["floating", "idle"] as const) {
       const a = actions[name];
       if (a) {
-        a.play();
-        a.paused = true;
+        a.play(); // real-time, looping → ambient motion even when idle
+        a.setEffectiveTimeScale(1);
       }
     }
     return () => void mixer.stopAllAction();
@@ -136,26 +170,47 @@ export function Astronaut() {
       walk.setEffectiveWeight(1 - smoothstep(BLEND_LO, BLEND_HI, p));
     }
 
-    // Scrub the float clip across the fall; weight fades in as he leaps, and
-    // fades back OUT during the landing flare.
+    // The float clip PLAYS live (ambient zero-g drift); we only ride its WEIGHT in
+    // as he leaps and out during the landing flare.
     const floatA = actions["floating"];
     if (floatA) {
-      const fp = clamp01((p - PHASE.walkEnd) / (1 - PHASE.walkEnd));
-      const dur = floatA.getClip().duration;
-      floatA.time = (fp * dur * FLOAT_CYCLES) % dur;
       floatA.setEffectiveWeight(
         smoothstep(BLEND_LO, BLEND_HI, p) * (1 - smoothstep(FLARE_LO, FLARE_HI, p)) * (1 - vt),
       );
     }
 
-    // Idle (standing) fades in for the touchdown AND during a planet visit (he
-    // hovers in a calm standing pose rather than the zero-g spread).
+    // Idle (standing) PLAYS live; its weight rides in for the touchdown.
     const idle = actions["idle"];
     if (idle) {
-      const dur = idle.getClip().duration;
-      idle.time = clamp01((p - FLARE_LO) / (1 - FLARE_LO)) * dur; // settle one cycle
       idle.setEffectiveWeight(Math.max(smoothstep(FLARE_LO, FLARE_HI, p), vt));
     }
+
+    // ── HEAD-LOOK ──────────────────────────────────────────────────────────
+    // The helmet eases to follow the cursor. Runs AFTER the mixer + the body pitch
+    // (this useFrame is registered after drei's), and rotates in WORLD axes (yaw
+    // about world-up, pitch about the ear axis) so it's a true left/right/up turn
+    // at ANY body pitch — never a roll during the dive. NOT inverted: cursor right
+    // → head right, cursor up → head up.
+    const dbg = (window as unknown as { __look?: { x: number; y: number } }).__look;
+    const tx = dbg ? dbg.x : look.current.tx;
+    const ty = dbg ? dbg.y : look.current.ty;
+    look.current.x += (tx - look.current.x) * 0.12;
+    look.current.y += (ty - look.current.y) * 0.12;
+    const yaw = look.current.x * 0.6; // cursor right → turn right
+    const pitch = look.current.y * 0.42; // cursor up → look up
+    const S = lookScratch;
+    const applyLook = (bone: THREE.Object3D | null, yA: number, pA: number) => {
+      if (!bone) return;
+      bone.updateWorldMatrix(true, false);
+      bone.getWorldQuaternion(S.q).invert();
+      S.ax.copy(S.wy).applyQuaternion(S.q);
+      bone.quaternion.multiply(S.dq.setFromAxisAngle(S.ax, yA));
+      bone.getWorldQuaternion(S.q).invert();
+      S.ax.copy(S.wz).applyQuaternion(S.q);
+      bone.quaternion.multiply(S.dq.setFromAxisAngle(S.ax, pA));
+    };
+    applyLook(bones.neck, yaw * 0.4, pitch * 0.4);
+    applyLook(bones.head, yaw * 0.65, pitch * 0.65);
   });
 
   return (

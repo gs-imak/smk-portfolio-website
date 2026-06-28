@@ -77,7 +77,20 @@ export function Astronaut() {
       });
       return r as THREE.Object3D | null;
     };
-    return { head: find("head"), neck: find("neck") };
+    const head = find("head");
+    const neck = find("neck");
+    const spine = find("Spine_2"); // upper body / chest
+    // Capture each look-bone's REST local rotation (before any clip plays). The
+    // look RESETS to rest each frame then re-applies — so it can NEVER accumulate
+    // (the walk clip doesn't animate the head → multiply-on-top spun it forever).
+    return {
+      head,
+      neck,
+      spine,
+      restHead: head?.quaternion.clone() ?? null,
+      restNeck: neck?.quaternion.clone() ?? null,
+      restSpine: spine?.quaternion.clone() ?? null,
+    };
   }, [model]);
   const lookScratch = useMemo(
     () => ({
@@ -199,18 +212,23 @@ export function Astronaut() {
     const yaw = look.current.x * 0.6; // cursor right → turn right
     const pitch = look.current.y * 0.42; // cursor up → look up
     const S = lookScratch;
-    const applyLook = (bone: THREE.Object3D | null, yA: number, pA: number) => {
-      if (!bone) return;
+    // Reset to the captured REST pose, THEN apply the look — deterministic, so it
+    // can't accumulate/spin even when a clip doesn't animate the bone. World axes
+    // (yaw about world-up, pitch about the ear axis) = a true turn at any body
+    // pitch, never a roll. Parent→child order so the chain composes.
+    const applyLook = (bone: THREE.Object3D | null, rest: THREE.Quaternion | null, yA: number, pA: number) => {
+      if (!bone || !rest) return;
+      bone.quaternion.copy(rest);
       bone.updateWorldMatrix(true, false);
       bone.getWorldQuaternion(S.q).invert();
       S.ax.copy(S.wy).applyQuaternion(S.q);
       bone.quaternion.multiply(S.dq.setFromAxisAngle(S.ax, yA));
-      bone.getWorldQuaternion(S.q).invert();
       S.ax.copy(S.wz).applyQuaternion(S.q);
       bone.quaternion.multiply(S.dq.setFromAxisAngle(S.ax, pA));
     };
-    applyLook(bones.neck, yaw * 0.4, pitch * 0.4);
-    applyLook(bones.head, yaw * 0.65, pitch * 0.65);
+    applyLook(bones.spine, bones.restSpine, yaw * 0.15, pitch * 0.12); // upper body slight turn
+    applyLook(bones.neck, bones.restNeck, yaw * 0.22, pitch * 0.22);
+    applyLook(bones.head, bones.restHead, yaw * 0.35, pitch * 0.35);
   });
 
   return (

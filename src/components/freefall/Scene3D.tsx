@@ -14,6 +14,7 @@ import { CameraRig } from "./CameraRig";
 import { CloudDeck } from "./CloudDeck";
 import { Earth } from "./Earth";
 import { Planets } from "./Planets";
+import { Asteroids } from "./Asteroids";
 import { PostFX } from "./PostFX";
 
 /**
@@ -78,6 +79,7 @@ export default function Scene3D({ reducedMotion = false }: { reducedMotion?: boo
       <Suspense fallback={null}>
         <Planets />
       </Suspense>
+      <Asteroids />
       <CameraRig />
       <PostFX />
     </Canvas>

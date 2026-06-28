@@ -84,14 +84,14 @@ const MOON = `${T}2k_moon.jpg`;
 // stretch. Off to alternating sides (z depth varies) so they don't block centre.
 // Fixed-size + no fade: PERSPECTIVE makes them grow as you fall past.
 export const PLANETS: PlanetDef[] = [
-  { texture: NEP, position: [13, -30, 20], radius: 4, tilt: 0.5 },
-  { texture: URA, position: [-12, -58, -16], radius: 4.5, tilt: 0.8 },
-  { texture: SAT, position: [12, -90, 19], radius: 6, ring: true, tilt: 0.34 },
-  { texture: JUP, position: [-14, -124, -15], radius: 7, tilt: 0.4 },
-  { texture: MAR, position: [12, -158, 18], radius: 3.5, tilt: 0.6 },
-  { texture: VEN, position: [-10, -192, -14], radius: 4, tilt: 0.5 },
-  { texture: MER, position: [13, -224, 20], radius: 3, tilt: 0.4 },
-  { texture: MOON, position: [-9, -256, -12], radius: 2.8, tilt: 0.3 },
+  { texture: NEP, position: [15, -30, 21], radius: 4.5, tilt: 0.5 },
+  { texture: URA, position: [-19, -56, -8], radius: 4, tilt: 0.9 },
+  { texture: SAT, position: [10, -86, 25], radius: 6, ring: true, tilt: 0.3 },
+  { texture: JUP, position: [-13, -120, -16], radius: 7.5, tilt: 0.45 },
+  { texture: MAR, position: [22, -154, 7], radius: 3.5, tilt: 0.7 },
+  { texture: VEN, position: [-8, -190, -24], radius: 4, tilt: 0.5 },
+  { texture: MER, position: [18, -226, 14], radius: 3, tilt: 0.4 },
+  { texture: MOON, position: [-11, -262, -9], radius: 2.8, tilt: 0.6 },
 ];
 
 /** Over-the-shoulder framing (dormant; kept for the guarded CameraRig block). */

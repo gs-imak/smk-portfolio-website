@@ -59,7 +59,7 @@ export default function Scene3D({ reducedMotion = false }: { reducedMotion?: boo
         toneMapping: THREE.AgXToneMapping,
         toneMappingExposure: 1.35,
       }}
-      camera={{ position: [-5.6, 1.5, 0], fov: 50, near: 0.5, far: 400 }}
+      camera={{ position: [-5.6, 1.5, 0], fov: 50, near: 2, far: 400 }}
     >
       <fogExp2 attach="fog" args={[0x050409, 0.019]} />
       <ScrollSmoother reducedMotion={reducedMotion} />

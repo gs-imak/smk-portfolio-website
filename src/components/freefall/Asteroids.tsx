@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import type { InstancedMesh } from "three";
+import { PLANETS } from "./visit";
 
 /**
  * A scattered ASTEROID / debris field drifting through the fall — organic, not
@@ -58,15 +59,35 @@ export function Asteroids() {
   // Per-instance transforms + a little colour variation (cool grey → warm brown).
   const data = useMemo(() => {
     const tint = new THREE.Color();
+    // Keep WELL CLEAR of every planet (debris never touches/blocks a world).
+    const clearOfPlanets = (x: number, y: number, z: number) =>
+      !PLANETS.some((pl) => {
+        const dx = x - pl.position[0];
+        const dy = y - pl.position[1];
+        const dz = z - pl.position[2];
+        return dx * dx + dy * dy + dz * dz < (pl.radius + 12) * (pl.radius + 12);
+      });
+    const pickPos = () => {
+      for (let t = 0; t < 24; t++) {
+        const ang = Math.random() * Math.PI * 2;
+        const rad = 16 + Math.pow(Math.random(), 0.7) * 30; // 16..46 from the lane
+        const x = LANE.x + Math.cos(ang) * rad;
+        const z = Math.sin(ang) * rad;
+        const y = -10 - Math.random() * 258;
+        if (clearOfPlanets(x, y, z)) return new THREE.Vector3(x, y, z);
+      }
+      // fallback: push it far out to the side
+      const s = Math.random() < 0.5 ? -1 : 1;
+      return new THREE.Vector3(LANE.x + s * 42, -10 - Math.random() * 258, (Math.random() < 0.5 ? -1 : 1) * 42);
+    };
     return Array.from({ length: VARIANTS }, () =>
       Array.from({ length: PER }, () => {
-        const ang = Math.random() * Math.PI * 2;
-        const rad = 13 + Math.pow(Math.random(), 0.7) * 30; // 13..43, biased nearer
         const u = Math.random();
-        const scale = 0.18 + Math.pow(u, 2.5) * 3.4; // many small, few big boulders
+        // Debris is SMALL — always far under planet size (planets are r 2.8–7.5).
+        const scale = 0.14 + Math.pow(u, 2.6) * 1.4; // 0.14 .. ~1.5
         tint.setHSL(0.06 + (Math.random() - 0.5) * 0.06, 0.18 + Math.random() * 0.12, 0.34 + Math.random() * 0.22);
         return {
-          pos: new THREE.Vector3(LANE.x + Math.cos(ang) * rad, -10 - Math.random() * 258, Math.sin(ang) * rad),
+          pos: pickPos(),
           rot: new THREE.Euler(Math.random() * 6.283, Math.random() * 6.283, Math.random() * 6.283),
           scale,
           color: tint.clone(),

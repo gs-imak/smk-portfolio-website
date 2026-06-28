@@ -20,8 +20,10 @@ import { GROUND_Y, smoothstep } from "./choreography";
  */
 
 const TEX = "/textures/cloud.png";
-// Centre of the slab — hugs the surface (GROUND_Y), in the fall lane.
-export const cloudDeckTuning = { x: 7, y: GROUND_Y + 8, z: 0 };
+// A cloud LAYER sitting ~35u ABOVE the ground (GROUND_Y), so there's a real
+// "descend through the clouds, THEN the ground appears below" phase before
+// touchdown — not clouds glued to the surface.
+export const cloudDeckTuning = { x: 7, y: GROUND_Y + 35, z: 0 };
 
 export function CloudDeck() {
   const ref = useRef<THREE.Group>(null);
@@ -34,7 +36,7 @@ export function CloudDeck() {
     // Fade the deck OUT as the camera drops to within ~20u of it, so the billboards
     // are only ever drawn while the camera is comfortably ABOVE them (looking down)
     // — never from inside, which is what re-sorts and strobes.
-    const above = smoothstep(cloudDeckTuning.y + 2, cloudDeckTuning.y + 22, camera.position.y);
+    const above = smoothstep(cloudDeckTuning.y + 3, cloudDeckTuning.y + 30, camera.position.y);
     const o = d * 0.85 * above;
     g.visible = o > 0.01;
     if (!g.visible) return;

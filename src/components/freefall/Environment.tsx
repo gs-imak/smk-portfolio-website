@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useRef } from "react";
+import { Suspense, useEffect, useMemo, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import { Environment as DreiEnvironment, Lightformer } from "@react-three/drei";
+import { Environment as DreiEnvironment, Lightformer, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { scroll } from "./useScrollStore";
 import type { RGB } from "./atmosphere";
@@ -87,43 +87,64 @@ function SkyDome() {
 }
 
 /**
- * Deep-space starfield — a shell of points around the viewer. Its opacity
- * tracks `atmosphere.starDensity` (dense in orbit → gone inside the cloud deck
- * → a few faint stars again at the warm ground). Follows the camera so it
- * always surrounds him, like the sky dome.
+ * Deep-space starfield — ROUND soft points (a shader, not square GL points) with
+ * varied size + a graded violet/teal-white tint, around the viewer. Opacity
+ * tracks `atmosphere.starDensity`. Follows the camera so it always surrounds him.
  */
-function Starfield({ count = 1500 }: { count?: number }) {
+const STAR_VERT = /* glsl */ `
+  attribute vec3 aColor; attribute float aSize;
+  varying vec3 vColor;
+  void main() {
+    vColor = aColor;
+    gl_PointSize = aSize;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  }
+`;
+const STAR_FRAG = /* glsl */ `
+  uniform float uOpacity;
+  varying vec3 vColor;
+  void main() {
+    vec2 d = gl_PointCoord - 0.5;
+    float r2 = dot(d, d) * 4.0;             // 0 centre → 1 edge
+    float a = exp(-r2 * 3.2);               // soft ROUND falloff (no square)
+    if (a < 0.01) discard;
+    gl_FragColor = vec4(vColor, a * uOpacity);
+  }
+`;
+
+function Starfield({ count = 1800 }: { count?: number }) {
   const ref = useRef<THREE.Points>(null);
   const { camera } = useThree();
 
   const { geometry, material } = useMemo(() => {
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
+    const sizes = new Float32Array(count);
     const tint = new THREE.Color();
     for (let i = 0; i < count; i++) {
-      // random direction on a sphere shell at radius ~150 (just inside the dome)
       const u = Math.random() * 2 - 1;
       const theta = Math.random() * Math.PI * 2;
       const r = Math.sqrt(1 - u * u);
-      const radius = 140 + Math.random() * 18;
+      const radius = 138 + Math.random() * 20;
       positions[i * 3] = Math.cos(theta) * r * radius;
       positions[i * 3 + 1] = u * radius;
       positions[i * 3 + 2] = Math.sin(theta) * r * radius;
-      // mostly cool-white, a few faintly violet/teal — graded to the palette
-      tint.setHSL(0.55 + (Math.random() - 0.5) * 0.18, 0.25, 0.78 + Math.random() * 0.22);
+      tint.setHSL(0.55 + (Math.random() - 0.5) * 0.22, 0.22, 0.74 + Math.random() * 0.26);
       colors[i * 3] = tint.r;
       colors[i * 3 + 1] = tint.g;
       colors[i * 3 + 2] = tint.b;
+      // mostly small, a few brighter/bigger stars
+      sizes[i] = (2 + Math.pow(Math.random(), 3) * 7) * Math.min(2, window.devicePixelRatio || 1);
     }
     const g = new THREE.BufferGeometry();
     g.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-    g.setAttribute("color", new THREE.BufferAttribute(colors, 3));
-    const m = new THREE.PointsMaterial({
-      size: 1.4,
-      sizeAttenuation: false, // crisp constant-size star points
-      vertexColors: true,
+    g.setAttribute("aColor", new THREE.BufferAttribute(colors, 3));
+    g.setAttribute("aSize", new THREE.BufferAttribute(sizes, 1));
+    const m = new THREE.ShaderMaterial({
+      vertexShader: STAR_VERT,
+      fragmentShader: STAR_FRAG,
+      uniforms: { uOpacity: { value: 1 } },
       transparent: true,
-      opacity: 1,
       depthWrite: false,
       blending: THREE.AdditiveBlending,
       fog: false,
@@ -131,23 +152,56 @@ function Starfield({ count = 1500 }: { count?: number }) {
     return { geometry: g, material: m };
   }, [count]);
 
-  useEffect(
-    () => () => {
-      geometry.dispose();
-      material.dispose();
-    },
-    [geometry, material],
-  );
+  useEffect(() => () => { geometry.dispose(); material.dispose(); }, [geometry, material]);
 
   useFrame(() => {
     if (!ref.current) return;
     ref.current.position.copy(camera.position);
-    ref.current.rotation.y += 0.00015; // imperceptible drift
-    material.opacity = scroll.atmosphere.starDensity;
-    ref.current.visible = material.opacity > 0.001;
+    ref.current.rotation.y += 0.00012;
+    material.uniforms.uOpacity.value = scroll.atmosphere.starDensity;
+    ref.current.visible = material.uniforms.uOpacity.value > 0.001;
   });
 
   return <points ref={ref} geometry={geometry} material={material} />;
+}
+
+/**
+ * NEBULA — the real Milky Way star map on a faint additive backshell behind the
+ * point stars, so the void has depth + a soft galactic band instead of a flat
+ * black. Follows the camera; fades with starDensity like the stars.
+ */
+function Nebula() {
+  const ref = useRef<THREE.Mesh>(null);
+  const { camera } = useThree();
+  const tex = useTexture("/textures/space/8k_stars_milky_way.jpg");
+  tex.colorSpace = THREE.SRGBColorSpace;
+  const mat = useMemo(
+    () =>
+      new THREE.MeshBasicMaterial({
+        map: tex,
+        side: THREE.BackSide,
+        transparent: true,
+        opacity: 0,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
+        fog: false,
+        toneMapped: true,
+        color: new THREE.Color("#8a8fb8"),
+      }),
+    [tex],
+  );
+  useFrame(() => {
+    if (!ref.current) return;
+    ref.current.position.copy(camera.position);
+    ref.current.rotation.y += 0.00004;
+    mat.opacity = scroll.atmosphere.starDensity * 0.5;
+    ref.current.visible = mat.opacity > 0.001;
+  });
+  return (
+    <mesh ref={ref} material={mat} renderOrder={-1}>
+      <sphereGeometry args={[158, 48, 32]} />
+    </mesh>
+  );
 }
 
 function Motes({ count = 280 }: { count?: number }) {
@@ -262,6 +316,9 @@ export function Environment() {
       <PaletteIBL />
       <FogDriver />
       <SkyDome />
+      <Suspense fallback={null}>
+        <Nebula />
+      </Suspense>
       <Starfield />
       <Motes />
     </>

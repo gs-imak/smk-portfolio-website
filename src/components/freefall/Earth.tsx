@@ -25,10 +25,6 @@ import { SUN } from "./Planets";
 // and grows believably into the planet he lands on (R88 filled the frame from
 // a third of the way down; 340 was a flat wall). Surface top still at GROUND_Y.
 const R = 40;
-// Appears around the midpoint as a SMALL, FAINT distant globe (so the middle of
-// the fall isn't empty), then perspective grows it as you close in — arriving in
-// the distance, not rushing the frame. Resolved by ~0.8, then the cloud plunge.
-const reveal = (p: number) => smoothstep(0.5, 0.8, p);
 
 const BODY_VERT = /* glsl */ `
   varying vec2 vUv; varying vec3 vN;
@@ -103,39 +99,31 @@ export function Earth() {
     const g = grp.current;
     if (!g) return;
     const p = scroll.smooth;
-    const r = reveal(p);
-    g.visible = r > 0.01;
-    if (!g.visible) return;
 
-    // GROW the globe into flat GROUND as he drops into the atmosphere. The scale
-    // happens DURING the cloud whiteout (p0.9-0.95) so it's hidden — you approach
-    // a distant globe, plunge through the white, and emerge standing ON THE GROUND
-    // with a far horizon, not perched on a marble. Surface top stays pinned at
-    // GROUND_Y as it scales (center drops with it).
-    const grow = 1 + smoothstep(0.89, 0.985, p) * 3.4; // 1 → 4.4  (R40 → R~176)
+    // ALWAYS rendered + OPAQUE body: a distant speck from the start that GROWS via
+    // perspective (no opacity fade → no transparent re-sort → NO flicker up close).
+    // GROW into flat GROUND as he drops in — most of it DURING the cloud whiteout
+    // (hidden) — so he lands ON the ground with a far horizon, not on a marble.
+    // Surface top stays pinned at GROUND_Y as it scales (center drops with it).
+    const grow = 1 + smoothstep(0.86, 0.985, p) * 9; // 1 → 10  (R40 → R~400, ~flat)
     g.scale.setScalar(grow);
     g.position.set(8, GROUND_Y - R * grow, 0);
 
     if (cloudMesh.current) cloudMesh.current.rotation.y += 0.00012;
-    if (bodyRef.current) {
-      bodyRef.current.uniforms.uOpacity.value = r;
-      bodyRef.current.uniforms.uClose.value = smoothstep(0.92, 1.0, p);
-      bodyRef.current.transparent = r < 0.995; // opaque once resolved → no re-sort
-    }
-    // The cloud + atmosphere SHELLS are the "Earth from space" look — for the
-    // DISTANT approach only. SHED them before touchdown so (a) no transparent
-    // shells flicker up close — the dominant near-Earth flicker — and (b) the
-    // ground reads as solid land, not a hazy ball.
-    const shed = 1 - smoothstep(0.86, 0.93, p); // 1 far → 0 at the surface
-    if (cloudRef.current) cloudRef.current.uniforms.uOpacity.value = 0.9 * r * shed;
-    if (atmRef.current) atmRef.current.uniforms.uIntensity.value = 2.4 * r * shed;
+    if (bodyRef.current) bodyRef.current.uniforms.uClose.value = smoothstep(0.9, 1.0, p);
+
+    // cloud + atmosphere SHELLS = the from-space look. Fade IN with the approach,
+    // SHED before touchdown. They blend over the OPAQUE body so they never re-sort.
+    const shells = smoothstep(0.4, 0.55, p) * (1 - smoothstep(0.84, 0.92, p));
+    if (cloudRef.current) cloudRef.current.uniforms.uOpacity.value = 0.85 * shells;
+    if (atmRef.current) atmRef.current.uniforms.uIntensity.value = 2.4 * shells;
   });
 
   return (
     <group ref={grp} position={center}>
       <mesh>
         <sphereGeometry args={[R, 160, 160]} />
-        <shaderMaterial ref={bodyRef} vertexShader={BODY_VERT} fragmentShader={BODY_FRAG} uniforms={bodyU} transparent fog={false} />
+        <shaderMaterial ref={bodyRef} vertexShader={BODY_VERT} fragmentShader={BODY_FRAG} uniforms={bodyU} fog={false} />
       </mesh>
       <mesh ref={cloudMesh} scale={1.004}>
         <sphereGeometry args={[R, 96, 96]} />

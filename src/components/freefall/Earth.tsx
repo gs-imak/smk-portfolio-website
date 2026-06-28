@@ -109,6 +109,9 @@ export function Earth() {
     if (bodyRef.current) {
       bodyRef.current.uniforms.uOpacity.value = r;
       bodyRef.current.uniforms.uClose.value = smoothstep(0.92, 1.0, scroll.smooth);
+      // Transparent only WHILE fading in; opaque once resolved so the body never
+      // re-sorts against its own shells as you scroll near it (no flicker).
+      bodyRef.current.transparent = r < 0.995;
     }
     if (cloudRef.current) cloudRef.current.uniforms.uOpacity.value = 0.9 * r;
     // Atmosphere rim glows on the limb from a distance, but FADE it as he gets

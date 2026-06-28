@@ -19,8 +19,8 @@ export const GROUND_Y = -FALL_DEPTH;
 
 /** Phase boundaries in scroll progress. */
 export const PHASE = {
-  walkEnd: 0.12,
-  leapEnd: 0.2,
+  walkEnd: 0.06,
+  leapEnd: 0.13,
   /** Begin the landing flare: he uprights (belly-down → feet-down) and the
    *  accelerating plunge decelerates to a settled touchdown at the ground. */
   flareStart: 0.86,
@@ -31,9 +31,12 @@ export const PHASE = {
  *  wheel; this is a light second pass — keep it responsive so the jump/fall
  *  don't feel like they drag behind the input. */
 export const SCROLL_SMOOTHING = 0.14;
-/** Per-frame easing of the actual camera toward its target pose. */
-export const CAM_POS_EASE = 0.1;
-export const CAM_TARGET_EASE = 0.12;
+/** Per-frame easing of the actual camera toward its target pose. Must out-pace
+ *  SCROLL_SMOOTHING (0.14) so the camera can't fall behind the character on a
+ *  FAST scroll/fling — if it lags, the character flies out of frame and the model
+ *  "disappears". The look-target tracks tighter still, so he stays centred. */
+export const CAM_POS_EASE = 0.3;
+export const CAM_TARGET_EASE = 0.5;
 
 /** The belly-down dive pitch (about his shoulder axis / world z). Shared by the
  * Astronaut (applies it to the model) AND the camera (so the camera stays locked
@@ -68,7 +71,7 @@ export const WALK_ROT: Vec3 = [0, Math.PI / 2, 0];
  *  FLARE back upright over [flareStart, 0.985] so he lands on his feet. The
  *  camera is built from this, so it swings above→behind→back-to-level for free. */
 export const diveBlendF = (p: number) =>
-  smoothstep(0.12, 0.42, p) * (1 - smoothstep(PHASE.flareStart, 1.0, p));
+  smoothstep(0.06, 0.32, p) * (1 - smoothstep(PHASE.flareStart, 1.0, p));
 
 export type Vec3 = readonly [number, number, number];
 

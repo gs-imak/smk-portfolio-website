@@ -19,8 +19,8 @@ const FLOAT_CYCLES = 2; // float-drift cycles over the fall
 // the dive pitch (diveBlend 0.12→0.42), so as he steps off the edge he tucks
 // straight into the zero-g skydive pose. Previously held until p0.2 → he froze
 // in a static walk pose mid-air for a beat ("walks off, gets stuck, then falls").
-const BLEND_LO = 0.12;
-const BLEND_HI = 0.27;
+const BLEND_LO = 0.06;
+const BLEND_HI = 0.18;
 // Landing flare: float (skydive spread) crossfades to idle (standing) so he
 // touches down on his feet. Aligned with the choreography's diveBlend flare.
 const FLARE_LO = 0.84;

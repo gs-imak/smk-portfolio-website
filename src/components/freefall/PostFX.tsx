@@ -73,7 +73,9 @@ export function PostFX() {
           blur
         />
         {/* cinematic grade — re-adds the "punch" AgX intentionally holds back */}
-        <Bloom mipmapBlur intensity={0.9} luminanceThreshold={0.6} luminanceSmoothing={0.25} />
+        {/* threshold raised so the bright planet day-sides don't sub-pixel
+            "firefly" through the mipmap bloom as the camera scrolls past them */}
+        <Bloom mipmapBlur intensity={0.8} luminanceThreshold={0.95} luminanceSmoothing={0.45} />
         <Vignette eskil={false} offset={0.28} darkness={0.72} />
         {/* AgX tonemap — MUST be last (composer forces NoToneMapping otherwise). */}
         <ToneMapping mode={7} />

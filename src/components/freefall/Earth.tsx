@@ -102,22 +102,33 @@ export function Earth() {
   useFrame(() => {
     const g = grp.current;
     if (!g) return;
-    const r = reveal(scroll.smooth);
+    const p = scroll.smooth;
+    const r = reveal(p);
     g.visible = r > 0.01;
     if (!g.visible) return;
+
+    // GROW the globe into flat GROUND as he drops into the atmosphere. The scale
+    // happens DURING the cloud whiteout (p0.9-0.95) so it's hidden — you approach
+    // a distant globe, plunge through the white, and emerge standing ON THE GROUND
+    // with a far horizon, not perched on a marble. Surface top stays pinned at
+    // GROUND_Y as it scales (center drops with it).
+    const grow = 1 + smoothstep(0.89, 0.985, p) * 3.4; // 1 → 4.4  (R40 → R~176)
+    g.scale.setScalar(grow);
+    g.position.set(8, GROUND_Y - R * grow, 0);
+
     if (cloudMesh.current) cloudMesh.current.rotation.y += 0.00012;
     if (bodyRef.current) {
       bodyRef.current.uniforms.uOpacity.value = r;
-      bodyRef.current.uniforms.uClose.value = smoothstep(0.92, 1.0, scroll.smooth);
-      // Transparent only WHILE fading in; opaque once resolved so the body never
-      // re-sorts against its own shells as you scroll near it (no flicker).
-      bodyRef.current.transparent = r < 0.995;
+      bodyRef.current.uniforms.uClose.value = smoothstep(0.92, 1.0, p);
+      bodyRef.current.transparent = r < 0.995; // opaque once resolved → no re-sort
     }
-    if (cloudRef.current) cloudRef.current.uniforms.uOpacity.value = 0.9 * r;
-    // Atmosphere rim glows on the limb from a distance, but FADE it as he gets
-    // right up against the surface (close = washes the whole frame otherwise).
-    const close = smoothstep(0.9, 1.0, scroll.smooth); // 0 far → 1 at touchdown
-    if (atmRef.current) atmRef.current.uniforms.uIntensity.value = (2.4 - 1.7 * close) * r;
+    // The cloud + atmosphere SHELLS are the "Earth from space" look — for the
+    // DISTANT approach only. SHED them before touchdown so (a) no transparent
+    // shells flicker up close — the dominant near-Earth flicker — and (b) the
+    // ground reads as solid land, not a hazy ball.
+    const shed = 1 - smoothstep(0.86, 0.93, p); // 1 far → 0 at the surface
+    if (cloudRef.current) cloudRef.current.uniforms.uOpacity.value = 0.9 * r * shed;
+    if (atmRef.current) atmRef.current.uniforms.uIntensity.value = 2.4 * r * shed;
   });
 
   return (

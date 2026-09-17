@@ -56,11 +56,11 @@ export const Hero = memo(function Hero() {
 
             <div className="flex flex-wrap gap-4 animate-fade-in-up" style={{ animationDelay: '1s' }}>
               <Button
-                onClick={() => scrollToSection("#projects")}
+                onClick={() => scrollToSection("#services")}
                 className="group h-14 rounded-xl text-base font-semibold bg-gradient-to-r from-purple-600 via-purple-500 to-indigo-600 hover:from-purple-700 hover:via-purple-600 hover:to-indigo-700 text-white border-0 shadow-lg hover:shadow-[0_0_30px_rgba(168,85,247,0.4)] transition-all duration-300 px-8"
               >
                 <span className="flex items-center justify-center gap-2">
-                  View Projects
+                  View Services
                   <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </span>
               </Button>
@@ -76,7 +76,7 @@ export const Hero = memo(function Hero() {
 
             <div className="flex items-center gap-6 pt-4 animate-fade-in-up" style={{ animationDelay: '1.2s' }}>
               <a
-                href="https://github.com"
+                href="https://github.com/gs-imak"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-foreground transition-all duration-300 hover:scale-110"
@@ -94,7 +94,7 @@ export const Hero = memo(function Hero() {
                 <span className="sr-only">LinkedIn</span>
               </a>
               <a
-                href="mailto:georgiy@example.com"
+                href="mailto:georgesimak@gmail.com"
                 className="text-muted-foreground hover:text-foreground transition-all duration-300 hover:scale-110"
               >
                 <Mail className="h-5 w-5" />

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
@@ -22,7 +23,7 @@ export function Clients() {
       fallback: "📚"
     },
     { 
-      name: "TotalEnergie", 
+      name: "TotalEnergies", 
       logo: "/logos/totalEnergies.png",
       fallback: "⚡"
     },
@@ -31,19 +32,7 @@ export function Clients() {
       logo: "/logos/edumalin.png",
       fallback: "🎓"
     },
-    { 
-      name: "Sauter", 
-      logo: "/logos/sauter.png",
-      fallback: "🔧"
-    },
   ];
-
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   return (
     <section className="py-32 relative overflow-hidden">
@@ -93,11 +82,11 @@ export function Clients() {
             />
 
             {/* Logo Grid - direct, no nested containers */}
-            <div className="relative grid grid-cols-2 md:grid-cols-3 gap-16 lg:gap-20">
+            <div className="relative flex flex-wrap justify-center gap-16 lg:gap-20">
               {clients.map((client, index) => (
                 <div
                   key={index}
-                  className="group relative flex items-center justify-center min-h-[120px] p-6"
+                  className="group relative flex items-center justify-center min-h-[120px] p-6 basis-[calc(50%-2rem)] md:basis-[calc(33.333%-3.5rem)]"
                   style={{ 
                     animationDelay: `${index * 0.1}s`,
                   }}
@@ -150,16 +139,16 @@ export function Clients() {
         {/* CTA Section - more minimal */}
         <div className="text-center">
           <p className="text-sm text-muted-foreground mb-4">
-            Interested in seeing my work?
+            Want the full history?
           </p>
           <Button
-            onClick={() => scrollToSection("#projects")}
+            asChild
             className="group h-12 rounded-xl text-base font-semibold bg-gradient-to-r from-purple-600 via-purple-500 to-indigo-600 hover:from-purple-700 hover:via-purple-600 hover:to-indigo-700 text-white border-0 shadow-lg hover:shadow-[0_0_30px_rgba(168,85,247,0.4)] transition-all duration-300 px-8"
           >
-            <span className="flex items-center justify-center gap-2">
-              View All Projects
+            <Link href="/cv" className="flex items-center justify-center gap-2">
+              View My CV
               <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </span>
+            </Link>
           </Button>
         </div>
       </div>

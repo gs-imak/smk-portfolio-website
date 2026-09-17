@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { Toaster } from "@/components/ui/sonner";
 import { CustomCursor } from "@/components/custom-cursor";
-import { PerformanceMonitor } from "@/components/performance-monitor";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -16,43 +14,28 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Georgiy Simak - Frontend & Game Developer",
-  description: "Expert frontend developer and game designer creating immersive digital experiences. Specializing in React, Next.js, Unity, and modern web technologies.",
-  keywords: ["frontend developer", "game developer", "React", "Next.js", "Unity", "web development", "game design"],
-  authors: [{ name: "Georgiy Simak" }],
-  creator: "Georgiy Simak",
-  publisher: "Georgiy Simak",
+  title: "George Simak - Full-Stack Developer",
+  description: "Full-Stack Developer based in Paris. Vue.js, React, Angular, TypeScript, Node.js. Available for freelance web development and technical consulting.",
+  keywords: ["full-stack developer", "frontend developer", "freelance", "Vue.js", "React", "Angular", "TypeScript", "Paris"],
+  authors: [{ name: "George Simak" }],
+  creator: "George Simak",
+  publisher: "George Simak",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://alexchen.dev"),
+  metadataBase: new URL("https://smk-portfolio-website.vercel.app"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Georgiy Simak - Frontend & Game Developer",
-    description: "Expert frontend developer and game designer creating immersive digital experiences.",
-    url: "https://alexchen.dev",
-    siteName: "Georgiy Simak Portfolio",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Georgiy Simak - Frontend & Game Developer",
-      },
-    ],
+    title: "George Simak - Full-Stack Developer",
+    description: "Full-Stack Developer based in Paris. Vue.js, React, Angular, TypeScript, Node.js.",
+    url: "https://smk-portfolio-website.vercel.app",
+    siteName: "George Simak Portfolio",
     locale: "en_US",
     type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Georgiy Simak - Frontend & Game Developer",
-    description: "Expert frontend developer and game designer creating immersive digital experiences.",
-    images: ["/og-image.jpg"],
-    creator: "@alexchen",
   },
   robots: {
     index: true,
@@ -64,9 +47,6 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
-  },
-  verification: {
-    google: "google-site-verification-code",
   },
 };
 
@@ -81,9 +61,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <CustomCursor />
-        <PerformanceMonitor />
         {children}
-        <Toaster richColors position="top-right" />
       </body>
     </html>
   );

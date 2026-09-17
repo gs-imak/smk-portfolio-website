@@ -3,8 +3,7 @@
 import { Navigation } from "@/components/navigation";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import { Download, ArrowLeft, Mail, Phone, MapPin, Github, Star, Award, Calendar, Zap, Target, Users } from "lucide-react";
+import { ArrowLeft, Mail, Phone, MapPin, Github, Star, Award, Calendar, Zap, Target, Users } from "lucide-react";
 import Link from "next/link";
 import { useCallback } from "react";
 
@@ -34,12 +33,12 @@ export default function CVPage() {
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
         {/* Header */}
         <div className="mb-12">
-          <Link href="/">
-            <Button variant="outline" className="mb-8 group rounded-full px-6 py-2 border-2 border-foreground/20 hover:border-foreground/40 hover:bg-foreground/5 text-foreground hover:text-foreground transition-all duration-300">
+          <Button asChild variant="outline" className="mb-8 group rounded-full px-6 py-2 border-2 border-foreground/20 hover:border-foreground/40 hover:bg-foreground/5 text-foreground hover:text-foreground transition-all duration-300">
+            <Link href="/">
               <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
               Back to Portfolio
-            </Button>
-          </Link>
+            </Link>
+          </Button>
           
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
             <div className="space-y-4">
@@ -59,13 +58,11 @@ export default function CVPage() {
               <p className="text-xl text-muted-foreground animate-fade-in-up" style={{ animationDelay: '0.6s' }}>Full-Stack Developer</p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
-              <Button className="group magnetic glow-on-hover rounded-full px-8 py-3 bg-gradient-to-b from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-                <Download className="mr-2 h-4 w-4" />
-                Download PDF
-              </Button>
-              <Button variant="outline" className="group rounded-full px-8 py-3 border-2 border-purple-500/30 hover:border-purple-500 hover:bg-purple-500/10 text-purple-400 hover:text-purple-300 transition-all duration-300">
-                <Github className="mr-2 h-4 w-4" />
-                View Code
+              <Button asChild variant="outline" className="group rounded-full px-8 py-3 border-2 border-purple-500/30 hover:border-purple-500 hover:bg-purple-500/10 text-purple-400 hover:text-purple-300 transition-all duration-300">
+                <a href="https://github.com/gs-imak" target="_blank" rel="noopener noreferrer">
+                  <Github className="mr-2 h-4 w-4" />
+                  View GitHub
+                </a>
               </Button>
             </div>
           </div>
@@ -180,7 +177,7 @@ export default function CVPage() {
               
               <div className="flex-1">
                 <h3 className="text-lg font-bold mb-2 text-white">GitHub</h3>
-                <p className="text-sm text-gray-400 font-medium">georgiysimak</p>
+                <p className="text-sm text-gray-400 font-medium">gs-imak</p>
               </div>
             </div>
           </div>

@@ -93,8 +93,8 @@ export const Skills = memo(function Skills() {
             <div className="space-y-4 text-base text-muted-foreground leading-relaxed">
               <p className="animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
                 I stay updated with the latest technologies to deliver modern, 
-                efficient solutions for every project. From frontend frameworks to 
-                game engines, I master the tools that bring ideas to life.
+                efficient solutions for every project. From frontend frameworks to
+                cloud infrastructure, I pick the tools that fit the job.
               </p>
               <p className="animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
                 Each technology is carefully chosen for its performance, community 
@@ -103,12 +103,12 @@ export const Skills = memo(function Skills() {
             </div>
 
             <div className="animate-fade-in-up" style={{ animationDelay: '1s' }}>
-              <Link href="/cv">
-                <Button variant="outline" className="group rounded-full px-6 py-2 border-2 border-foreground/20 hover:border-foreground/40 hover:bg-foreground/5 text-foreground hover:text-foreground transition-all duration-300">
+              <Button asChild variant="outline" className="group rounded-full px-6 py-2 border-2 border-foreground/20 hover:border-foreground/40 hover:bg-foreground/5 text-foreground hover:text-foreground transition-all duration-300">
+                <Link href="/cv">
                   <FileText className="mr-2 h-4 w-4" />
                   View My CV
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
           </div>
 

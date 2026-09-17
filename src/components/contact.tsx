@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Mail, Linkedin, Github, MapPin, Send, Phone } from "lucide-react";
-import { toast } from "sonner";
 import Image from "next/image";
 
 export const Contact = memo(function Contact() {
@@ -15,7 +14,6 @@ export const Contact = memo(function Contact() {
     email: "",
     message: ""
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Mouse spotlight effect handler
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
@@ -28,16 +26,13 @@ export const Contact = memo(function Contact() {
     card.style.setProperty('--mouse-y', `${y}px`);
   }, []);
 
-  const handleSubmit = useCallback(async (e: React.FormEvent) => {
+  // No backend: the form hands the typed message to the visitor's email client.
+  const handleSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-
-    setTimeout(() => {
-      toast.success("Message sent! I'll get back to you soon.");
-      setFormData({ name: "", email: "", message: "" });
-      setIsSubmitting(false);
-    }, 1000);
-  }, []);
+    const subject = encodeURIComponent(`Project inquiry from ${formData.name}`);
+    const body = encodeURIComponent(`${formData.message}\n\n${formData.name}\n${formData.email}`);
+    window.location.href = `mailto:georgesimak@gmail.com?subject=${subject}&body=${body}`;
+  }, [formData]);
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({
@@ -90,11 +85,6 @@ export const Contact = memo(function Contact() {
             </div>
 
             <div className="relative z-10 text-center max-w-3xl mx-auto">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/20 border border-purple-400/30 mb-6">
-                <div className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
-                <span className="text-sm font-semibold text-purple-300">Limited Spots Available</span>
-              </div>
-              
               <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4">
                 Free 30-Minute Discovery Call
               </h3>
@@ -104,11 +94,11 @@ export const Contact = memo(function Contact() {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a href="mailto:georgesimak@gmail.com?subject=Free Discovery Call Request">
-                  <Button className="h-14 px-8 rounded-xl text-base font-semibold bg-white text-purple-900 hover:bg-gray-100 border-0 shadow-xl transition-all duration-300">
+                <Button asChild className="h-14 px-8 rounded-xl text-base font-semibold bg-white text-purple-900 hover:bg-gray-100 border-0 shadow-xl transition-all duration-300">
+                  <a href="mailto:georgesimak@gmail.com?subject=Free Discovery Call Request">
                     Book Your Free Call
-                  </Button>
-                </a>
+                  </a>
+                </Button>
                 <span className="text-sm text-gray-400">or scroll down to send a message</span>
               </div>
             </div>
@@ -274,7 +264,7 @@ export const Contact = memo(function Contact() {
               <div className="relative z-10">
                 <div className="mb-8">
                   <h3 className="text-3xl font-bold mb-3 text-white animate-fade-in-up" style={{ animationDelay: '1.3s' }}>Send Me a Message</h3>
-                  <p className="text-gray-400 text-lg animate-fade-in-up" style={{ animationDelay: '1.5s' }}>I&apos;ll get back to you within 24 hours</p>
+                  <p className="text-gray-400 text-lg animate-fade-in-up" style={{ animationDelay: '1.5s' }}>Opens in your email app. I&apos;ll get back to you within 24 hours</p>
                 </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -324,26 +314,12 @@ export const Contact = memo(function Contact() {
                   <Button
                     type="submit"
                     className="w-full h-14 group rounded-xl text-base font-semibold bg-gradient-to-r from-purple-600 via-purple-500 to-indigo-600 hover:from-purple-700 hover:via-purple-600 hover:to-indigo-700 text-white border-0 shadow-lg hover:shadow-[0_0_30px_rgba(168,85,247,0.4)] transition-all duration-300"
-                    disabled={isSubmitting}
                   >
-                    {isSubmitting ? (
-                      <span className="flex items-center justify-center gap-3">
-                        <span className="h-5 w-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        Sending message...
-                      </span>
-                    ) : (
-                      <span className="flex items-center justify-center gap-2">
-                        Send Message
-                        <Send className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                      </span>
-                    )}
+                    <span className="flex items-center justify-center gap-2">
+                      Send Message
+                      <Send className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                    </span>
                   </Button>
-                </div>
-
-                <div className="text-center pt-2">
-                  <p className="text-xs text-muted-foreground/70">
-                    By sending this message, you agree to our privacy policy
-                  </p>
                 </div>
               </form>
               </div>
@@ -357,7 +333,7 @@ export const Contact = memo(function Contact() {
           <p className="text-muted-foreground mb-8 text-lg">Let&apos;s build something amazing together</p>
           <div className="flex justify-center items-center gap-4">
             <a
-              href="https://github.com/georgiysimak"
+              href="https://github.com/gs-imak"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative p-6 rounded-2xl bg-[#13111C]/60 backdrop-blur-xl border border-white/[0.15] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(255,255,255,0.08)] overflow-hidden"

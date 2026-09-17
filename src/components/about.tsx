@@ -21,9 +21,9 @@ export const About = memo(function About() {
       metrics: ["5+ Years Experience", "Vue.js & React Expert", "CAC40 Clients"]
     },
     {
-      title: "Game Development",
-      description: "Creating interactive experiences with Unity and modern game engines. From concept to deployment, I bring game ideas to life with engaging mechanics and stunning visuals.",
-      metrics: ["Unity Certified", "8 Games Published", "100K+ Downloads"]
+      title: "Back-end & DevOps",
+      description: "Node.js APIs backed by MongoDB and Neo4j, deployed on AWS (EC2, S3, IAM, CloudFront) with CI/CD pipelines. I have set up and run infrastructure end to end, from Linux servers to automated deployments.",
+      metrics: ["Node.js & REST APIs", "MongoDB & Neo4j", "AWS & CI/CD"]
     }
   ];
 
@@ -64,7 +64,7 @@ export const About = memo(function About() {
               </p>
               <p className="animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
                 Based in Paris, I&apos;ve had the privilege of working with top-tier clients including 
-                CAC40 companies like TotalEnergie, UGC, and Atlantic. I specialize in client consulting, 
+                CAC40 companies like TotalEnergies, UGC, and Atlantic. I specialize in client consulting, 
                 pair-programming, and delivering robust, scalable solutions that drive business success.
               </p>
             </div>

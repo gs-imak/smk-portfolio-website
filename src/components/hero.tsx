@@ -85,7 +85,7 @@ export const Hero = memo(function Hero() {
                 <span className="sr-only">GitHub</span>
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://linkedin.com/in/georgiysimak"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-foreground transition-all duration-300 hover:scale-110"
